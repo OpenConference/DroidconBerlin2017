@@ -1,41 +1,46 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.0"
-    defaultConfig {
-        applicationId "droidcon2017.de.droidconberlin"
-        minSdkVersion 21
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  compileSdkVersion 26
+  buildToolsVersion "26.0.0"
+  defaultConfig {
+    applicationId "de.droidcon.berlin2017"
+    minSdkVersion 21
+    targetSdkVersion 26
+    versionCode 1
+    versionName "1.0"
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
+  }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation deps.kotlinStdLib
-    implementation deps.appCompat
-    implementation deps.appCompat
-    implementation deps.design
-    implementation deps.constraintLayout
-    implementation deps.conductor
-    implementation deps.mosbyMvi
-    implementation deps.mosbyMviConductor
-    implementation deps.rxJava
-    implementation deps.rxAndroid
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.0'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.0'
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation deps.kotlinStdLib
+  implementation deps.appCompat
+  implementation deps.appCompat
+  implementation deps.design
+  implementation deps.constraintLayout
+  implementation deps.conductor
+  implementation deps.mosbyMvi
+  implementation deps.mosbyMviConductor
+  implementation deps.rxJava
+  implementation deps.rxBinding
+  implementation deps.rxAndroid
+  implementation deps.firebaseDatabase
+  implementation deps.firebaseAnalytics
+  testImplementation 'junit:junit:4.12'
+  androidTestImplementation 'com.android.support.test:runner:1.0.0'
+  androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.0'
 }
+
+
+
+apply plugin: 'com.google.gms.google-services'
