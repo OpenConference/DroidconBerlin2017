@@ -1,0 +1,45 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+  compileSdkVersion compileSdk
+  buildToolsVersion buildTools
+
+
+  defaultConfig {
+    minSdkVersion minSdk
+    targetSdkVersion targetSdk
+    versionCode 1
+    versionName "1.0"
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+}
+
+dependencies {
+  implementation deps.supportAnnotations
+  implementation deps.rxJava
+  implementation deps.kotlinStdLib
+
+  kapt deps.autoValueCursorCompiler
+  implementation deps.autoValueCursor
+  implementation deps.autoValueAnnotations
+  kapt deps.autoValueCompiler
+  api deps.sqlBriteDao
+  implementation deps.threetenabp
+  implementation deps.timber
+  implementation deps.rxJavaInterop
+  implementation deps.rxJava
+  implementation project(':businesslogic:model')
+  implementation project(':businesslogic:notification')
+
+
+  implementation deps.loganSquare
+  kapt deps.loganSquareCompiler
+  implementation deps.loganSquareConverter
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="screen_title_sessions">Sessions</string>
+  <string name="screen_title_my_schedule">Mein Kalender</string>
+  <string name="screen_title_speakers">Referenten</string>
+  <string name="screen_title_twitter">#droidconDE</string>
+
+  <string name="error_unknown">Ein unerwarteter Fehler ist aufgetreten.</string>
+  <string name="error_search_invalid">Ungültige Suchanfrage</string>
+
+  <string name="sessions_sticky_date_format">dd.MM</string>
+  <string name="session_empty_view">Leider sind noch keine Sessions verfügbar</string>
+  <string name="my_schedule_empty_view">Keine Sessions in deinem Kalender.\nHier klicken um Sessions hinzuzufügen.</string>
+  <string name="session_details_no_data">Noch keine Daten für diese Session verfügbar</string>
+
+  <string name="session_details_added_to_schedule">Session hinzugefügt. Du bekommst eine Erinnerung 10 Minuten bevor die Session startet.</string>
+  <string name="error_session_details_added_to_schedule">Ein Fehler ist aufgetreten. Bitte wiederholen.</string>
+  <string name="error_session_details_removed_from_schedule">Ein Fehler ist aufgetreten. Bitte wiederholen.</string>
+  <string name="speaker_details_no_data">Leider sind noch keine Daten vorhanden.</string>
+
+  <string name="notification_title">Eine Session startet bald</string>
+  <string name="notification_text">%1$s startet um %2$s</string>
+
+
+  <string name="menu_license">Lizenzen</string>
+  <string name="menu_search">Suche</string>
+
+
+  <string name="search_query_hint">Suchbegriff ...</string>
+  <string name="search_no_results">Keine Ergebnisse gefunden</string>
+</resources>

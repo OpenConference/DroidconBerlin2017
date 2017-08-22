@@ -1,14 +1,21 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-  compileSdkVersion 26
-  buildToolsVersion "26.0.0"
+  compileSdkVersion compileSdk
+  buildToolsVersion buildTools
+
+  packagingOptions {
+    exclude 'META-INF/rxjava.properties'
+  }
+
   defaultConfig {
     applicationId "de.droidcon.berlin2017"
-    minSdkVersion 21
-    targetSdkVersion 26
+    minSdkVersion minSdk
+    targetSdkVersion targetSdk
+    targetSdkVersion targetSdk
     versionCode 1
     versionName "1.0"
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -36,7 +43,21 @@ dependencies {
   implementation deps.rxAndroid
   implementation deps.firebaseDatabase
   implementation deps.firebaseAnalytics
-  testImplementation 'junit:junit:4.12'
+  implementation deps.firebaseAuth
+  implementation deps.retrofit
+  implementation deps.retrofitRxJava
+  implementation deps.loganSquareConverter
+  implementation deps.okhttp
+  implementation deps.picasso
+  implementation deps.picassoOkHttp3
+  implementation deps.dagger
+  kapt deps.daggerCompiler
+  implementation project(":businesslogic:model")
+  implementation project(":businesslogic:schedule")
+  implementation project(":businesslogic:notification")
+  implementation deps.timber
+
+  testImplementation deps.junit
   androidTestImplementation 'com.android.support.test:runner:1.0.0'
   androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.0'
 }
