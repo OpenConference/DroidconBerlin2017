@@ -8,7 +8,6 @@ import de.droidcon.berlin2017.notification.NotificationScheduler
 import de.droidcon.berlin2017.schedule.backend.ScheduleDataStateDeterminer
 import de.droidcon.berlin2017.schedule.backend.TimebaseScheduleDataStateDeterminer
 import de.droidcon.berlin2017.ui.MainActivity
-import javax.inject.Singleton
 
 /**
  *
@@ -27,7 +26,6 @@ open class ScheduleModule(c: Context) {
   protected val context: Context = c.applicationContext
 
   @Provides
-  @Singleton
   fun provideScheduleDataStateDeterminer(): ScheduleDataStateDeterminer {
     val sharedPrefs = context.getSharedPreferences("TimebaseScheduleDeterminer",
         Context.MODE_PRIVATE)
@@ -35,6 +33,5 @@ open class ScheduleModule(c: Context) {
   }
 
   @Provides
-  @Singleton
   fun provideNotificationScheduler(): NotificationScheduler = DefaultNotificationScheduler(context, { context, session -> MainActivity.buildSessionDetailsIntent(context, session)})
 }

@@ -10,10 +10,8 @@ import de.droidcon.berlin2017.schedule.database.dao.SessionDao
 import de.droidcon.berlin2017.schedule.database.dao.SessionDaoSqlite
 import de.droidcon.berlin2017.schedule.database.dao.SpeakerDao
 import de.droidcon.berlin2017.schedule.database.dao.SpeakerDaoSqlite
-import javax.inject.Singleton
 
 @Module
-@Singleton
 class DaoModule(context: Context) {
 
 
@@ -37,15 +35,12 @@ class DaoModule(context: Context) {
   }
 
   @Provides
-  @Singleton
   fun provideSessionDao() = sessionDao
 
   @Provides
-  @Singleton
   fun provideSpeakerDao() = speakerDao
 
   @Provides
-  @Singleton
   fun provideLocationDao() = locationDao
 
 }

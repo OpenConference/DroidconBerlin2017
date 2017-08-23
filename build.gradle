@@ -30,6 +30,7 @@ buildscript {
                  okhttp              : '3.8.1',
                  picasso             : '2.5.2',
                  picassoOkHttp3      : '1.0.2',
+                 lottie              : "2.2.0",
                  junit               : "4.12"]
 
   ext.deps = [playServicesGradle     : "com.google.gms:google-services:$ext.version.playServicesGradle",
@@ -38,6 +39,7 @@ buildscript {
               appCompat              : "com.android.support:appcompat-v7:$ext.version.supportLib",
               design                 : "com.android.support:design:$ext.version.supportLib",
               constraintLayout       : "com.android.support.constraint:constraint-layout:$ext.version.constraintLayout",
+              multiDex               : "com.android.support:multidex:1.0.1",
               conductor              : "com.bluelinelabs:conductor:$ext.version.conductor",
               mosbyMvi               : "com.hannesdorfmann.mosby3:mvi:$ext.version.mosbyMvi",
               mosbyMviConductor      : "com.hannesdorfmann.mosby3:mvi-conductor:3.0.0",
@@ -68,6 +70,7 @@ buildscript {
               threetenabp            : "com.jakewharton.threetenabp:threetenabp:$ext.version.threetenabp",
               timber                 : "com.jakewharton.timber:timber:$ext.version.timber",
               rxJavaInterop          : "com.github.akarnokd:rxjava2-interop:$ext.version.rxJavaInterop",
+              lottie                 : "com.airbnb.android:lottie:$ext.version.lottie",
 
 
               loganSquare            : "com.bluelinelabs:logansquare:$ext.version.loganSquare",

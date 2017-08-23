@@ -19,6 +19,7 @@ android {
     versionCode 1
     versionName "1.0"
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    multiDexEnabled true
   }
   buildTypes {
     release {
@@ -32,7 +33,7 @@ dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
   implementation deps.kotlinStdLib
   implementation deps.appCompat
-  implementation deps.appCompat
+  implementation deps.multiDex
   implementation deps.design
   implementation deps.constraintLayout
   implementation deps.conductor
@@ -56,6 +57,7 @@ dependencies {
   implementation project(":businesslogic:schedule")
   implementation project(":businesslogic:notification")
   implementation deps.timber
+  implementation deps.lottie
 
   testImplementation deps.junit
   androidTestImplementation 'com.android.support.test:runner:1.0.0'

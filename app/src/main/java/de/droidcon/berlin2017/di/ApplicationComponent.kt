@@ -1,8 +1,10 @@
 package de.droidcon.berlin2017.di
 
+import com.squareup.picasso.Picasso
 import dagger.Component
 import de.droidcon.berlin2017.schedule.repository.SessionsRepository
-import javax.inject.Singleton
+import de.droidcon.berlin2017.ui.navigation.NavigatorFactory
+import de.droidcon.berlin2017.ui.viewbinding.ViewBindingFactory
 
 /**
  *
@@ -10,9 +12,10 @@ import javax.inject.Singleton
  * @author Hannes Dorfmann
  */
 @Component(modules = arrayOf(ApplicationModule::class))
-@Singleton
 interface ApplicationComponent {
 
+  fun picasso() : Picasso
   fun sessionRepository(): SessionsRepository
-
+  fun navigatorFactory(): NavigatorFactory
+  fun uiBinderFactory(): ViewBindingFactory
 }

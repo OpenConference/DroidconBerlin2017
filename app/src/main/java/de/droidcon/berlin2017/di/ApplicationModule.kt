@@ -9,7 +9,6 @@ import de.droidcon.berlin2017.schedule.database.dao.LocationDao
 import de.droidcon.berlin2017.schedule.database.dao.SessionDao
 import de.droidcon.berlin2017.schedule.database.dao.SpeakerDao
 import de.droidcon.berlin2017.schedule.sync.ScheduleSync
-import javax.inject.Singleton
 
 /**
  *
@@ -17,15 +16,15 @@ import javax.inject.Singleton
  * @author Hannes Dorfmann
  */
 @Module(
-    includes = arrayOf(ScheduleModule::class, DaoModule::class, NetworkModule::class, RepositoriesModule::class,
-        PicassoModule::class)
+    includes = arrayOf(ScheduleModule::class, DaoModule::class, NetworkModule::class,
+        RepositoriesModule::class,
+        PicassoModule::class, NavigatorModule::class, ViewBindingModule::class)
 )
 class ApplicationModule(c: Context) {
 
   private val applicationContext = c.applicationContext
 
   @Provides
-  @Singleton
   fun provideScheduleSync(backend: BackendScheduleAdapter,
       notificationScheduler: NotificationScheduler,
       sessionDao: SessionDao,
@@ -34,7 +33,6 @@ class ApplicationModule(c: Context) {
       speakerDao, locationDao)
 
   @Provides
-  @Singleton
   @ApplicationContext
   fun provideApplicationContext() = applicationContext
 }

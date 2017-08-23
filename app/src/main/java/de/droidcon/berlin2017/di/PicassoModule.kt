@@ -6,7 +6,6 @@ import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
-import javax.inject.Singleton
 
 /**
  *
@@ -18,7 +17,7 @@ class PicassoModule(c: Context) {
 
   private val context = c.applicationContext
 
-  @Singleton
+
   @Provides
   fun providePicasso(okhttp: OkHttpClient) =
       Picasso.Builder(context).downloader(OkHttp3Downloader(okhttp)).build()

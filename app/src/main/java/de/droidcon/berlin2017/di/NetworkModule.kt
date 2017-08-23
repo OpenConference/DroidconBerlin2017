@@ -10,13 +10,12 @@ import de.droidcon.berlin2017.schedule.backend.DroidconBerlinBackendScheduleAdap
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import javax.inject.Singleton
 
 /**
  * @author Hannes Dorfmann
  */
 @Module
-open class NetworkModule(private val context: Context) {
+open class NetworkModule(context: Context) {
 
   private val retrofit: Retrofit
   private val okHttp: OkHttpClient
@@ -40,11 +39,9 @@ open class NetworkModule(private val context: Context) {
   }
 
   @Provides
-  @Singleton
   fun provideOkHttp(): OkHttpClient = okHttp
 
   @Provides
-  @Singleton
   fun provideBackendAdapter(): BackendScheduleAdapter = backendAdapter
 
 }

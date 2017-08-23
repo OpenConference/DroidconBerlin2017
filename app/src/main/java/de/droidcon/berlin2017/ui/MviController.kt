@@ -1,0 +1,52 @@
+package de.droidcon.berlin2017.ui
+
+import android.content.Context
+import android.os.Bundle
+import android.support.annotation.CallSuper
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.bluelinelabs.conductor.Controller
+import com.hannesdorfmann.mosby3.MviConductorDelegateCallback
+import com.hannesdorfmann.mosby3.MviConductorLifecycleListener
+import com.hannesdorfmann.mosby3.mvi.MviPresenter
+import com.hannesdorfmann.mosby3.mvp.MvpView
+
+/**
+ * This is the base Presenter for Model-View-Intent based controllers.
+ * By using this class you have to provide a [de.droidcon.berlin2017.ui.viewbinding.ViewBinding] through [de.droidcon.berlin2017.ui.viewbinding.ViewBindingFactory].
+ * Furthermore, the [de.droidcon.berlin2017.ui.viewbinding.ViewBinding] must implement the View interface from MVI view.
+ *
+ * @author Hannes Dorfmann
+ */
+
+abstract class MviController<V : MvpView, P : MviPresenter<V, *>>(
+    args: Bundle?
+) : Controller(), MviConductorDelegateCallback<V, P> {
+
+  constructor() : this(null)
+
+  private val mosbyDelegate by lazy { MviConductorLifecycleListener(this) }
+  val navigator by lazy { applicationComponent().navigatorFactory()[this] }
+  protected val viewBinding by lazy { applicationComponent().uiBinderFactory()[this] }
+
+  abstract val layoutRes: Int
+
+
+  @Suppress("UNCHECKED_CAST")
+  override fun getMvpView(): V = viewBinding as V
+
+  @CallSuper
+  override fun onContextAvailable(context: Context) {
+    super.onContextAvailable(context)
+    addLifecycleListener(viewBinding)
+    addLifecycleListener(mosbyDelegate)
+  }
+
+  override fun setRestoringViewState(restoringViewState: Boolean) {
+    viewBinding.restoringViewState = restoringViewState
+  }
+
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View =
+      inflater.inflate(layoutRes, container, false)
+}
