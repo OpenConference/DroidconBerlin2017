@@ -5,6 +5,8 @@ import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.SimpleColorFilter
 import de.droidcon.berlin2017.R
 import de.droidcon.berlin2017.ui.splash.SplashView.ViewState
+import de.droidcon.berlin2017.ui.splash.SplashView.ViewState.ERROR
+import de.droidcon.berlin2017.ui.splash.SplashView.ViewState.LOADING
 import de.droidcon.berlin2017.ui.viewbinding.LifecycleAwareRef
 import de.droidcon.berlin2017.ui.viewbinding.ViewBinding
 import io.reactivex.Observable
@@ -24,11 +26,11 @@ class SplashViewBinding() : ViewBinding(), SplashView {
     progressView.addColorFilterToLayer("green ring 1",
         SimpleColorFilter(progressView.resources.getColor(R.color.green)))
     progressView.addColorFilterToLayer("flamingo ring 3",
-        SimpleColorFilter(progressView.resources.getColor(R.color.red)))
+        SimpleColorFilter(progressView.resources.getColor(R.color.green_dark)))
     progressView.addColorFilterToLayer("flamingo ring 2",
-        SimpleColorFilter(progressView.resources.getColor(R.color.turkis)))
+        SimpleColorFilter(progressView.resources.getColor(R.color.green_dark)))
     progressView.addColorFilterToLayer("flamingo ring 1",
-        SimpleColorFilter(progressView.resources.getColor(R.color.green_light)))
+        SimpleColorFilter(progressView.resources.getColor(R.color.green_dark)))
   }
 
 
@@ -36,15 +38,8 @@ class SplashViewBinding() : ViewBinding(), SplashView {
 
   override fun render(vs: ViewState) {
     Timber.d("Render $vs")
-
-
-    /*
-    when (vs) {
-      is ViewState.Error -> navigator.showHome()
-      is ViewState.LoadingProgress ->
-        if (vs.isLoadingComplete()) navigator.showHome()
-        else progressView.progress = vs.loadingProgress.toFloat() / 100f
+    if (vs == ERROR || vs == LOADING) {
+      navigator.showHome() // In case of error there will be a retry button
     }
-    */
   }
 }

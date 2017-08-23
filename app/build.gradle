@@ -49,6 +49,7 @@ dependencies {
   implementation deps.retrofitRxJava
   implementation deps.loganSquareConverter
   implementation deps.okhttp
+  implementation deps.okhttpLogging
   implementation deps.picasso
   implementation deps.picassoOkHttp3
   implementation deps.dagger

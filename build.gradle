@@ -56,6 +56,7 @@ buildscript {
               retrofit               : "com.squareup.retrofit2:retrofit:$ext.version.retrofit",
               retrofitRxJava         : "com.squareup.retrofit2:adapter-rxjava2:$ext.version.retrofit",
               okhttp                 : "com.squareup.okhttp3:okhttp:$ext.version.okhttp",
+              okhttpLogging          : "com.squareup.okhttp3:logging-interceptor:$ext.version.okhttp",
               moshi                  : "com.squareup.moshi:moshi-kotlin:$ext.version.moshi",
               picasso                : "com.squareup.picasso:picasso:$ext.version.picasso",
               picassoOkHttp3         : "com.jakewharton.picasso:picasso2-okhttp3-downloader:$ext.version.picassoOkHttp3",

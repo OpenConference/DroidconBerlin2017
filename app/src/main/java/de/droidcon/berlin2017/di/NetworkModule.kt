@@ -4,12 +4,16 @@ import android.content.Context
 import com.github.aurae.retrofit2.LoganSquareConverterFactory
 import dagger.Module
 import dagger.Provides
+import de.droidcon.berlin2017.BuildConfig
 import de.droidcon.berlin2017.schedule.backend.BackendScheduleAdapter
 import de.droidcon.berlin2017.schedule.backend.DroidconBerlinBackend
 import de.droidcon.berlin2017.schedule.backend.DroidconBerlinBackendScheduleAdapter
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import okhttp3.logging.HttpLoggingInterceptor.Level
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+
 
 /**
  * @author Hannes Dorfmann
@@ -23,8 +27,15 @@ open class NetworkModule(context: Context) {
   private val backend: DroidconBerlinBackend
 
   init {
-    okHttp = OkHttpClient.Builder().cache(okhttp3.Cache(context.cacheDir, 48 * 1024 * 1024))
-        .build()
+    val builder = OkHttpClient.Builder()
+        .cache(okhttp3.Cache(context.cacheDir, 48 * 1024 * 1024))
+
+    if (BuildConfig.DEBUG) {
+      val logging = HttpLoggingInterceptor()
+      logging.level = Level.BODY
+      builder.addInterceptor(logging)
+    }
+    okHttp = builder.build()
 
     retrofit = Retrofit.Builder()
         .client(okHttp)

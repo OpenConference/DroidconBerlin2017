@@ -25,22 +25,23 @@ class ScheduleDataAwareObservableFactory(private val scheduleSync: ScheduleSync,
    */
   fun <T> create(originalObservable: Observable<T>): Observable<T> =
       scheduleDataStateDeterminer.getScheduleSyncDataState().flatMapObservable {
+        Timber.d("Schedule Sync state: $it")
         when (it) {
           ScheduleDataStateDeterminer.ScheduleDataState.UP_TO_DATE -> originalObservable
 
           ScheduleDataStateDeterminer.ScheduleDataState.NO_DATA ->
             scheduleSync.executeSync()
-                .andThen { scheduleDataStateDeterminer.markScheduleSyncedSuccessful() }
-                .toObservable<Any>()
-                .switchMap { originalObservable }
+                .andThen(scheduleDataStateDeterminer.markScheduleSyncedSuccessful())
+                .andThen( originalObservable)
 
           ScheduleDataStateDeterminer.ScheduleDataState.RUN_BACKGROUND_SYNC -> {
             // Execute sync in background
             scheduleSync.executeSync()
-                .andThen { scheduleDataStateDeterminer.markScheduleSyncedSuccessful() }
+                .andThen(scheduleDataStateDeterminer.markScheduleSyncedSuccessful())
                 .observeOn(backgroundSyncScheduler)
                 .subscribeOn(backgroundSyncScheduler)
-                .subscribe({}, { Timber.e(it, "Error when starting background sync") })
+                .subscribe({ Timber.d("Synced schedule in background successfully") },
+                    { Timber.e(it, "Error while syncing schedule in background") })
 
             // Continue with original observable in parallel
             originalObservable

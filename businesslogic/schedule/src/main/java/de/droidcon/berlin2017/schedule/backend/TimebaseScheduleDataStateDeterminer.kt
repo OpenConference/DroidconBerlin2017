@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import io.reactivex.Completable
 import io.reactivex.Single
 import org.threeten.bp.Instant
+import timber.log.Timber
 
 /**
  * This [TimebaseScheduleDataStateDeterminer] basically says that every two hours a sync will run in background
@@ -43,6 +44,7 @@ class TimebaseScheduleDataStateDeterminer(private val sharedPrefs: SharedPrefere
             .putBoolean(KEY_RUN_AT_LEAST_ONCE, true)
             .putLong(KEY_LAST_SYNC, currentTime().toEpochMilli())
             .commit()
+        Timber.d("Marked Schedule as synced")
       }
 
   fun currentTime() = Instant.now()

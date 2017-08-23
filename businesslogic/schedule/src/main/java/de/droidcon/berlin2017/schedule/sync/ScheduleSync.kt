@@ -14,6 +14,7 @@ import de.droidcon.berlin2017.schedule.database.dao.SessionDao
 import de.droidcon.berlin2017.schedule.database.dao.SpeakerDao
 import io.reactivex.Completable
 import io.reactivex.Single
+import timber.log.Timber
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -37,6 +38,7 @@ class ScheduleSync(
     val zipped: Single<Boolean> = Single.zip(listOf(backend.getLocations(),
         backend.getSpeakers(), backend.getSessions())) { results ->
 
+      Timber.d("Sync executed, results received")
       val locationsResponse = results[0] as BackendScheduleResponse<Location>
       val speakersResponse = results[1] as BackendScheduleResponse<Speaker>
       val sessionsResponse = results[2] as BackendScheduleResponse<Session>
@@ -116,6 +118,7 @@ class ScheduleSync(
 
           transaction.markSuccessful()
           notificaionSchedulerCommands.forEach { it.execute() } // Execute only if transaction was successful
+          Timber.d("Synced successfully")
         } finally {
           transaction.end()
         }

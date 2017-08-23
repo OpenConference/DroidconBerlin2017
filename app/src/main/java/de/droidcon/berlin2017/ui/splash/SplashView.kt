@@ -25,19 +25,9 @@ interface SplashView : MvpView {
   /**
    * States a View can render
    */
-  sealed class ViewState {
-
-    protected val PROGRESS_RANGE: IntRange = 0..100
-
-    data class LoadingProgress(val loadingProgress: Int) : ViewState() {
-      init {
-        require(PROGRESS_RANGE.contains(
-            loadingProgress)) { "Progress must be between $PROGRESS_RANGE but was $loadingProgress" }
-      }
-
-      fun isLoadingComplete() = loadingProgress == 100
-    }
-
-    data class Error(val error: Throwable) : ViewState()
+  enum class ViewState {
+    LOADING,
+    ERROR,
+    COMPLETED
   }
 }
