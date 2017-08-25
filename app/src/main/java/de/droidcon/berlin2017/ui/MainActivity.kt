@@ -11,8 +11,6 @@ import com.bluelinelabs.conductor.RouterTransaction
 import de.droidcon.berlin2017.DroidconApplication
 import de.droidcon.berlin2017.R
 import de.droidcon.berlin2017.model.Session
-import de.droidcon.berlin2017.schedule.backend.ScheduleDataStateDeterminer.ScheduleDataState.NO_DATA
-import de.droidcon.berlin2017.ui.home.HomeController
 import de.droidcon.berlin2017.ui.splash.SplashController
 
 
@@ -23,34 +21,6 @@ class MainActivity : AppCompatActivity() {
       TODO("Implement")
     }
   }
-
-  /*
-  private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-    when (item.itemId) {
-      id.navigation_home -> {
-        message.setText(string.title_home)
-        return@OnNavigationItemSelectedListener true
-      }
-      id.navigation_dashboard -> {
-        message.setText(string.title_dashboard)
-        return@OnNavigationItemSelectedListener true
-      }
-      id.navigation_notifications -> {
-        message.setText(string.title_notifications)
-        return@OnNavigationItemSelectedListener true
-      }
-    }
-    false
-  }
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(layout.activity_main)
-
-    navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-  }
-  */
-
   private lateinit var router: Router
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,10 +35,10 @@ class MainActivity : AppCompatActivity() {
       val showSplash = DroidconApplication.getApplicationComponent(this).scheduleStateDeterminer()
           .getScheduleSyncDataState().blockingGet()
 
-      if (showSplash == NO_DATA)
+    //  if (showSplash == NO_DATA)
         router.setRoot(RouterTransaction.with(SplashController()))
-      else
-        router.setRoot(RouterTransaction.with(HomeController()))
+    //  else
+    //    router.setRoot(RouterTransaction.with(HomeController()))
     }
   }
 

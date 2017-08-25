@@ -35,7 +35,7 @@ class SplashPresenter @Inject constructor(
 
         }
 
-    val timer = Observable.timer(2, SECONDS) // Show splash screen at least 2 seconds
+    val timer = Observable.timer(9, SECONDS) // Show splash screen at least 2 seconds
 
     val combined = Observable.combineLatest(listOf(data, timer)) {
       it[0] as SplashView.ViewState
