@@ -59,6 +59,7 @@ dependencies {
   implementation project(":businesslogic:notification")
   implementation deps.timber
   implementation deps.lottie
+  implementation deps.adapterDelegates
 
   testImplementation deps.junit
   androidTestImplementation 'com.android.support.test:runner:1.0.0'

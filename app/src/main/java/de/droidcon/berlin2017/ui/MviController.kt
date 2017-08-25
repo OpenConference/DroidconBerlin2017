@@ -11,6 +11,7 @@ import com.hannesdorfmann.mosby3.MviConductorDelegateCallback
 import com.hannesdorfmann.mosby3.MviConductorLifecycleListener
 import com.hannesdorfmann.mosby3.mvi.MviPresenter
 import com.hannesdorfmann.mosby3.mvp.MvpView
+import de.droidcon.berlin2017.analytics.AnalyticsLifecycleListener
 
 /**
  * This is the base Presenter for Model-View-Intent based controllers.
@@ -26,11 +27,17 @@ abstract class MviController<V : MvpView, P : MviPresenter<V, *>>(
 
   constructor() : this(null)
 
+
   private val mosbyDelegate by lazy { MviConductorLifecycleListener(this) }
   val navigator by lazy { applicationComponent().navigatorFactory()[this] }
   protected val viewBinding by lazy { applicationComponent().uiBinderFactory()[this] }
 
-  abstract val layoutRes: Int
+  protected abstract val layoutRes: Int
+
+  /**
+   * Set to true if the Controller should be tracked automatically with analytics
+   */
+  protected open val trackingWithAnalytics = true
 
 
   @Suppress("UNCHECKED_CAST")
@@ -41,6 +48,8 @@ abstract class MviController<V : MvpView, P : MviPresenter<V, *>>(
     super.onContextAvailable(context)
     addLifecycleListener(viewBinding)
     addLifecycleListener(mosbyDelegate)
+    if (trackingWithAnalytics)
+      addLifecycleListener(AnalyticsLifecycleListener())
   }
 
   override fun setRestoringViewState(restoringViewState: Boolean) {
@@ -49,4 +58,5 @@ abstract class MviController<V : MvpView, P : MviPresenter<V, *>>(
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View =
       inflater.inflate(layoutRes, container, false)
+
 }

@@ -38,7 +38,7 @@ abstract class ViewBinding : LifecycleListener(), LifecycleOwner {
     }
   }
 
-  protected abstract fun bindView(rootView: View)
+  protected abstract fun bindView(rootView: ViewGroup)
 
   override fun addListener(clearCallback: () -> Unit) {
     clearCallbacks.add(clearCallback)

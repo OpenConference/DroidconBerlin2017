@@ -72,6 +72,7 @@ buildscript {
               timber                 : "com.jakewharton.timber:timber:$ext.version.timber",
               rxJavaInterop          : "com.github.akarnokd:rxjava2-interop:$ext.version.rxJavaInterop",
               lottie                 : "com.airbnb.android:lottie:$ext.version.lottie",
+              adapterDelegates       : "com.hannesdorfmann:adapterdelegates3:3.0.1",
 
 
               loganSquare            : "com.bluelinelabs:logansquare:$ext.version.loganSquare",

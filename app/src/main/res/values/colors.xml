@@ -11,4 +11,9 @@
   <color name="turkis">#64D79E</color>
 
   <color name="splash_background">#4d4d4d</color>
+
+  <color name="textColorPrimary">#6a6a6a</color>
+  <color name="textColorSecondary">#919191</color>
+
+  <color name="speakerslist_placeholder">#E0E0E0</color>
 </resources>

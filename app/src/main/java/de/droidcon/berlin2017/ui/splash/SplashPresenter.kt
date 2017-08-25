@@ -2,9 +2,11 @@ package de.droidcon.berlin2017.ui.splash
 
 import com.hannesdorfmann.mosby3.mvi.MviBasePresenter
 import de.droidcon.berlin2017.schedule.repository.SessionsRepository
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import java.util.concurrent.TimeUnit.SECONDS
 import javax.inject.Inject
 
 /**
@@ -18,7 +20,7 @@ class SplashPresenter @Inject constructor(
 
   override fun bindIntents() {
 
-    val observable = intent(SplashView::loadIntent) // This will cause loading the data
+    val data = intent(SplashView::loadIntent) // This will cause loading the data
         .doOnNext({ Timber.d("Intent: loading") })
         .switchMap {
           sessionsRepository.allSessions()
@@ -30,11 +32,16 @@ class SplashPresenter @Inject constructor(
                 Timber.e(it)
                 SplashView.ViewState.ERROR
               }
-              .observeOn(AndroidSchedulers.mainThread())
+
         }
 
+    val timer = Observable.timer(2, SECONDS) // Show splash screen at least 2 seconds
 
-    subscribeViewState(observable, SplashView::render)
+    val combined = Observable.combineLatest(listOf(data, timer)) {
+      it[0] as SplashView.ViewState
+    }.observeOn(AndroidSchedulers.mainThread())
+
+    subscribeViewState(combined, SplashView::render)
 
   }
 }

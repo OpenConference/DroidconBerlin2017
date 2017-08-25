@@ -34,3 +34,7 @@
 -keepclassmembers class com.yourcompany.models.** {
   *;
 }
+
+-keepclassmembers class android.support.design.internal.BottomNavigationMenuView {
+    boolean mShiftingMode;
+}

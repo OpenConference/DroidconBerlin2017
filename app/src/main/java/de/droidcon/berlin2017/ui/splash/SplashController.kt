@@ -5,7 +5,7 @@ import de.droidcon.berlin2017.ui.MviController
 import de.droidcon.berlin2017.ui.applicationComponent
 
 /**
- *
+ * Splash screen, only shown the first time the app starts
  *
  * @author Hannes Dorfmann
  */

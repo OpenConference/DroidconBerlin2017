@@ -2,6 +2,7 @@ package de.droidcon.berlin2017
 
 import android.content.Context
 import android.support.multidex.MultiDexApplication
+import de.droidcon.berlin2017.di.AnalyticsModule
 import de.droidcon.berlin2017.di.ApplicationComponent
 import de.droidcon.berlin2017.di.ApplicationModule
 import de.droidcon.berlin2017.di.DaggerApplicationComponent
@@ -42,6 +43,7 @@ open class DroidconApplication : MultiDexApplication() {
           .repositoriesModule(RepositoriesModule())
           .scheduleModule(ScheduleModule(this))
           .picassoModule(PicassoModule(this))
+          .analyticsModule(AnalyticsModule(this))
           .navigatorModule(NavigatorModule())
           .viewBindingModule(ViewBindingModule())
 

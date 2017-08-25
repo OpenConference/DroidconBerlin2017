@@ -18,7 +18,8 @@ import de.droidcon.berlin2017.schedule.sync.ScheduleSync
 @Module(
     includes = arrayOf(ScheduleModule::class, DaoModule::class, NetworkModule::class,
         RepositoriesModule::class,
-        PicassoModule::class, NavigatorModule::class, ViewBindingModule::class)
+        PicassoModule::class, NavigatorModule::class, ViewBindingModule::class,
+        AnalyticsModule::class)
 )
 class ApplicationModule(c: Context) {
 

@@ -8,8 +8,11 @@ import android.view.ViewGroup
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
+import de.droidcon.berlin2017.DroidconApplication
 import de.droidcon.berlin2017.R
 import de.droidcon.berlin2017.model.Session
+import de.droidcon.berlin2017.schedule.backend.ScheduleDataStateDeterminer.ScheduleDataState.NO_DATA
+import de.droidcon.berlin2017.ui.home.HomeController
 import de.droidcon.berlin2017.ui.splash.SplashController
 
 
@@ -59,7 +62,13 @@ class MainActivity : AppCompatActivity() {
 
     router = Conductor.attachRouter(this, container, savedInstanceState)
     if (!router.hasRootController()) {
-      router.setRoot(RouterTransaction.with(SplashController()))
+      val showSplash = DroidconApplication.getApplicationComponent(this).scheduleStateDeterminer()
+          .getScheduleSyncDataState().blockingGet()
+
+      if (showSplash == NO_DATA)
+        router.setRoot(RouterTransaction.with(SplashController()))
+      else
+        router.setRoot(RouterTransaction.with(HomeController()))
     }
   }
 
