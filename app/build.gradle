@@ -33,6 +33,7 @@ dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
   implementation deps.kotlinStdLib
   implementation deps.appCompat
+  implementation deps.cardview
   implementation deps.multiDex
   implementation deps.design
   implementation deps.constraintLayout
@@ -52,14 +53,17 @@ dependencies {
   implementation deps.okhttpLogging
   implementation deps.picasso
   implementation deps.picassoOkHttp3
+  implementation deps.picassoTransformations
   implementation deps.dagger
   kapt deps.daggerCompiler
   implementation project(":businesslogic:model")
   implementation project(":businesslogic:schedule")
   implementation project(":businesslogic:notification")
+  implementation project(":businesslogic:clock")
   implementation deps.timber
   implementation deps.lottie
   implementation deps.adapterDelegates
+  implementation deps.recyclerViewFastscroll
 
   testImplementation deps.junit
   androidTestImplementation 'com.android.support.test:runner:1.0.0'

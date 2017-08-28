@@ -2,6 +2,7 @@ package de.droidcon.berlin2017
 
 import android.content.Context
 import android.support.multidex.MultiDexApplication
+import com.jakewharton.threetenabp.AndroidThreeTen
 import de.droidcon.berlin2017.di.AnalyticsModule
 import de.droidcon.berlin2017.di.ApplicationComponent
 import de.droidcon.berlin2017.di.ApplicationModule
@@ -27,6 +28,7 @@ open class DroidconApplication : MultiDexApplication() {
 
   override fun onCreate() {
     super.onCreate()
+    AndroidThreeTen.init(this)
     plantTimber()
     applicationComponent = applicationComponentBuilder().build()
   }

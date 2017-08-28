@@ -11,6 +11,7 @@
       android:drawableTop="@drawable/ic_error"
       android:padding="@dimen/activity_vertical_margin"
       android:visibility="gone"
+      android:gravity="center"
       android:text="@string/error_unknown_retry"
       style="@style/ErrorView"
       />

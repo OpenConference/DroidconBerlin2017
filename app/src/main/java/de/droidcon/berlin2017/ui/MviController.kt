@@ -30,7 +30,9 @@ abstract class MviController<V : MvpView, P : MviPresenter<V, *>>(
 
   private val mosbyDelegate by lazy { MviConductorLifecycleListener(this) }
   val navigator by lazy { applicationComponent().navigatorFactory()[this] }
-  protected val viewBinding by lazy { applicationComponent().uiBinderFactory()[this] }
+  private val viewBinding by lazy { applicationComponent().uiBinderFactory()[this] }
+  private var lifecycleListenersRegistered = false
+
 
   protected abstract val layoutRes: Int
 
@@ -46,10 +48,18 @@ abstract class MviController<V : MvpView, P : MviPresenter<V, *>>(
   @CallSuper
   override fun onContextAvailable(context: Context) {
     super.onContextAvailable(context)
-    addLifecycleListener(viewBinding)
-    addLifecycleListener(mosbyDelegate)
-    if (trackingWithAnalytics)
-      addLifecycleListener(AnalyticsLifecycleListener())
+
+    // Because of dependency injection we can only register the components once a context
+    // (used for depenedncy injection) is available
+
+    if (!lifecycleListenersRegistered) {
+      lifecycleListenersRegistered = true
+      addLifecycleListener(viewBinding)
+      addLifecycleListener(mosbyDelegate)
+      if (trackingWithAnalytics)
+        addLifecycleListener(AnalyticsLifecycleListener())
+    }
+
   }
 
   override fun setRestoringViewState(restoringViewState: Boolean) {

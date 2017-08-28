@@ -57,7 +57,9 @@ interface Session  {
   @Nullable
   fun endTime(): Instant?
 
-  @Nullable
+  /**
+   * Speakers who will give this talk
+   */
   fun speakers(): List<Speaker>
 
   /**

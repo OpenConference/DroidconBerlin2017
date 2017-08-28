@@ -14,6 +14,9 @@
 
   <color name="textColorPrimary">#6a6a6a</color>
   <color name="textColorSecondary">#919191</color>
+  <color name="black_text">#212121</color>
+
+  <color name="separator_line">#b9b9b9</color>
 
   <color name="speakerslist_placeholder">#E0E0E0</color>
 </resources>

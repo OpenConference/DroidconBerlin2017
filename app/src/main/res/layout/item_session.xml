@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/item_horizontal_margin"
+    android:paddingLeft="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/item_horizontal_margin"
+    >
+
+  <android.support.v7.widget.CardView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      >
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+      <ImageView
+          android:id="@+id/authorPic1"
+          android:layout_width="@dimen/session_author_image_width_height"
+          android:layout_height="@dimen/session_author_image_width_height"
+          android:layout_marginStart="8dp"
+          android:layout_marginTop="8dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:srcCompat="@color/colorAccent"
+          />
+
+      <ImageView
+          android:id="@+id/authorPic2"
+          android:layout_width="@dimen/session_author_image_width_height"
+          android:layout_height="@dimen/session_author_image_width_height"
+          android:layout_marginStart="8dp"
+          android:layout_marginTop="8dp"
+          app:layout_constraintStart_toEndOf="@+id/authorPic1"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:srcCompat="@color/colorAccent"
+          />
+
+      <ImageView
+          android:id="@+id/authorPic3"
+          android:layout_width="@dimen/session_author_image_width_height"
+          android:layout_height="@dimen/session_author_image_width_height"
+          android:layout_marginStart="8dp"
+          android:layout_marginTop="8dp"
+          app:layout_constraintStart_toEndOf="@+id/authorPic2"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:srcCompat="@color/colorAccent"
+          />
+
+      <TextView
+          android:id="@+id/speakers"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="8dp"
+          android:layout_marginStart="8dp"
+          android:layout_marginTop="12dp"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:textSize="12sp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/authorPic1"
+          tools:text="Speaker1 and Speaker2"
+
+          />
+      <TextView
+          android:id="@+id/title"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="8dp"
+          android:layout_marginStart="8dp"
+          android:layout_marginTop="20dp"
+          android:ellipsize="end"
+          android:maxLines="2"
+          android:minLines="2"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/speakers"
+          tools:text="This is the title of a session about "
+          style="@style/SessionItemTitle"
+          />
+
+      <TextView
+          android:id="@+id/time"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="8dp"
+          android:layout_marginStart="8dp"
+          android:layout_marginTop="8dp"
+          android:maxLines="1"
+          android:textColor="@color/green"
+          android:textSize="14sp"
+          android:textStyle="bold"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/title"
+          tools:text="10:00 - 14:00"
+          />
+      <ImageView
+          android:id="@+id/favorite"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="8dp"
+          android:layout_marginEnd="8dp"
+          android:visibility="gone"
+          app:layout_constraintBottom_toBottomOf="@+id/authorPic3"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="@+id/authorPic3"
+          app:srcCompat="@drawable/ic_done"
+          tools:visibility="visible"
+          />
+
+    </android.support.constraint.ConstraintLayout>
+
+  </android.support.v7.widget.CardView>
+
+</FrameLayout>

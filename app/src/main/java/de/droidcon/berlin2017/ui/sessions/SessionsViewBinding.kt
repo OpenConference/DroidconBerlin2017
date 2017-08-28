@@ -1,6 +1,6 @@
-package de.droidcon.berlin2017.ui.speakers
+package de.droidcon.berlin2017.ui.sessions
 
-import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.transition.TransitionManager
 import android.view.LayoutInflater
@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager
 import com.hannesdorfmann.adapterdelegates3.ListDelegationAdapter
 import de.droidcon.berlin2017.R
-import de.droidcon.berlin2017.model.Speaker
 import de.droidcon.berlin2017.ui.PicassoScrollListener
 import de.droidcon.berlin2017.ui.gone
 import de.droidcon.berlin2017.ui.lce.LceViewState
@@ -21,34 +20,37 @@ import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
 
 /**
- * UI that displays the list of speakers
+ * Responsible to display a list of all Sessions on screen
  *
  * @author Hannes Dorfmann
  */
-class SpeakersViewBinding : ViewBinding(), SpeakersView {
+class SessionsViewBinding : ViewBinding(), SessionsView {
+
+  private var recyclerView by LifecycleAwareRef<RecyclerView>(this)
+  private val scrolledToNowSubject = PublishSubject.create<Boolean>()
+  private val retrySubject = PublishSubject.create<Unit>()
 
   private var loadingView by LifecycleAwareRef<View>(this)
   private var errorView by LifecycleAwareRef<View>(this)
   private var emptyView by LifecycleAwareRef<View>(this)
-  private var recyclerView by LifecycleAwareRef<RecyclerView>(this)
   private var rootView by LifecycleAwareRef<ViewGroup>(this)
-  private var adapter by LifecycleAwareRef<ListDelegationAdapter<List<Speaker>>>(this)
-
-  private val retrySubject = PublishSubject.create<Unit>()
+  private var adapter by LifecycleAwareRef<ListDelegationAdapter<List<SchedulePresentationModel>>>(
+      this)
 
   override fun bindView(rootView: ViewGroup) {
+
     this.rootView = rootView
+    val inflater = LayoutInflater.from(rootView.context)
+
     adapter = ListDelegationAdapter(
-        AdapterDelegatesManager<List<Speaker>>()
-            .addDelegate(SpeakersAdapterDelegate(LayoutInflater.from(rootView.context), picasso,
-                { navigator.showSpeakerDetails(it) }))
+        AdapterDelegatesManager<List<SchedulePresentationModel>>()
+            .addDelegate(SessionAdapterDelegate(inflater, picasso,
+                { navigator.showSessionDetails(it) }))
+            .addDelegate(SessionDayHeaderAdapterDelegate(inflater))
+            .addDelegate(SessionTimeSlotDividerAdapterDelegate(inflater))
     )
 
-    val layoutManager = GridLayoutManager(rootView.context,
-        rootView.resources.getInteger(R.integer.speakers_list_columns))
-    layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-      override fun getSpanSize(position: Int): Int = 1
-    }
+    val layoutManager = LinearLayoutManager(rootView.context)
 
     recyclerView = rootView.findViewById(R.id.recyclerView)
     recyclerView.adapter = adapter
@@ -61,12 +63,13 @@ class SpeakersViewBinding : ViewBinding(), SpeakersView {
 
 
     errorView.setOnClickListener { retrySubject.onNext(Unit) }
-
   }
 
-  override fun loadIntent(): Observable<Unit> = retrySubject.startWith(Unit) // trigger on subscribe
+  override fun loadDataIntent(): Observable<Unit> = retrySubject.startWith(Unit)
 
-  override fun render(state: LceViewState<List<Speaker>>) {
+  override fun scrolledToNowIntent(): Observable<Boolean> = scrolledToNowSubject.startWith(false)
+
+  override fun render(state: LceViewState<Sessions>) {
     Timber.d("render $state")
     TransitionManager.beginDelayedTransition(rootView)
     when (state) {
@@ -85,14 +88,19 @@ class SpeakersViewBinding : ViewBinding(), SpeakersView {
       is LceViewState.Content -> {
         loadingView.gone()
         errorView.gone()
-        if (state.data.isEmpty()) {
+        if (state.data.sessions.isEmpty()) {
           emptyView.visible()
           recyclerView.gone()
         } else {
-          adapter.items = state.data
+          adapter.items = state.data.sessions
           adapter.notifyDataSetChanged()
           emptyView.gone()
           recyclerView.visible()
+          if (state.data.scrollTo != null){
+            recyclerView.scrollToPosition(state.data.scrollTo)
+            scrolledToNowSubject.onNext(true)
+            scrolledToNowSubject.onComplete()
+          }
         }
       }
     }

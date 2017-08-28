@@ -14,7 +14,7 @@ import io.reactivex.Observable
 import timber.log.Timber
 
 /**
- *
+ * Responsible to display the splash screen UI
  *
  * @author Hannes Dorfmann
  */

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/subheader_height"
+    android:paddingLeft="64dp"
+    android:paddingRight="64dp"
+    >
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/separator_line"
+      android:layout_gravity="center"
+      />
+
+</FrameLayout>

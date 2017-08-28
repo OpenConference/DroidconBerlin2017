@@ -1,2 +1,2 @@
-include ':app', ':sessions', ':businesslogic:schedule', ':businesslogic:notification', ':businesslogic:model'
+include ':app', ':businesslogic:schedule', ':businesslogic:notification', ':businesslogic:model', ':businesslogic:clock'
 
