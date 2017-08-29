@@ -71,6 +71,7 @@ class SessionAdapterDelegate(
     private val favorite = v.findViewById<View>(R.id.favorite)
 
     fun bind(session: SessionPresentationModel) {
+      this.session = session.session
 
       authorPic1.gone()
       authorPic2.gone()
