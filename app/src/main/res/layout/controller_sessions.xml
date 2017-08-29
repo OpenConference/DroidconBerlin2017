@@ -15,8 +15,6 @@
       app:fastScrollPopupTextColor="@android:color/white"
       app:fastScrollPopupTextSize="24sp"
       app:fastScrollThumbColor="@color/colorAccent"
-      android:paddingTop="40dp"
-      android:clipToPadding="false"
       />
 
   <TextView

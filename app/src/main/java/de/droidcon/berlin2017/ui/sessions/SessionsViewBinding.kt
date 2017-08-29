@@ -39,7 +39,6 @@ class SessionsViewBinding : ViewBinding(), SessionsView {
       this)
 
   override fun bindView(rootView: ViewGroup) {
-Timber.d("SessionsViewBinding bindView()")
     this.rootView = rootView
     val inflater = LayoutInflater.from(rootView.context)
 
@@ -47,8 +46,8 @@ Timber.d("SessionsViewBinding bindView()")
         AdapterDelegatesManager<List<SchedulePresentationModel>>()
             .addDelegate(0, SessionAdapterDelegate(inflater, picasso,
                 { navigator.showSessionDetails(it) }))
-            .addDelegate(1,SessionDayHeaderAdapterDelegate(inflater))
-            .addDelegate(2, SessionTimeSlotDividerAdapterDelegate(inflater))
+            .addDelegate(1, SessionDayHeaderAdapterDelegate(inflater))
+            .addDelegate(2, SessionDayHeaderPlusSearchBoxSpaceAdapterDelegate(inflater))
     )
 
     val layoutManager = LinearLayoutManager(rootView.context)

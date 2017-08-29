@@ -21,6 +21,7 @@ class SessionsAdapter(
     return when (viewType) {
       0 -> recyclerView.resources.getDimensionPixelOffset(R.dimen.session_item_height)
       1 -> recyclerView.resources.getDimensionPixelOffset(R.dimen.subheader_height)
+      2 -> recyclerView.resources.getDimensionPixelOffset(R.dimen.subheader_height_plus_searchbox)
       else -> throw IllegalArgumentException(
           "Don't know how to compute the height of item with viewType = $viewType")
     }

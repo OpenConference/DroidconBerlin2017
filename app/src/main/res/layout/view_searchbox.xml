@@ -24,7 +24,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_search"
+        app:srcCompat="@drawable/avd_search_close"
         />
 
     <EditText
@@ -45,6 +45,7 @@
         app:layout_constraintEnd_toStartOf="@+id/clearSearch"
         app:layout_constraintStart_toEndOf="@+id/searchIcon"
         app:layout_constraintTop_toTopOf="parent"
+        android:textSize="14sp"
         />
     <ImageButton
         android:id="@+id/clearSearch"

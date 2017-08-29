@@ -5,9 +5,12 @@
   <dimen name="item_horizontal_margin">8dp</dimen>
   <dimen name="errorview_width_height">128dp</dimen>
   <dimen name="subheader_height">88dp</dimen>
-  <dimen name="subheader_text_size">14sp</dimen>
+  <dimen name="subheader_height_plus_searchbox">128dp</dimen>
+  <dimen name="subheader_text_size">16sp</dimen>
   <dimen name="subheader_text_size_smaller">12sp</dimen>
   <dimen name="session_header_height">300dp</dimen>
   <dimen name="session_author_image_width_height">25dp</dimen>
   <dimen name="session_item_height">185dp</dimen>
+
+  <dimen name="day_in_week_header_paddingtop">40dp</dimen>
 </resources>

@@ -1,0 +1,102 @@
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+  <aapt:attr name="android:drawable">
+    <vector
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:height="24dp"
+        android:viewportHeight="24"
+        android:viewportWidth="24"
+        android:width="24dp">
+      <group android:name="oval_container">
+        <path
+            android:name="oval"
+            android:pathData="M 13.389 13.389 C 15.537 11.241 15.537 7.759 13.389 5.611 C 11.241 3.463 7.759 3.463 5.611 5.611 C 3.463 7.759 3.463 11.241 5.611 13.389 C 7.759 15.537 11.241 15.537 13.389 13.389 Z"
+            android:strokeColor="@color/textColorSecondary"
+            android:strokeWidth="1.8"/>
+      </group>
+      <path
+          android:name="ne_stem"
+          android:pathData="M 18 6 L 6 18"
+          android:strokeColor="@color/textColorSecondary"
+          android:strokeWidth="1.8"
+          android:trimPathStart="1"/>
+      <path
+          android:name="nw_stem"
+          android:pathData="M 6 6 L 20 20"
+          android:strokeColor="@color/textColorSecondary"
+          android:strokeWidth="1.8"
+          android:trimPathStart="0.48"/>
+    </vector>
+  </aapt:attr>
+  <target android:name="nw_stem">
+    <aapt:attr name="android:animation">
+      <set xmlns:android="http://schemas.android.com/apk/res/android">
+        <objectAnimator
+            android:duration="500"
+            android:interpolator="@android:interpolator/fast_out_slow_in"
+            android:propertyName="trimPathStart"
+            android:startOffset="300"
+            android:valueFrom="0.48"
+            android:valueTo="0"
+            android:valueType="floatType"/>
+        <objectAnimator
+            android:duration="500"
+            android:interpolator="@android:interpolator/fast_out_slow_in"
+            android:propertyName="trimPathEnd"
+            android:startOffset="300"
+            android:valueFrom="1"
+            android:valueTo="0.86"
+            android:valueType="floatType"/>
+      </set>
+    </aapt:attr>
+  </target>
+  <target android:name="ne_stem">
+    <aapt:attr name="android:animation">
+      <objectAnimator
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          android:duration="314"
+          android:interpolator="@android:interpolator/fast_out_slow_in"
+          android:propertyName="trimPathStart"
+          android:startOffset="522"
+          android:valueFrom="1"
+          android:valueTo="0"
+          android:valueType="floatType"/>
+    </aapt:attr>
+  </target>
+  <target android:name="oval">
+    <aapt:attr name="android:animation">
+      <objectAnimator
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          android:duration="416"
+          android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+          android:propertyName="trimPathStart"
+          android:startOffset="134"
+          android:valueFrom="0"
+          android:valueTo="1"
+          android:valueType="floatType"/>
+    </aapt:attr>
+  </target>
+  <target android:name="oval_container">
+    <aapt:attr name="android:animation">
+      <set xmlns:android="http://schemas.android.com/apk/res/android">
+        <objectAnimator
+            android:duration="500"
+            android:interpolator="@android:interpolator/fast_out_slow_in"
+            android:propertyName="translateX"
+            android:startOffset="300"
+            android:valueFrom="0"
+            android:valueTo="-6.7"
+            android:valueType="floatType"/>
+        <objectAnimator
+            android:duration="500"
+            android:interpolator="@android:interpolator/fast_out_slow_in"
+            android:propertyName="translateY"
+            android:startOffset="300"
+            android:valueFrom="0"
+            android:valueTo="-6.7"
+            android:valueType="floatType"/>
+      </set>
+    </aapt:attr>
+  </target>
+</animated-vector>
