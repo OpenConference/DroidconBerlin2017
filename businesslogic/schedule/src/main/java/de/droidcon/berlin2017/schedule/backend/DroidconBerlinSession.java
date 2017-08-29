@@ -3,8 +3,7 @@ package de.droidcon.berlin2017.schedule.backend;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Html;
-import com.bluelinelabs.logansquare.annotation.JsonField;
-import com.bluelinelabs.logansquare.annotation.JsonObject;
+import com.squareup.moshi.Json;
 import de.droidcon.berlin2017.model.Session;
 import de.droidcon.berlin2017.model.Speaker;
 import java.util.ArrayList;
@@ -15,19 +14,19 @@ import org.threeten.bp.format.DateTimeFormatter;
 /**
  * @author Hannes Dorfmann
  */
-@JsonObject class DroidconBerlinSession implements Session {
+class DroidconBerlinSession implements Session {
 
-  @JsonField String title;
-  @JsonField(name = "nid") String id;
-  @JsonField(name = "abstract") String description;
-  @JsonField(name = "speaker_uids") List<String> speakerIds;
-  @JsonField(name = "room_id") List<String> roomIds;
-  @JsonField(name = "start_iso") List<String> startTimes;
-  @JsonField(name = "end_iso") List<String> endTimes;
+  @Json(name ="title") String title;
+  @Json(name = "nid") String id;
+  @Json(name = "abstract") String description;
+  @Json(name = "speaker_uids") List<String> speakerIds;
+  @Json(name = "room_id") List<String> roomIds;
+  @Json(name = "start_iso") List<String> startTimes;
+  @Json(name = "end_iso") List<String> endTimes;
 
-  private Instant start;
-  private Instant end;
-  private ArrayList<Speaker> speakers;
+  private transient Instant start;
+  private transient Instant end;
+  private transient List<Speaker> speakers;
 
   @NonNull @Override public String id() {
     return id;

@@ -37,9 +37,6 @@ dependencies {
   implementation deps.rxJava
   implementation project(':businesslogic:model')
   implementation project(':businesslogic:notification')
-
-
-  implementation deps.loganSquare
-  kapt deps.loganSquareCompiler
-  implementation deps.loganSquareConverter
+  api deps.moshiConverter
+  api deps.moshi
 }

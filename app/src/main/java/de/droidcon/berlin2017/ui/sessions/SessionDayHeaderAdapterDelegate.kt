@@ -25,7 +25,7 @@ class SessionDayHeaderAdapterDelegate(
       position: Int): Boolean = item is DayPresentationModel
 
   override fun onCreateViewHolder(parent: ViewGroup): DayViewHolder = DayViewHolder(
-      inflater.inflate(R.layout.item_sessions_timeslot_separator, parent, false))
+      inflater.inflate(R.layout.item_session_day_header, parent, false))
 
   override fun onBindViewHolder(item: DayPresentationModel, viewHolder: DayViewHolder,
       payloads: MutableList<Any>) {

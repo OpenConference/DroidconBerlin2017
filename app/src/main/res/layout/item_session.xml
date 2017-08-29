@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/session_item_height"
     android:paddingBottom="@dimen/item_horizontal_margin"
     android:paddingLeft="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_vertical_margin"
@@ -13,6 +13,8 @@
   <android.support.v7.widget.CardView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      app:cardElevation="2dp"
+      app:cardUseCompatPadding="true"
       >
 
     <android.support.constraint.ConstraintLayout
@@ -80,11 +82,15 @@
           android:ellipsize="end"
           android:maxLines="2"
           android:minLines="2"
+          android:textSize="18sp"
+          android:textStyle="bold"
+          app:autoSizeTextType="uniform"
+          app:autoSizeMinTextSize="14sp"
+          app:autoSizeMaxTextSize="18sp"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/speakers"
           tools:text="This is the title of a session about "
-          style="@style/SessionItemTitle"
           />
 
       <TextView
@@ -97,7 +103,6 @@
           android:maxLines="1"
           android:textColor="@color/green"
           android:textSize="14sp"
-          android:textStyle="bold"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/title"

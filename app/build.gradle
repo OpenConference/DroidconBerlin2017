@@ -48,7 +48,6 @@ dependencies {
   implementation deps.firebaseAuth
   implementation deps.retrofit
   implementation deps.retrofitRxJava
-  implementation deps.loganSquareConverter
   implementation deps.okhttp
   implementation deps.okhttpLogging
   implementation deps.picasso

@@ -1,18 +1,21 @@
 package de.droidcon.berlin2017.di
 
 import android.content.Context
-import com.github.aurae.retrofit2.LoganSquareConverterFactory
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import de.droidcon.berlin2017.BuildConfig
 import de.droidcon.berlin2017.schedule.backend.BackendScheduleAdapter
 import de.droidcon.berlin2017.schedule.backend.DroidconBerlinBackend
 import de.droidcon.berlin2017.schedule.backend.DroidconBerlinBackendScheduleAdapter
+import de.droidcon.berlin2017.schedule.backend.HtmlStringTypeAdapter
+import de.droidcon.berlin2017.schedule.backend.InstantIsoTypeConverter
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 
 /**
@@ -37,11 +40,17 @@ open class NetworkModule(context: Context) {
     }
     okHttp = builder.build()
 
+    val moshi = Moshi.Builder()
+       // .add(HtmlStringConverter())
+        .add(HtmlStringTypeAdapter.newFactory())
+        .add(InstantIsoTypeConverter())
+        .build()
+
     retrofit = Retrofit.Builder()
         .client(okHttp)
         .baseUrl("http://droidcon.de/rest/")
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .addConverterFactory(LoganSquareConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 
 

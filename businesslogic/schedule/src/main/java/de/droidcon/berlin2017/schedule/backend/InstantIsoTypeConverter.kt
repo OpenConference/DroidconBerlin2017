@@ -1,6 +1,7 @@
 package de.droidcon.berlin2017.schedule.backend
 
-import com.bluelinelabs.logansquare.typeconverters.StringBasedTypeConverter
+import com.squareup.moshi.FromJson
+import com.squareup.moshi.ToJson
 import org.threeten.bp.Instant
 import org.threeten.bp.format.DateTimeFormatter
 
@@ -9,9 +10,11 @@ import org.threeten.bp.format.DateTimeFormatter
  *
  * @author Hannes Dorfmann
  */
-class InstantIsoTypeConverter : StringBasedTypeConverter<Instant>() {
+class InstantIsoTypeConverter() {
 
-  override fun convertToString(o: Instant?): String? = if (o == null) {
+
+  @ToJson
+  fun convertToString(o: Instant?): String? = if (o == null) {
     null
   } else {
     val timeFormatter = DateTimeFormatter.ISO_DATE_TIME;
@@ -19,7 +22,8 @@ class InstantIsoTypeConverter : StringBasedTypeConverter<Instant>() {
 
   }
 
-  override fun getFromString(str: String?): Instant? = if (str == null) {
+  @FromJson
+  fun getFromString(str: String?): Instant? = if (str == null) {
     null
   } else {
     val timeFormatter = DateTimeFormatter.ISO_DATE_TIME;

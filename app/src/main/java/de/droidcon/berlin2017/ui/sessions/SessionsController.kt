@@ -11,7 +11,7 @@ import de.droidcon.berlin2017.ui.applicationComponent
  */
 class SessionsController : MviController<SessionsView, SessionsPresenter>() {
 
-  override val layoutRes: Int = R.layout.controller_lce
+  override val layoutRes: Int = R.layout.controller_sessions
 
   override fun createPresenter(): SessionsPresenter = SessionsPresenter(
       applicationComponent().sessionsInteractor())

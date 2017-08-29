@@ -18,6 +18,7 @@ import de.droidcon.berlin2017.ui.visible
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
+import java.util.concurrent.TimeUnit.MILLISECONDS
 
 /**
  * Responsible to display a list of all Sessions on screen
@@ -38,16 +39,16 @@ class SessionsViewBinding : ViewBinding(), SessionsView {
       this)
 
   override fun bindView(rootView: ViewGroup) {
-
+Timber.d("SessionsViewBinding bindView()")
     this.rootView = rootView
     val inflater = LayoutInflater.from(rootView.context)
 
-    adapter = ListDelegationAdapter(
+    adapter = SessionsAdapter(
         AdapterDelegatesManager<List<SchedulePresentationModel>>()
-            .addDelegate(SessionAdapterDelegate(inflater, picasso,
+            .addDelegate(0, SessionAdapterDelegate(inflater, picasso,
                 { navigator.showSessionDetails(it) }))
-            .addDelegate(SessionDayHeaderAdapterDelegate(inflater))
-            .addDelegate(SessionTimeSlotDividerAdapterDelegate(inflater))
+            .addDelegate(1,SessionDayHeaderAdapterDelegate(inflater))
+            .addDelegate(2, SessionTimeSlotDividerAdapterDelegate(inflater))
     )
 
     val layoutManager = LinearLayoutManager(rootView.context)
@@ -65,9 +66,11 @@ class SessionsViewBinding : ViewBinding(), SessionsView {
     errorView.setOnClickListener { retrySubject.onNext(Unit) }
   }
 
-  override fun loadDataIntent(): Observable<Unit> = retrySubject.startWith(Unit)
+  override fun loadDataIntent(): Observable<Unit> = Observable.merge(Observable.just(Unit),
+      retrySubject)
 
-  override fun scrolledToNowIntent(): Observable<Boolean> = scrolledToNowSubject.startWith(false)
+  override fun scrolledToNowIntent(): Observable<Boolean> = Observable.merge(Observable.just(false),
+      scrolledToNowSubject).delay(100, MILLISECONDS)
 
   override fun render(state: LceViewState<Sessions>) {
     Timber.d("render $state")
@@ -96,7 +99,7 @@ class SessionsViewBinding : ViewBinding(), SessionsView {
           adapter.notifyDataSetChanged()
           emptyView.gone()
           recyclerView.visible()
-          if (state.data.scrollTo != null){
+          if (state.data.scrollTo != null) {
             recyclerView.scrollToPosition(state.data.scrollTo)
             scrolledToNowSubject.onNext(true)
             scrolledToNowSubject.onComplete()

@@ -1,14 +1,10 @@
 package de.droidcon.berlin2017.schedule.backend;
 
-import com.bluelinelabs.logansquare.annotation.JsonField;
-import com.bluelinelabs.logansquare.annotation.JsonObject;
+import com.squareup.moshi.Json;
 
 /**
  * @author Hannes Dorfmann
  */
-@JsonObject class DroidconBerlinLink {
-  @JsonField String url;
-
-  public DroidconBerlinLink() {
-  }
+class DroidconBerlinLink {
+  @Json(name ="url") String url;
 }

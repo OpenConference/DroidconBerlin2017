@@ -3,8 +3,7 @@ package de.droidcon.berlin2017.schedule.backend;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Html;
-import com.bluelinelabs.logansquare.annotation.JsonField;
-import com.bluelinelabs.logansquare.annotation.JsonObject;
+import com.squareup.moshi.Json;
 import de.droidcon.berlin2017.model.Speaker;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
@@ -12,16 +11,16 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Hannes Dorfmann
  */
-@JsonObject class DroidconBerlinSpeaker implements Speaker {
+class DroidconBerlinSpeaker implements Speaker {
 
-  @JsonField(name = "uid") String id;
-  @JsonField(name = "gn") String firstName;
-  @JsonField(name = "sn") String lastName;
-  @JsonField(name = "org") String company;
-  @JsonField(name = "position") String jobTitle;
-  @JsonField(name = "image") String profilePic;
-  @JsonField(name = "description_short") String info;
-  @JsonField(name = "links") List<DroidconBerlinLink> links;
+  @Json(name = "uid") String id;
+  @Json(name = "gn") String firstName;
+  @Json(name = "sn") String lastName;
+  @Json(name = "org") String company;
+  @Json(name = "position") String jobTitle;
+  @Json(name = "image") String profilePic;
+  @Json(name = "description_short") String info;
+  @Json(name = "links") List<DroidconBerlinLink> links;
 
   @Nullable @org.jetbrains.annotations.Nullable @Override public String profilePic() {
     return profilePic;

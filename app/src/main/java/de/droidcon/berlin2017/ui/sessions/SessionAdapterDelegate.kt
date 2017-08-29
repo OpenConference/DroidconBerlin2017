@@ -17,6 +17,7 @@ import de.droidcon.berlin2017.ui.sessions.SessionAdapterDelegate.SessionViewHold
 import de.droidcon.berlin2017.ui.visible
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 
+
 /**
  * Displays a session
  *
@@ -44,7 +45,20 @@ class SessionAdapterDelegate(
   inner class SessionViewHolder(v: View) : ViewHolder(v) {
 
     init {
+
       v.setOnClickListener { clickListener(session) }
+
+      /*
+
+      val resources = v.context.getResources()
+      val metrics = resources.getDisplayMetrics()
+      v.viewTreeObserver.addOnPreDrawListener {
+        val px = v.height
+        val dp : Float = px / (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
+        Timber.d("Height: $px px $dp dp")
+
+        true }
+        */
     }
 
     private lateinit var session: Session
@@ -52,6 +66,7 @@ class SessionAdapterDelegate(
     private val authorPic2 = v.findViewById<ImageView>(R.id.authorPic2)
     private val authorPic3 = v.findViewById<ImageView>(R.id.authorPic3)
     private val speakerNames = v.findViewById<TextView>(R.id.speakers)
+    private val title = v.findViewById<TextView>(R.id.title)
     private val time = v.findViewById<TextView>(R.id.time)
     private val favorite = v.findViewById<View>(R.id.favorite)
 
@@ -64,7 +79,7 @@ class SessionAdapterDelegate(
       if (session.speakers.isNotEmpty()) {
         val speaker = session.speakers[0]
         picasso.load(speaker.profilePic())
-            .placeholder(R.color.speakerslist_placeholder)
+            .placeholder(R.drawable.speaker_circle_placeholder)
             .transform(CropCircleTransformation())
             .tag(PicassoScrollListener.TAG)
             .into(authorPic1)
@@ -74,7 +89,7 @@ class SessionAdapterDelegate(
       if (session.speakers.size >= 2) {
         val speaker = session.speakers[1]
         picasso.load(speaker.profilePic())
-            .placeholder(R.color.speakerslist_placeholder)
+            .placeholder(R.drawable.speaker_circle_placeholder)
             .transform(CropCircleTransformation())
             .tag(PicassoScrollListener.TAG)
             .into(authorPic2)
@@ -85,7 +100,7 @@ class SessionAdapterDelegate(
       if (session.speakers.size >= 3) {
         val speaker = session.speakers[2]
         picasso.load(speaker.profilePic())
-            .placeholder(R.color.speakerslist_placeholder)
+            .placeholder(R.drawable.speaker_circle_placeholder)
             .transform(CropCircleTransformation())
             .tag(PicassoScrollListener.TAG)
             .into(authorPic3)
@@ -94,6 +109,7 @@ class SessionAdapterDelegate(
 
 
       speakerNames.text = session.speakerNames
+      title.text = session.title
 
       if (session.time == null) {
         time.gone()
@@ -107,5 +123,6 @@ class SessionAdapterDelegate(
       else
         favorite.gone()
     }
+
   }
 }

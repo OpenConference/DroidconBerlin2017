@@ -3,14 +3,13 @@ package de.droidcon.berlin2017.ui.sessions
 import de.droidcon.berlin2017.model.Session
 import de.droidcon.berlin2017.ui.sessions.SchedulePresentationModel.DayPresentationModel
 import de.droidcon.berlin2017.ui.sessions.SchedulePresentationModel.SessionPresentationModel
-import de.droidcon.berlin2017.ui.sessions.SchedulePresentationModel.TimeSlotDividerPresentationModel
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneId
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.FormatStyle.SHORT
 
 private val dayInWeekShort = DateTimeFormatter.ofPattern("EEE")
-private val timeFormatter = DateTimeFormatter.ofLocalizedDateTime(SHORT)
+private val timeFormatter = DateTimeFormatter.ofLocalizedTime(SHORT)
 private val dayInWeekLong = DateTimeFormatter.ofPattern("EEEE")
 private val dateShortFormatter = DateTimeFormatter.ofLocalizedDate(SHORT)
 
@@ -72,6 +71,7 @@ class PhoneSessionGrouper() : SessionGrouper {
         // Precondition: Session has a start time holds because start time already checked for grouping by day
         val timeSlots = sessions.groupBy { it.startTime() }.toList().sortedBy { (startDateTime, _) -> startDateTime }
         timeSlots.forEachIndexed { i, (startDateTime, sessionInTimeSlot) ->
+          /*
           if (i > 0) {
             val startZoned = LocalDateTime.ofInstant(startDateTime, zoneConferenceTakesPlace)
             result.add(TimeSlotDividerPresentationModel(
@@ -80,6 +80,7 @@ class PhoneSessionGrouper() : SessionGrouper {
                     startZoned)
             ))
           }
+          */
           result += sessionInTimeSlot.toSchedulePresentationModel(zoneConferenceTakesPlace,
               fallbackStartDateIfDateNotSet)
         }
@@ -104,12 +105,12 @@ private fun List<Session>.toSchedulePresentationModel(zoneConferenceTakesPlace: 
   val speakers = it.speakers()
 
   val speakerNames = if (speakers.size == 1) speakers[0].name() else speakers.foldIndexed(
-      StringBuilder()) { i, builder, name ->
+      StringBuilder()) { i, builder, speaker ->
     if (i == speakers.size - 1)
       builder.append(" & ")
-    else builder.append(", ")
+    else if (i > 0) builder.append(", ")
 
-    builder.append(name)
+    builder.append(speaker.name())
 
   }.toString()
 
