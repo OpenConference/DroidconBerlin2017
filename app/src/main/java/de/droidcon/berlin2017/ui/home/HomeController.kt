@@ -15,6 +15,8 @@ class HomeController : MviController<HomeView, HomePresenter>() {
 
   override val layoutRes: Int = R.layout.controller_home
 
-  override fun createPresenter(): HomePresenter =
-      HomePresenter()
+  override fun createPresenter(): HomePresenter  {
+    navigator.showSessions()
+    return HomePresenter()
+  }
 }

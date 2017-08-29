@@ -45,4 +45,5 @@ class HomeViewBinding : ViewBinding(), HomeView {
     bottomNavigationView.disableShiftMode()
     //bottomNavigationView.setOnNavigationItemReselectedListener { Timber.d("Selected $it")}
   }
+
 }
