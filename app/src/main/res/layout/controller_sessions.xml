@@ -13,8 +13,10 @@
       android:visibility="gone"
       app:fastScrollPopupBgColor="@color/colorAccent"
       app:fastScrollPopupTextColor="@android:color/white"
-      app:fastScrollPopupTextSize="28sp"
+      app:fastScrollPopupTextSize="24sp"
       app:fastScrollThumbColor="@color/colorAccent"
+      android:paddingTop="40dp"
+      android:clipToPadding="false"
       />
 
   <TextView

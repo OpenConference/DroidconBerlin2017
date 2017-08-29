@@ -6,6 +6,7 @@
   <string name="screen_title_my_schedule">My Schedule</string>
   <string name="screen_title_speakers">Speakers</string>
   <string name="screen_title_twitter">Twitter</string>
+  <string name="search_hint">Sessions, Speakers …</string>
 
 
   <string name="error_unknown">An unexpected error has occurred.</string>

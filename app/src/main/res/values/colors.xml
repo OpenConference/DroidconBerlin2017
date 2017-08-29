@@ -17,6 +17,7 @@
   <color name="black_text">#212121</color>
 
   <color name="separator_line">#b9b9b9</color>
-
   <color name="speakerslist_placeholder">#E0E0E0</color>
+
+  <color name="searchbox_border">#b9b9b9</color>
 </resources>
