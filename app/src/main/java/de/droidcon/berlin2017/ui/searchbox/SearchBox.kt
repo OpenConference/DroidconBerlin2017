@@ -63,6 +63,4 @@ class SearchBox(context: Context, attributeSet: AttributeSet) : CardView(context
     val drawable = searchIcon.drawable as AnimatedVectorDrawable
     drawable.start()
   }
-
-
 }
