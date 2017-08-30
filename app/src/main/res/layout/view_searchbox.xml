@@ -78,6 +78,7 @@
         app:srcCompat="@drawable/ic_more"
         tools:visibility="visible"
         style="@android:style/Widget.Material.Light.ImageButton"
+        android:visibility="gone"
         />
   </android.support.constraint.ConstraintLayout>
 </merge>

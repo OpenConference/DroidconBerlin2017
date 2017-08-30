@@ -69,7 +69,7 @@ class SessionsViewBinding : ViewBinding(), SessionsView {
       retrySubject)
 
   override fun scrolledToNowIntent(): Observable<Boolean> = Observable.merge(Observable.just(false),
-      scrolledToNowSubject).delay(100, MILLISECONDS)
+      scrolledToNowSubject).delay(200, MILLISECONDS)
 
   override fun render(state: LceViewState<Sessions>) {
     Timber.d("render $restoringViewState $state")
