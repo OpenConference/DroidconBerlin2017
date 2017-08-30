@@ -72,7 +72,7 @@ class SessionsViewBinding : ViewBinding(), SessionsView {
       scrolledToNowSubject).delay(100, MILLISECONDS)
 
   override fun render(state: LceViewState<Sessions>) {
-    Timber.d("render $state")
+    Timber.d("render $restoringViewState $state")
     if (!restoringViewState)
       TransitionManager.beginDelayedTransition(rootView)
 

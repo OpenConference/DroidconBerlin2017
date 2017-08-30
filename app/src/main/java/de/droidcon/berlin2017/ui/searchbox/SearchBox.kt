@@ -1,6 +1,7 @@
 package de.droidcon.berlin2017.ui.searchbox
 
 import android.content.Context
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.support.v7.widget.CardView
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -57,6 +58,11 @@ class SearchBox(context: Context, attributeSet: AttributeSet) : CardView(context
   fun currentSearchText(): String = searchInput.text.toString()
 
   fun requestFocusForSearchInput(): Boolean = searchField.requestFocus()
+
+  fun animateSearchIconToCloseIcon() {
+    val drawable = searchIcon.drawable as AnimatedVectorDrawable
+    drawable.start()
+  }
 
 
 }

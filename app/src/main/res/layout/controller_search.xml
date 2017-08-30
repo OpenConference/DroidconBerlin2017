@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/searchRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/search_background"
     android:orientation="vertical"
+    android:transitionGroup="false"
     >
 
 
@@ -19,17 +21,22 @@
       android:layout_marginTop="@dimen/activity_horizontal_margin"
       android:transitionName="@string/transition_searchbox"
       app:cardElevation="8dp"
+      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
+      tools:layout_height="40dp"
+      tools:background="@color/green"
       />
 
 
   <FrameLayout
       android:id="@+id/resultsWrapper"
       android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="1"
+      android:layout_height="wrap_content"
       android:layout_marginLeft="@dimen/activity_vertical_margin"
       android:layout_marginRight="@dimen/activity_vertical_margin"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/searchBox"
+      tools:background="@color/red"
       >
 
     <FrameLayout
@@ -47,6 +54,7 @@
           android:layout_margin="@dimen/search_progress_margin"
           android:indeterminate="true"
           android:visibility="gone"
+          tools:visibility="visible"
           />
 
       <include layout="@layout/view_error"/>
@@ -76,4 +84,4 @@
 
 
   </FrameLayout>
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
