@@ -3,6 +3,7 @@ package de.droidcon.berlin2017.di
 import com.squareup.picasso.Picasso
 import dagger.Component
 import de.droidcon.berlin2017.analytics.Analytics
+import de.droidcon.berlin2017.clock.Clock
 import de.droidcon.berlin2017.interactor.SessionsInteractor
 import de.droidcon.berlin2017.interactor.SpeakerDetailsInteractor
 import de.droidcon.berlin2017.schedule.backend.ScheduleDataStateDeterminer
@@ -30,4 +31,5 @@ interface ApplicationComponent {
   fun sessionsInteractor() : SessionsInteractor
   fun searchEngine() : SearchEngine
   fun speakerDetailsInteractor() : SpeakerDetailsInteractor
+  fun clock() : Clock
 }

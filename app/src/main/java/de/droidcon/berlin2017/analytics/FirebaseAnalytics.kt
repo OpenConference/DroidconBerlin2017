@@ -34,4 +34,16 @@ class FirebaseAnalytics(context: Context) : Analytics {
     bundle.putString(FirebaseAnalytics.Param.SEARCH_TERM, query)
     firebase.logEvent(FirebaseAnalytics.Event.SEARCH, bundle)
   }
+
+  override fun trackSessionMarkedAsFavorite(sessionId: String) {
+    val bundle = Bundle()
+    bundle.putString("SessionId", sessionId)
+    firebase.logEvent("MarkSessionAsFavorite", bundle)
+  }
+
+  override fun trackSessionRemovedFromFavorite(sessionId: String) {
+    val bundle = Bundle()
+    bundle.putString("SessionId", sessionId)
+    firebase.logEvent("RemoveSessionFromFavorite", bundle)
+  }
 }

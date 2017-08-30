@@ -7,6 +7,8 @@ import de.droidcon.berlin2017.ui.home.HomeNavigator
 import de.droidcon.berlin2017.ui.navigation.NavigatorFactory
 import de.droidcon.berlin2017.ui.search.SearchController
 import de.droidcon.berlin2017.ui.search.SearchViewNavigator
+import de.droidcon.berlin2017.ui.sessiondetails.SessionDetailsController
+import de.droidcon.berlin2017.ui.sessiondetails.SessionDetailsNavigator
 import de.droidcon.berlin2017.ui.sessions.SessionsController
 import de.droidcon.berlin2017.ui.sessions.SessionsNavigator
 import de.droidcon.berlin2017.ui.speakerdetail.SpeakerDetailsController
@@ -33,7 +35,8 @@ class NavigatorModule {
               SpeakersController::class.java to ::SpeakersNavigator,
               SessionsController::class.java to ::SessionsNavigator,
               SearchController::class.java to ::SearchViewNavigator,
-              SpeakerDetailsController::class.java to :: SpeakerDetailsNavigator
+              SpeakerDetailsController::class.java to ::SpeakerDetailsNavigator,
+              SessionDetailsController::class.java to ::SessionDetailsNavigator
           )
       )
 

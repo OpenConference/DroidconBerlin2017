@@ -1,4 +1,4 @@
-package de.droidcon.berlin2017.ui.search
+package de.droidcon.berlin2017.ui.sessiondetails
 
 import com.bluelinelabs.conductor.Controller
 import com.bluelinelabs.conductor.RouterTransaction
@@ -6,7 +6,6 @@ import com.bluelinelabs.conductor.changehandler.HorizontalChangeHandler
 import de.droidcon.berlin2017.model.Session
 import de.droidcon.berlin2017.model.Speaker
 import de.droidcon.berlin2017.ui.navigation.Navigator
-import de.droidcon.berlin2017.ui.sessiondetails.SessionDetailsController
 import de.droidcon.berlin2017.ui.speakerdetail.SpeakerDetailsController
 
 /**
@@ -14,10 +13,11 @@ import de.droidcon.berlin2017.ui.speakerdetail.SpeakerDetailsController
  *
  * @author Hannes Dorfmann
  */
-class SearchViewNavigator(private val controller: Controller) : Navigator {
+class SessionDetailsNavigator(private val controller: Controller) : Navigator {
 
   override fun showHome() {
-    controller.router.popCurrentController()
+    TODO(
+        "not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 
   override fun showSessions() {
@@ -36,24 +36,19 @@ class SearchViewNavigator(private val controller: Controller) : Navigator {
   }
 
   override fun showSpeakerDetails(speaker: Speaker) {
-
     controller.router.pushController(
-        RouterTransaction.with(SpeakerDetailsController(speaker.id()))
-            .popChangeHandler(HorizontalChangeHandler())
+        RouterTransaction.with(
+            SpeakerDetailsController(speaker.id())
+        )
             .pushChangeHandler(HorizontalChangeHandler())
-    )
+            .popChangeHandler(HorizontalChangeHandler())
 
+    )
   }
 
   override fun showSessionDetails(session: Session) {
-
-    controller.router.pushController(
-        RouterTransaction.with(
-            SessionDetailsController(session.id())
-        )
-            .popChangeHandler(HorizontalChangeHandler())
-            .pushChangeHandler(HorizontalChangeHandler())
-    )
+    TODO(
+        "not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 
   override fun showTweets() {

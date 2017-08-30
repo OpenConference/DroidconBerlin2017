@@ -14,4 +14,6 @@ interface Analytics {
   fun trackSessionDetailsScreen(id: String)
   fun trackSpeakersDetailsScreen(id: String)
   fun trackSearch(query : String)
+  fun trackSessionMarkedAsFavorite(sessionId : String)
+  fun trackSessionRemovedFromFavorite(sessionId : String)
 }

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -32,6 +31,7 @@
       <android.support.constraint.ConstraintLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent"
+          android:paddingRight="@dimen/activity_horizontal_margin"
           >
         <ImageView
             android:id="@+id/speakerPic1"
@@ -107,7 +107,6 @@
         android:padding="@dimen/activity_horizontal_margin"
         android:paddingBottom="64dp"
         android:paddingTop="@dimen/activity_horizontal_margin"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -139,7 +138,7 @@
             />
 
         <TextView
-            android:id="@+id/when"
+            android:id="@+id/time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toRightOf="@id/textColumnGuideline"
@@ -156,7 +155,7 @@
             android:textColor="@color/green"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/when"
+            app:layout_constraintTop_toBottomOf="@id/time"
             />
 
 
@@ -167,7 +166,7 @@
             android:layout_marginTop="16dp"
             app:layout_constraintLeft_toRightOf="@id/textColumnGuideline"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/when"
+            app:layout_constraintTop_toBottomOf="@id/time"
             tools:text="Room 123"
             />
 
@@ -181,9 +180,11 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/where"
+            android:lineSpacingMultiplier="1.2"
             />
 
         <TextView
+            android:id="@+id/description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/aboutTitle"

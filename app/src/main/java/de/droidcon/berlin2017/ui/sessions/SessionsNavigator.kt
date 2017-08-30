@@ -1,9 +1,12 @@
 package de.droidcon.berlin2017.ui.sessions
 
 import com.bluelinelabs.conductor.Controller
+import com.bluelinelabs.conductor.RouterTransaction
+import com.bluelinelabs.conductor.changehandler.HorizontalChangeHandler
 import de.droidcon.berlin2017.model.Session
 import de.droidcon.berlin2017.model.Speaker
 import de.droidcon.berlin2017.ui.navigation.Navigator
+import de.droidcon.berlin2017.ui.sessiondetails.SessionDetailsController
 
 /**
  *
@@ -38,8 +41,13 @@ class SessionsNavigator(private val controller: Controller) : Navigator {
   }
 
   override fun showSessionDetails(session: Session) {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
+    controller.parentController!!.router.pushController(
+        RouterTransaction.with(
+            SessionDetailsController(session.id())
+        )
+            .popChangeHandler(HorizontalChangeHandler())
+            .pushChangeHandler(HorizontalChangeHandler())
+    )
   }
 
   override fun showTweets() {
