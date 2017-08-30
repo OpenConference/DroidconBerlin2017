@@ -4,6 +4,7 @@ import com.squareup.picasso.Picasso
 import dagger.Component
 import de.droidcon.berlin2017.analytics.Analytics
 import de.droidcon.berlin2017.interactor.SessionsInteractor
+import de.droidcon.berlin2017.interactor.SpeakerDetailsInteractor
 import de.droidcon.berlin2017.schedule.backend.ScheduleDataStateDeterminer
 import de.droidcon.berlin2017.schedule.repository.SessionsRepository
 import de.droidcon.berlin2017.schedule.repository.SpeakerRepository
@@ -28,4 +29,5 @@ interface ApplicationComponent {
   fun uiBinderFactory(): ViewBindingFactory
   fun sessionsInteractor() : SessionsInteractor
   fun searchEngine() : SearchEngine
+  fun speakerDetailsInteractor() : SpeakerDetailsInteractor
 }

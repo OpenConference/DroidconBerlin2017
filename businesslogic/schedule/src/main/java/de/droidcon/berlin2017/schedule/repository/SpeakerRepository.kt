@@ -28,7 +28,7 @@ interface SpeakerRepository {
 /**
  * A [SpeakerRepository] that uses the speakers from local database
  */
-class LocalDbAndFirebaseSpeakerRepository(
+class LocalSpeakerRepository(
     private val scheduleDataAwareObservableFactory: ScheduleDataAwareObservableFactory,
     private val speakerDao: SpeakerDao) : SpeakerRepository {
 

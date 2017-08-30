@@ -7,7 +7,7 @@ import de.droidcon.berlin2017.schedule.backend.ScheduleDataStateDeterminer
 import de.droidcon.berlin2017.schedule.database.dao.SessionDao
 import de.droidcon.berlin2017.schedule.database.dao.SpeakerDao
 import de.droidcon.berlin2017.schedule.repository.LocalDbAndFirebaseRepository
-import de.droidcon.berlin2017.schedule.repository.LocalDbAndFirebaseSpeakerRepository
+import de.droidcon.berlin2017.schedule.repository.LocalSpeakerRepository
 import de.droidcon.berlin2017.schedule.repository.SessionsRepository
 import de.droidcon.berlin2017.schedule.repository.SpeakerRepository
 import de.droidcon.berlin2017.schedule.sync.ScheduleDataAwareObservableFactory
@@ -35,7 +35,7 @@ class RepositoriesModule {
 
   @Provides
   fun provideSpeakerRepository(factory: ScheduleDataAwareObservableFactory,
-      speakerDao: SpeakerDao): SpeakerRepository = LocalDbAndFirebaseSpeakerRepository(factory,
+      speakerDao: SpeakerDao): SpeakerRepository = LocalSpeakerRepository(factory,
       speakerDao)
 
 }

@@ -9,9 +9,10 @@ import de.droidcon.berlin2017.ui.applicationComponent
  *
  * @author Hannes Dorfmann
  */
-class SpeakersController : MviController<SpeakersView, SpeakersPresenter>() {
+class SpeakersController() : MviController<SpeakersView, SpeakersPresenter>() {
 
   override val layoutRes: Int = R.layout.controller_lce
 
-  override fun createPresenter(): SpeakersPresenter = SpeakersPresenter(applicationComponent().speakersRepository())
+  override fun createPresenter(): SpeakersPresenter = SpeakersPresenter(
+      applicationComponent().speakersRepository())
 }

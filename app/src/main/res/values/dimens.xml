@@ -16,6 +16,7 @@
   <dimen name="search_progress_margin">32dp</dimen>
   <dimen name="keyline_contentstart">72dp</dimen>
 
+  <dimen name="session_details_item_margin_top_bottom">4dp</dimen>
   <dimen name="sessions_item_title_details_space">6dp
   </dimen> <!-- Space between session title and details like time, place etc.-->
   <dimen name="sessions_item_text_space">4dp</dimen>

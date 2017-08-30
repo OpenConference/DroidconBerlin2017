@@ -23,7 +23,7 @@ import de.droidcon.berlin2017.analytics.AnalyticsLifecycleListener
 
 abstract class MviController<V : MvpView, P : MviPresenter<V, *>>(
     args: Bundle?
-) : Controller(), MviConductorDelegateCallback<V, P> {
+) : Controller(args), MviConductorDelegateCallback<V, P> {
 
   constructor() : this(null)
 

@@ -13,7 +13,9 @@ sealed class LceViewState<T> {
   /**
    * Indicates that data is loading
    */
-  class Loading<T> : LceViewState<T>()
+  class Loading<T> : LceViewState<T>() {
+    override fun toString(): String = "LceViewState.Loading"
+  }
 
   /**
    * Indicates that an error while loading data has occurred
