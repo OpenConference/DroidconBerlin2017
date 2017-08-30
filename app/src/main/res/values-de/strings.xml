@@ -27,6 +27,9 @@
   <string name="menu_license">Lizenzen</string>
   <string name="menu_search">Suche</string>
 
+  <string name="session_details_when">Wann</string>
+  <string name="session_details_where">Wo</string>
+  <string name="session_details_abstract">Beschreibung</string>
 
   <string name="search_query_hint">Suchbegriff ...</string>
   <string name="search_no_results">Keine Ergebnisse gefunden</string>

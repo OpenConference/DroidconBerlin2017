@@ -35,4 +35,8 @@
   <string name="search_query_hint">Search ...</string>
   <string name="search_no_results">No results found</string>
 
+  <string name="session_details_when">When</string>
+  <string name="session_details_where">Where</string>
+  <string name="session_details_abstract">About</string>
+
 </resources>

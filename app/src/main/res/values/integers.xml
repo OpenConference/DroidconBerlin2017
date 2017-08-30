@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <integer name="speakers_list_columns">2</integer>
+
+  <integer name="add_to_schedule_duration">@android:integer/config_mediumAnimTime</integer>
 </resources>
