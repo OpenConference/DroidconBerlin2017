@@ -5,6 +5,8 @@ import dagger.Provides
 import de.droidcon.berlin2017.ui.home.HomeController
 import de.droidcon.berlin2017.ui.home.HomeNavigator
 import de.droidcon.berlin2017.ui.navigation.NavigatorFactory
+import de.droidcon.berlin2017.ui.search.SearchController
+import de.droidcon.berlin2017.ui.search.SearchViewNavigator
 import de.droidcon.berlin2017.ui.sessions.SessionsController
 import de.droidcon.berlin2017.ui.sessions.SessionsNavigator
 import de.droidcon.berlin2017.ui.speakers.SpeakersController
@@ -27,7 +29,8 @@ class NavigatorModule {
               SplashController::class.java to ::SplashNavigator,
               HomeController::class.java to ::HomeNavigator,
               SpeakersController::class.java to ::SpeakersNavigator,
-              SessionsController::class.java to ::SessionsNavigator
+              SessionsController::class.java to ::SessionsNavigator,
+              SearchController::class.java to ::SearchViewNavigator
 
           )
       )

@@ -7,6 +7,7 @@ import de.droidcon.berlin2017.interactor.SessionsInteractor
 import de.droidcon.berlin2017.schedule.backend.ScheduleDataStateDeterminer
 import de.droidcon.berlin2017.schedule.repository.SessionsRepository
 import de.droidcon.berlin2017.schedule.repository.SpeakerRepository
+import de.droidcon.berlin2017.search.SearchEngine
 import de.droidcon.berlin2017.ui.navigation.NavigatorFactory
 import de.droidcon.berlin2017.ui.viewbinding.ViewBindingFactory
 
@@ -26,4 +27,5 @@ interface ApplicationComponent {
   fun navigatorFactory(): NavigatorFactory
   fun uiBinderFactory(): ViewBindingFactory
   fun sessionsInteractor() : SessionsInteractor
+  fun searchEngine() : SearchEngine
 }

@@ -7,6 +7,8 @@ import de.droidcon.berlin2017.R
 import de.droidcon.berlin2017.model.Session
 import de.droidcon.berlin2017.model.Speaker
 import de.droidcon.berlin2017.ui.navigation.Navigator
+import de.droidcon.berlin2017.ui.search.SearchChangeHandler
+import de.droidcon.berlin2017.ui.search.SearchController
 import de.droidcon.berlin2017.ui.sessions.SessionsController
 import de.droidcon.berlin2017.ui.speakers.SpeakersController
 
@@ -28,6 +30,15 @@ class HomeNavigator(private val controller : Controller) : Navigator {
                 .popChangeHandler(FadeChangeHandler())
                 .pushChangeHandler(FadeChangeHandler())
         )
+  }
+
+  override fun showSearch() {
+    val shared = controller.resources!!.getString(R.string.transition_searchbox)
+    controller.router.pushController(
+        RouterTransaction.with(SearchController())
+            .popChangeHandler(SearchChangeHandler(listOf(shared)))
+            .pushChangeHandler(SearchChangeHandler(listOf(shared)))
+    )
   }
 
   override fun showMySchedule() {

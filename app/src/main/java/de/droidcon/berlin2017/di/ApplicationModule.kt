@@ -20,7 +20,7 @@ import de.droidcon.berlin2017.schedule.sync.ScheduleSync
         RepositoriesModule::class,
         PicassoModule::class, NavigatorModule::class, ViewBindingModule::class,
         AnalyticsModule::class, ClockModule::class,
-        SessionsModule::class)
+        SessionsModule::class, SearchModule::class)
 )
 class ApplicationModule(c: Context) {
 

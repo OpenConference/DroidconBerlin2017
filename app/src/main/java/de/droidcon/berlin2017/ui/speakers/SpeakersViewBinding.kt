@@ -68,7 +68,8 @@ class SpeakersViewBinding : ViewBinding(), SpeakersView {
 
   override fun render(state: LceViewState<List<Speaker>>) {
     Timber.d("render $state")
-    TransitionManager.beginDelayedTransition(rootView)
+    if (!restoringViewState)
+      TransitionManager.beginDelayedTransition(rootView)
     when (state) {
       is LceViewState.Loading -> {
         errorView.gone()

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/searchRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/search_background"
+    android:orientation="vertical"
+    >
+
+
+  <de.droidcon.berlin2017.ui.searchbox.SearchBox
+      android:id="@+id/searchBox"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="@dimen/activity_vertical_margin"
+      android:layout_marginRight="@dimen/activity_vertical_margin"
+      android:layout_marginTop="@dimen/activity_horizontal_margin"
+      android:transitionName="@string/transition_searchbox"
+      app:cardElevation="8dp"
+      app:layout_constraintTop_toTopOf="parent"
+      />
+
+
+  <FrameLayout
+      android:id="@+id/resultsWrapper"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:layout_marginLeft="@dimen/activity_vertical_margin"
+      android:layout_marginRight="@dimen/activity_vertical_margin"
+      >
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_light"
+        >
+
+      <ProgressBar
+          android:id="@+id/loadingView"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="top|center_horizontal"
+          android:layout_margin="@dimen/search_progress_margin"
+          android:indeterminate="true"
+          android:visibility="gone"
+          />
+
+      <include layout="@layout/view_error"/>
+
+      <android.support.v7.widget.RecyclerView
+          android:id="@+id/contentView"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:visibility="gone"
+          />
+
+      <TextView
+          android:id="@+id/noResult"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="top|center_horizontal"
+          android:layout_margin="@dimen/search_progress_margin"
+          android:drawableTop="@drawable/ic_search_big"
+          android:gravity="center"
+          android:padding="16dp"
+          android:text="@string/search_no_results"
+          android:textSize="18sp"
+          android:visibility="gone"
+          />
+
+    </FrameLayout>
+
+
+  </FrameLayout>
+</LinearLayout>

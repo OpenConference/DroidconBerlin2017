@@ -1,6 +1,7 @@
 package de.droidcon.berlin2017.ui.sessions
 
 import de.droidcon.berlin2017.model.Session
+import de.droidcon.berlin2017.model.Speaker
 import de.droidcon.berlin2017.ui.sessions.SchedulePresentationModel.DayPresentationModel
 import de.droidcon.berlin2017.ui.sessions.SchedulePresentationModel.SessionPresentationModel
 import org.threeten.bp.LocalDateTime
@@ -99,28 +100,6 @@ private fun List<Session>.toSchedulePresentationModel(zoneConferenceTakesPlace: 
 
   val start = if (it.startTime() == null) null else LocalDateTime.ofInstant(it.startTime(),
       zoneConferenceTakesPlace)
-  val end = if (it.endTime() == null) null else LocalDateTime.ofInstant(it.endTime(),
-      zoneConferenceTakesPlace)
-
-  val speakers = it.speakers()
-
-  val speakerNames = if (speakers.size == 1) speakers[0].name() else speakers.foldIndexed(
-      StringBuilder()) { i, builder, speaker ->
-    if (i == speakers.size - 1)
-      builder.append(" & ")
-    else if (i > 0) builder.append(", ")
-
-    builder.append(speaker.name())
-
-  }.toString()
-
-
-  val time = if (start == null) null else {
-    if (end != null)
-      "${timeFormatter.format(start)} - ${timeFormatter.format(end)}"
-    else
-      timeFormatter.format(start)
-  }
 
   SessionPresentationModel(
       id = it.id(),
@@ -131,8 +110,43 @@ private fun List<Session>.toSchedulePresentationModel(zoneConferenceTakesPlace: 
       speakers = it.speakers(),
       date = start ?: fallbackStartDateIfDateNotSet,
       favorite = it.favorite(),
-      speakerNames = speakerNames,
-      time = time,
+      speakerNames = it.speakers().speakerNames(),
+      time = it.shortTime(zoneConferenceTakesPlace, false),
       session = it
   )
+}
+
+
+fun List<Speaker>.speakerNames(): String {
+  return if (size == 1) this[0].name() else this.foldIndexed(
+      StringBuilder()) { i, builder, speaker ->
+    if (i == this.size - 1)
+      builder.append(" & ")
+    else if (i > 0) builder.append(", ")
+
+    builder.append(speaker.name())
+
+  }.toString()
+
+}
+
+fun Session.shortTime(zoneConferenceTakesPlace: ZoneId, dayOfWeek: Boolean): String? {
+
+  val start = if (this.startTime() == null) null else LocalDateTime.ofInstant(this.startTime(),
+      zoneConferenceTakesPlace)
+  val end = if (this.endTime() == null) null else LocalDateTime.ofInstant(this.endTime(),
+      zoneConferenceTakesPlace)
+
+
+  val time = if (start == null) null else {
+    if (end != null)
+      "${timeFormatter.format(start)} - ${timeFormatter.format(end)}"
+    else
+      timeFormatter.format(start)
+  }
+
+  return if (dayOfWeek && start != null)
+    dayInWeekShort.format(start) + ", " + time
+  else
+    time
 }

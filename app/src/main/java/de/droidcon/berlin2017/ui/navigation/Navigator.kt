@@ -23,4 +23,6 @@ interface Navigator {
   fun showSessionDetails(session : Session)
 
   fun showTweets()
+
+  fun showSearch()
 }

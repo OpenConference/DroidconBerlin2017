@@ -59,6 +59,7 @@ dependencies {
   implementation project(":businesslogic:schedule")
   implementation project(":businesslogic:notification")
   implementation project(":businesslogic:clock")
+  implementation project(":businesslogic:search")
   implementation deps.timber
   implementation deps.lottie
   implementation deps.adapterDelegates

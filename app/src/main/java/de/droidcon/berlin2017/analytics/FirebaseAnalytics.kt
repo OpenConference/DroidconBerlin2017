@@ -1,6 +1,7 @@
 package de.droidcon.berlin2017.analytics
 
 import android.content.Context
+import android.os.Bundle
 import com.bluelinelabs.conductor.Controller
 import com.google.firebase.analytics.FirebaseAnalytics
 
@@ -9,7 +10,7 @@ import com.google.firebase.analytics.FirebaseAnalytics
  *
  * @author Hannes Dorfmann
  */
-class FirebaseAnalytics(context : Context) : Analytics {
+class FirebaseAnalytics(context: Context) : Analytics {
 
   private val firebase = FirebaseAnalytics.getInstance(context);
 
@@ -26,5 +27,11 @@ class FirebaseAnalytics(context : Context) : Analytics {
 
   override fun trackScreen(controller: Controller) {
     firebase.setCurrentScreen(controller.activity!!, controller::class.java.simpleName, null)
+  }
+
+  override fun trackSearch(query: String) {
+    val bundle = Bundle()
+    bundle.putString(FirebaseAnalytics.Param.SEARCH_TERM, query)
+    firebase.logEvent(FirebaseAnalytics.Event.SEARCH, bundle)
   }
 }

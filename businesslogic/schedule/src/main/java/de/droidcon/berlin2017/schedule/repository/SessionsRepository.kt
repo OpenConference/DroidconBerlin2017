@@ -29,6 +29,8 @@ interface SessionsRepository {
   fun removeSessionFromSchedule(session: Session): Completable
 
   fun getSessionsOfSpeaker(speakerId: String): Observable<List<Session>>
+
+  fun findSessionsWith(query: String): Observable<List<Session>>
 }
 
 /**
@@ -70,4 +72,7 @@ class LocalDbAndFirebaseRepository(
 
   override fun getSessionsOfSpeaker(speakerId: String): Observable<List<Session>> =
       scheduleDataAwareObservableFactory.create(sessionDao.getSessionsOfSpeaker(speakerId))
+
+  override fun findSessionsWith(query: String): Observable<List<Session>> =
+      scheduleDataAwareObservableFactory.create(sessionDao.findSessionsWith(query))
 }

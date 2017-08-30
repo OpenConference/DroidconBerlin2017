@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <!-- Shared element transitions -->
+  <string name="transition_searchbox">SearchBoxSharedElement</string>
+
+</resources>

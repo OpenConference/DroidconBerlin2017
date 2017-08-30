@@ -4,6 +4,7 @@ import android.support.design.widget.BottomNavigationView
 import android.view.ViewGroup
 import de.droidcon.berlin2017.R
 import de.droidcon.berlin2017.ui.disableShiftMode
+import de.droidcon.berlin2017.ui.searchbox.SearchBox
 import de.droidcon.berlin2017.ui.viewbinding.LifecycleAwareRef
 import de.droidcon.berlin2017.ui.viewbinding.ViewBinding
 
@@ -15,6 +16,8 @@ import de.droidcon.berlin2017.ui.viewbinding.ViewBinding
 class HomeViewBinding : ViewBinding(), HomeView {
 
   private var bottomNavigationView: BottomNavigationView by LifecycleAwareRef(this)
+  private var searchBox: SearchBox by LifecycleAwareRef(this)
+
 
   private val navigationListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
     when (item.itemId) {
@@ -40,10 +43,15 @@ class HomeViewBinding : ViewBinding(), HomeView {
 
 
   override fun bindView(rootView: ViewGroup) {
+    searchBox = rootView.findViewById(R.id.searchBox)
+    searchBox.showInput = false
+    searchBox.setOnClickListener { navigator.showSearch() }
+
     bottomNavigationView = rootView.findViewById(R.id.navigation)
     bottomNavigationView.setOnNavigationItemSelectedListener(navigationListener)
     bottomNavigationView.disableShiftMode()
     bottomNavigationView.setOnNavigationItemReselectedListener { } // Disallow reselect
+
   }
 
 }

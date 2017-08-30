@@ -48,4 +48,9 @@ class SplashNavigator(private val controller: Controller) : Navigator {
     TODO(
         "not implemented")
   }
+
+  override fun showSearch() {
+    TODO(
+        "not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
 }

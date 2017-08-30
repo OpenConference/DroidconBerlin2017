@@ -13,4 +13,14 @@
   <dimen name="session_item_height">185dp</dimen>
 
   <dimen name="day_in_week_header_paddingtop">40dp</dimen>
+  <dimen name="search_progress_margin">32dp</dimen>
+  <dimen name="keyline_contentstart">72dp</dimen>
+
+  <dimen name="sessions_item_title_details_space">6dp
+  </dimen> <!-- Space between session title and details like time, place etc.-->
+  <dimen name="sessions_item_text_space">4dp</dimen>
+  <dimen name="sessions_item_padding_top_bottom">10dp</dimen>
+  <dimen name="keyline_content_width">40dp</dimen>
+  <dimen name="keyline_content_with_plus_start_padding">56dp</dimen>
+
 </resources>

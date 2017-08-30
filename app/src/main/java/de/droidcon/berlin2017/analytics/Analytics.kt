@@ -13,4 +13,5 @@ interface Analytics {
   fun trackScreen(controller : Controller)
   fun trackSessionDetailsScreen(id: String)
   fun trackSpeakersDetailsScreen(id: String)
+  fun trackSearch(query : String)
 }

@@ -18,6 +18,11 @@ interface SpeakerRepository {
   fun allSpeakers(): Observable<List<Speaker>>
 
   fun getSpeaker(id: String): Observable<Speaker>
+
+  /**
+   * Find speakers that match the following criteria
+   */
+  fun findSessionsWith(query: String): Observable<List<Speaker>>
 }
 
 /**
@@ -34,4 +39,6 @@ class LocalDbAndFirebaseSpeakerRepository(
       scheduleDataAwareObservableFactory.create(
           speakerDao.getSpeaker(id))
 
+  override fun findSessionsWith(query: String): Observable<List<Speaker>> =
+      scheduleDataAwareObservableFactory.create(speakerDao.findSessionsWith(query))
 }
