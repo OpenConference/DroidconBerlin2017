@@ -2,11 +2,12 @@ package de.droidcon.berlin2017.ui.sessiondetails
 
 import com.hannesdorfmann.mosby3.mvi.MviBasePresenter
 import de.droidcon.berlin2017.analytics.Analytics
-import de.droidcon.berlin2017.model.Session
 import de.droidcon.berlin2017.schedule.repository.SessionsRepository
 import de.droidcon.berlin2017.ui.lce.LceViewState
 import de.droidcon.berlin2017.ui.lce.lceObservable
+import de.droidcon.berlin2017.ui.sessiondetails.SessionDetailsView.SessionState
 import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
 import timber.log.Timber
 
 /**
@@ -17,15 +18,16 @@ import timber.log.Timber
 class SessionDetailsPresenter(
     private val sessionRepository: SessionsRepository,
     private val analytics: Analytics
-) : MviBasePresenter<SessionDetailsView, LceViewState<Session>>() {
+) : MviBasePresenter<SessionDetailsView, LceViewState<SessionState>>() {
+
+  private lateinit var addRemovFavoriteDisposable : Disposable
 
   override fun bindIntents() {
     //
     // No error handling nor snackbar info (added or removed to schedule). YOLO.
     //
 
-    // Intent function takes care of unsubscribing
-    intent(SessionDetailsView::clickOnFabIntent)
+    addRemovFavoriteDisposable = intent(SessionDetailsView::clickOnFabIntent)
         .doOnNext { Timber.d("Add Session to favorites Intent. Session = ${it.id()}") }
         .doOnNext {
           if (it.favorite()) analytics.trackSessionRemovedFromFavorite(
@@ -41,14 +43,28 @@ class SessionDetailsPresenter(
             Unit
           }.switchMap { Observable.never<Unit>() }
         }
+        .subscribe()
 
     val sessionData = intent(SessionDetailsView::loadIntent)
         .doOnNext { Timber.d("load Session intent. Session Id = $it") }
         .switchMap {
           // Will automatically update if Session is "favorite" / "not favorite anymore"
-          lceObservable(sessionRepository.getSession(it))
+          lceObservable(sessionRepository.getSession(it)
+              .map { SessionState(false, it) }
+              .scan { old, new ->
+                SessionState(
+                    favoriteChanged = old.session.favorite() != new.session.favorite(),
+                    session = new.session
+                )
+              })
         }
 
+
     subscribeViewState(sessionData, SessionDetailsView::render)
+  }
+
+  override fun unbindIntents() {
+    super.unbindIntents()
+    addRemovFavoriteDisposable.dispose()
   }
 }

@@ -19,8 +19,11 @@ import de.droidcon.berlin2017.ui.splash.SplashController
 class MainActivity : AppCompatActivity() {
 
   companion object {
+    private val KEY_SESSION_ID = "SessionIdFromNotification"
     fun buildSessionDetailsIntent(context: Context, session: Session): Intent {
-      TODO("Implement")
+      val intent = Intent(context, MainActivity::class.java)
+      intent.putExtra(KEY_SESSION_ID, session.id())
+      return intent
     }
   }
 
@@ -49,5 +52,10 @@ class MainActivity : AppCompatActivity() {
     if (!router.handleBack()) {
       super.onBackPressed()
     }
+  }
+
+  override fun onNewIntent(intent: Intent?) {
+    super.onNewIntent(intent)
+    // TODO implement notification handling
   }
 }

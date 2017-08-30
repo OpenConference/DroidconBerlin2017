@@ -1,6 +1,8 @@
 package de.droidcon.berlin2017.ui.sessiondetails
 
 import android.content.Context
+import android.graphics.drawable.AnimatedVectorDrawable
+import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.Toolbar
 import android.transition.TransitionManager
 import android.view.View
@@ -17,6 +19,7 @@ import de.droidcon.berlin2017.ui.gone
 import de.droidcon.berlin2017.ui.lce.LceViewState
 import de.droidcon.berlin2017.ui.lce.LceViewState.Content
 import de.droidcon.berlin2017.ui.lce.LceViewState.Loading
+import de.droidcon.berlin2017.ui.sessiondetails.SessionDetailsView.SessionState
 import de.droidcon.berlin2017.ui.sessions.shortTime
 import de.droidcon.berlin2017.ui.sessions.speakerNames
 import de.droidcon.berlin2017.ui.viewbinding.LifecycleAwareRef
@@ -26,6 +29,7 @@ import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import org.threeten.bp.ZoneId
+import timber.log.Timber
 
 /**
  *
@@ -39,7 +43,7 @@ class SessionDetailsViewBinding : ViewBinding(), SessionDetailsView {
 
   private lateinit var zoneConferenceTakesPlace: ZoneId
   private val loadSubject = PublishSubject.create<String>()
-  private var fab by LifecycleAwareRef<View>(this)
+  private var fab by LifecycleAwareRef<FloatingActionButton>(this)
   private var rootView by LifecycleAwareRef<ViewGroup>(this)
   private var loadingView by LifecycleAwareRef<View>(this)
   private var errorView by LifecycleAwareRef<View>(this)
@@ -76,17 +80,18 @@ class SessionDetailsViewBinding : ViewBinding(), SessionDetailsView {
     description = rootView.findViewById(R.id.description)
 
     errorView.setOnClickListener { loadSubject.onNext(sessionId) }
-    toolbar.setNavigationOnClickListener { navigator.popSelfFromBackstack()  }
+    toolbar.setNavigationOnClickListener { navigator.popSelfFromBackstack() }
 
   }
 
 
   override fun loadIntent(): Observable<String> = loadSubject.startWith(sessionId)
 
-  override fun clickOnFabIntent(): Observable<Session> = RxView.clicks(fab).map { session }
+  override fun clickOnFabIntent(): Observable<Session> = RxView.clicks(fab).doOnNext{ Timber.d("Click on fab")}.map { session }
 
 
-  override fun render(state: LceViewState<Session>) {
+  override fun render(state: LceViewState<SessionState>) {
+    Timber.d("render $state")
 
     if (!restoringViewState)
       TransitionManager.beginDelayedTransition(rootView)
@@ -105,7 +110,7 @@ class SessionDetailsViewBinding : ViewBinding(), SessionDetailsView {
         loadingView.gone()
       }
       is Content -> {
-        session = state.data
+        session = state.data.session
         if (fab.visibility != View.VISIBLE && !restoringViewState) {
           // TODO use spring animation
           fab.scaleX = 0f
@@ -114,13 +119,22 @@ class SessionDetailsViewBinding : ViewBinding(), SessionDetailsView {
           fab.animate()
               .scaleX(1f)
               .scaleY(1f)
-              .setStartDelay(800)
+              .setStartDelay(600)
               .setInterpolator(OvershootInterpolator())
               .start()
         } else {
           fab.scaleX = 1f
           fab.scaleY = 1f
           fab.visible()
+        }
+
+        if (state.data.favoriteChanged && !restoringViewState) {
+          Timber.d("not resoring Session ${session.favorite()}")
+          setFabDrawable(!session.favorite())
+          fab.startVectorDrawableAnimation()
+        } else {
+          Timber.d("not changed or restoring Session ${session.favorite()}")
+          setFabDrawable(session.favorite())
         }
 
         errorView.gone()
@@ -167,4 +181,28 @@ class SessionDetailsViewBinding : ViewBinding(), SessionDetailsView {
   }
 
 
+  private fun setFabDrawable(favorite: Boolean) {
+
+    Timber.d("Set drawable $favorite")
+    val drawable = fab.drawable as AnimatedVectorDrawable
+    drawable.stop()
+
+    if (favorite) {
+      Timber.d("R.drawable.avd_remove_from_schedule")
+      fab.setImageDrawable(
+          fab.context.resources.getDrawable(
+              R.drawable.avd_remove_from_schedule, fab.context.theme)!!.mutate().constantState.newDrawable())
+    } else {
+      Timber.d("R.drawable.avd_add_to_schedule")
+      fab.context.resources.getDrawable(
+          R.drawable.avd_add_to_schedule, fab.context.theme)!!.mutate().constantState.newDrawable()
+    }
+  }
+
+
+}
+
+fun FloatingActionButton.startVectorDrawableAnimation() {
+  val drawable = drawable as AnimatedVectorDrawable
+  drawable.start()
 }

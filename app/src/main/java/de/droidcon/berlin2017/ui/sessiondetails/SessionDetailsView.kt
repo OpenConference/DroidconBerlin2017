@@ -26,5 +26,14 @@ interface SessionDetailsView : MvpView {
   /**
    * Renders the session on screen
    */
-  fun render(state: LceViewState<Session>)
+  fun render(state: LceViewState<SessionState>)
+
+
+  /**
+   * View state for a session
+   */
+  data class SessionState (
+      val favoriteChanged : Boolean,
+      val session : Session
+  )
 }

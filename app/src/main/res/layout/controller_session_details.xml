@@ -135,6 +135,7 @@
             android:textColor="@color/green"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
+            android:textSize="18sp"
             />
 
         <TextView
@@ -144,6 +145,7 @@
             app:layout_constraintLeft_toRightOf="@id/textColumnGuideline"
             app:layout_constraintRight_toRightOf="parent"
             tools:text="Monday 2:30pm - 5:45pm"
+            android:textSize="18sp"
             />
 
         <TextView
@@ -156,6 +158,8 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/time"
+            android:textSize="18sp"
+
             />
 
 
@@ -168,6 +172,8 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/time"
             tools:text="Room 123"
+            android:textSize="18sp"
+
             />
 
         <TextView
@@ -180,7 +186,9 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/where"
-            android:lineSpacingMultiplier="1.2"
+
+            android:textSize="18sp"
+
             />
 
         <TextView
@@ -192,6 +200,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             tools:text="This is a very long description for the session blahbq hj qwe hjqw ehjbqbehjbqwe"
+            android:lineSpacingMultiplier="1.3"
+            android:textSize="18sp"
             />
 
 
