@@ -21,4 +21,6 @@
 
   <color name="search_background_color">#B9323232</color>
   <color name="background_light">#F5F5F5</color>
+
+  <color name="profilepic_darken">#1E222222</color>
 </resources>

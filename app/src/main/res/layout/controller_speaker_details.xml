@@ -45,8 +45,6 @@
             app:layout_collapseMode="pin"
             app:navigationIcon="@drawable/ic_arrow_back_white"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-            app:titleMarginStart="@dimen/keyline_contentstart"
-            android:background="@color/green"
             />
 
       </android.support.design.widget.CollapsingToolbarLayout>

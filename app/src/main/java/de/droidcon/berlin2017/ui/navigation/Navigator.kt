@@ -25,4 +25,6 @@ interface Navigator {
   fun showTweets()
 
   fun showSearch()
+
+  fun popSelfFromBackstack()
 }

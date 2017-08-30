@@ -58,4 +58,8 @@ class SearchViewNavigator(private val controller: Controller) : Navigator {
     TODO(
         "not implemented") //To change body of created functions use File | Settings | File Templates.
   }
+
+  override fun popSelfFromBackstack() {
+    controller.router.popCurrentController()
+  }
 }

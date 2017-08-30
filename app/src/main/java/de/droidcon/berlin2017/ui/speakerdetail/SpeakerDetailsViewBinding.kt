@@ -1,6 +1,7 @@
 package de.droidcon.berlin2017.ui.speakerdetail
 
 import android.content.Context
+import android.graphics.PorterDuff
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -64,7 +65,12 @@ class SpeakerDetailsViewBinding : ViewBinding(), SpeakerDetailsView {
     errorView = rootView.findViewById(R.id.error)
     loadingView = rootView.findViewById(R.id.loading)
 
+    profilePic.setColorFilter(
+        rootView.resources.getColor(R.color.profilepic_darken),
+        PorterDuff.Mode.DARKEN)
+
     errorView.setOnClickListener { loadSubject.onNext(speakerId) }
+    toolbar.setNavigationOnClickListener { navigator.popSelfFromBackstack() }
 
     val inflater = LayoutInflater.from(rootView.context)
     adapter = ListDelegationAdapter(
