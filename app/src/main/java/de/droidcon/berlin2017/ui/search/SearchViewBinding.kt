@@ -1,5 +1,6 @@
 package de.droidcon.berlin2017.ui.search
 
+import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.transition.Transition
@@ -8,6 +9,7 @@ import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bluelinelabs.conductor.Controller
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager
 import com.hannesdorfmann.adapterdelegates3.ListDelegationAdapter
 import de.droidcon.berlin2017.R
@@ -114,6 +116,12 @@ class SearchViewBinding : ViewBinding(), SearchView {
         }
       }
     }
+  }
+
+
+  override fun onRestoreViewState(controller: Controller, savedViewState: Bundle) {
+    super.onRestoreViewState(controller, savedViewState)
+    Timber.d("Restore")
   }
 
 

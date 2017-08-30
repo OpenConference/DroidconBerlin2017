@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:colorBackground"
+    >
+
+  <android.support.constraint.ConstraintLayout
+      android:id="@+id/contentView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      >
+
+    <View
+        android:id="@+id/backgroundToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="@color/green"
+        app:layout_constraintBottom_toBottomOf="@+id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_back_white"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+        />
+
+    <ImageView
+        android:id="@+id/speakerPic1"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:background="@color/red"
+        />
+
+    <ImageView
+        android:id="@+id/speakerPic2"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toRightOf="@id/speakerPic1"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:background="@color/red"
+        />
+
+    <ImageView
+        android:id="@+id/speakerPic3"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toRightOf="@id/speakerPic2"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:background="@color/red"
+        />
+
+
+    <TextView
+        android:id="@+id/speakers"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/speakerPic1"
+        app:layout_constraintTop_toBottomOf="@+id/speakerPic1"
+        tools:text="Speaker 1 and Speaker 2"
+        android:textColor="#FFFFFF"
+        />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:paddingBottom="8dp"
+        android:maxLines="3"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintStart_toStartOf="@+id/speakers"
+        app:layout_constraintTop_toBottomOf="@+id/speakers"
+        tools:text="This is the title"
+        android:textColor="#FFFFFF"
+        />
+
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="0dp"
+        android:clipToPadding="false"
+        android:paddingBottom="64dp"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backgroundToolbar"
+        app:layout_constraintVertical_bias="0.0"
+        >
+
+
+    </ScrollView>
+
+  </android.support.constraint.ConstraintLayout>
+
+  <include layout="@layout/view_error"/>
+
+  <include layout="@layout/view_loading"/>
+
+</FrameLayout>

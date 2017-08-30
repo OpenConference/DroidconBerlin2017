@@ -6,7 +6,7 @@
     android:id="@+id/searchRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/search_background"
+    android:background="@color/search_background_color"
     android:orientation="vertical"
     android:transitionGroup="false"
     >

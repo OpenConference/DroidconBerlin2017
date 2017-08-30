@@ -19,6 +19,7 @@ import de.droidcon.berlin2017.ui.changehandler.SharedElementTransitionChangeHand
 import de.droidcon.berlin2017.ui.searchbox.SearchBox;
 import java.util.ArrayList;
 import java.util.List;
+import timber.log.Timber;
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP) public class SearchChangeHandler
     extends SharedElementTransitionChangeHandler {
@@ -62,12 +63,22 @@ import java.util.List;
         .addTarget(container.getResources().getString(R.string.transition_searchbox));
 
     if (isPush) {
+
+
+      // Set the transition drawable for animation
+      to.setBackground(to.getResources().getDrawable(R.drawable.search_background));
+
       transitionSet.addListener(new Transition.TransitionListener() {
+
         @Override public void onTransitionStart(Transition transition) {
-          SearchBox searchBox = (SearchBox) to.findViewById(R.id.searchBox);
-          searchBox.animateSearchIconToCloseIcon();
-          TransitionDrawable background = (TransitionDrawable) to.getBackground();
-          background.startTransition(200);
+          try {
+            final SearchBox searchBox = (SearchBox) to.findViewById(R.id.searchBox);
+            searchBox.animateSearchIconToCloseIcon();
+            TransitionDrawable background = (TransitionDrawable) to.getBackground();
+            background.startTransition(200);
+          } catch (Throwable t){
+            Timber.e(t);
+          }
         }
 
         @Override public void onTransitionEnd(Transition transition) {
