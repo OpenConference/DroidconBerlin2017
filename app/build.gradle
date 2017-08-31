@@ -43,9 +43,7 @@ dependencies {
   implementation deps.rxJava
   implementation deps.rxBinding
   implementation deps.rxAndroid
-  implementation deps.firebaseDatabase
   implementation deps.firebaseAnalytics
-  implementation deps.firebaseAuth
   implementation deps.retrofit
   implementation deps.retrofitRxJava
   implementation deps.okhttp
@@ -60,6 +58,7 @@ dependencies {
   implementation project(":businesslogic:notification")
   implementation project(":businesslogic:clock")
   implementation project(":businesslogic:search")
+  implementation project(":businesslogic:updater")
   implementation deps.timber
   implementation deps.lottie
   implementation deps.adapterDelegates

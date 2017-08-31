@@ -24,7 +24,7 @@ class MySchedulePresenter(
 
     val data = intent(SessionsView::loadDataIntent)
         .doOnNext { Timber.d("Load data intent") }
-        .switchMap { sessionsInteractor.allSessions(scrolledToNowIntent).subscribeOn(Schedulers.io()) }
+        .switchMap { sessionsInteractor.favoriteSessions(scrolledToNowIntent).subscribeOn(Schedulers.io()) }
         .observeOn(AndroidSchedulers.mainThread())
 
     subscribeViewState(data, SessionsView::render)

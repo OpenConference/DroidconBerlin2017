@@ -8,12 +8,18 @@ import android.view.ViewGroup
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
+import com.bluelinelabs.conductor.changehandler.FadeChangeHandler
 import de.droidcon.berlin2017.DroidconApplication
 import de.droidcon.berlin2017.R
 import de.droidcon.berlin2017.model.Session
 import de.droidcon.berlin2017.schedule.backend.ScheduleDataStateDeterminer.ScheduleDataState.NO_DATA
+import de.droidcon.berlin2017.ui.goodbye.GoodByeController
 import de.droidcon.berlin2017.ui.home.HomeController
 import de.droidcon.berlin2017.ui.splash.SplashController
+import de.droidcon.berlin2017.ui.update.UpdateController
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import timber.log.Timber
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +34,7 @@ class MainActivity : AppCompatActivity() {
   }
 
   private lateinit var router: Router
+  private lateinit var updateCheckerDisposable: Disposable
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -35,10 +42,11 @@ class MainActivity : AppCompatActivity() {
     setContentView(R.layout.activity_main)
 
     val container = findViewById<ViewGroup>(R.id.controller_container)
+    val applicationComponent = DroidconApplication.getApplicationComponent(this)
 
     router = Conductor.attachRouter(this, container, savedInstanceState)
     if (!router.hasRootController()) {
-      val showSplash = DroidconApplication.getApplicationComponent(this).scheduleStateDeterminer()
+      val showSplash = applicationComponent.scheduleStateDeterminer()
           .getScheduleSyncDataState().blockingGet()
 
       if (showSplash == NO_DATA)
@@ -46,6 +54,20 @@ class MainActivity : AppCompatActivity() {
       else
         router.setRoot(RouterTransaction.with(HomeController()))
     }
+
+    updateCheckerDisposable = applicationComponent.appUpdaterChecker()
+        .newAppVersionAvailable()
+        .subscribeOn(AndroidSchedulers.mainThread())
+        .subscribe({
+          if (!it.appPublished) {
+            router.setRoot(RouterTransaction.with(GoodByeController()))
+          } else if (it.newerAppVersionAvailable) {
+            router.pushController(RouterTransaction.with(UpdateController())
+                .pushChangeHandler(FadeChangeHandler())
+                .popChangeHandler(FadeChangeHandler())
+            )
+          }
+        }, { Timber.e(it) })
   }
 
   override fun onBackPressed() {

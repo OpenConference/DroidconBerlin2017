@@ -33,4 +33,12 @@
 
   <string name="search_query_hint">Suchbegriff ...</string>
   <string name="search_no_results">Keine Ergebnisse gefunden</string>
+
+  <string name="app_update_available_title">Neue Version verfügbar</string>
+  <string name="app_update_available_description">Eine neuere Version dieser App ist im Play Store verfügbar.</string>
+  <string name="app_update_available_install">Installieren</string>
+  <string name="app_update_available_close">Schließen</string>
+
+
+  <string name="goodbye">Droidcon Berlin 2017 ist vorbei.\n\nBis zum nächsten Mal!</string>
 </resources>

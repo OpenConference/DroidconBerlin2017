@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/splash_background"
+    android:paddingBottom="42dp"
+    android:paddingEnd="42dp"
+    android:paddingLeft="42dp"
+    android:paddingRight="42dp"
+    android:paddingTop="42dp"
+    >
+
+  <ImageView
+      android:id="@+id/imageView"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginEnd="8dp"
+      android:scaleType="fitCenter"
+      app:layout_constraintBottom_toBottomOf="@+id/guideline"
+      app:layout_constraintBottom_toTopOf="@+id/guideline"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/ic_graphic_tv_tower_sq"
+      />
+
+  <TextView
+      android:id="@+id/loading"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/guideline2"
+      android:textColor="#FFFFFF"
+      android:textSize="18sp"
+      android:text="@string/goodbye"
+      android:gravity="center"
+      android:lineSpacingMultiplier="1.5"
+      />
+
+  <android.support.constraint.Guideline
+      android:id="@+id/guideline"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_percent="0.80"
+      />
+  <android.support.constraint.Guideline
+      android:id="@+id/guideline2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_percent="0.85"
+      />
+</android.support.constraint.ConstraintLayout>

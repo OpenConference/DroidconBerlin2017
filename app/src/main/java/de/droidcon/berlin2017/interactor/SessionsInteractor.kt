@@ -70,7 +70,7 @@ class SessionsInteractor @Inject constructor(
         lceState
       }
 
-    }.distinct()
+    }.distinctUntilChanged()
   }
 
   private fun findScrollToIndex(sessions: List<SchedulePresentationModel>,

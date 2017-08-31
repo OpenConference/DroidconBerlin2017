@@ -16,4 +16,6 @@ interface Analytics {
   fun trackSearch(query : String)
   fun trackSessionMarkedAsFavorite(sessionId : String)
   fun trackSessionRemovedFromFavorite(sessionId : String)
+  fun trackInstallUpdateDismissed()
+  fun trackInstallUpdateClicked()
 }

@@ -46,4 +46,14 @@ class FirebaseAnalytics(context: Context) : Analytics {
     bundle.putString("SessionId", sessionId)
     firebase.logEvent("RemoveSessionFromFavorite", bundle)
   }
+
+  override fun trackInstallUpdateDismissed() {
+    val bundle = Bundle()
+    firebase.logEvent("InstallUpdateDismissed", bundle)
+  }
+
+  override fun trackInstallUpdateClicked() {
+    val bundle = Bundle()
+    firebase.logEvent("InstallUpdate", bundle)
+  }
 }
