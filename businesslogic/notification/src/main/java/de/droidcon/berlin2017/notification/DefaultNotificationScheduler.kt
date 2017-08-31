@@ -10,6 +10,7 @@ import org.threeten.bp.Instant
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneId
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 
 /**
  * Default [NotificationScheduler] for android
@@ -21,7 +22,7 @@ class DefaultNotificationScheduler(private val context: Context,
 
   companion object {
     // TODO add settings
-    val NOTIFICTAION_BEFORE_SESSION_START = 10 * 60 * 1000L // 10 Minutes in millis
+    private val NOTIFICATION_BEFORE_SESSION_START = TimeUnit.MINUTES.toMillis(10) // 10 Minutes
   }
 
 
@@ -50,7 +51,7 @@ class DefaultNotificationScheduler(private val context: Context,
 
     val intent = buildPendingIntent(session)
 
-    val notificationTime = startTime.minusMillis(NOTIFICTAION_BEFORE_SESSION_START)
+    val notificationTime = startTime.minusMillis(NOTIFICATION_BEFORE_SESSION_START)
 
     val localTime = LocalDateTime.ofInstant(notificationTime, ZoneId.systemDefault())
     Timber.d("Schedule notification at $localTime  " + LocalDateTime.now(
