@@ -61,14 +61,23 @@ class SearchViewBinding : ViewBinding(), SearchView {
     val inflater = LayoutInflater.from(rootView.context)
 
     adapter = ListDelegationAdapter(AdapterDelegatesManager<List<SearchableItem>>()
-        .addDelegate(SearchSessionAdapterDelegate(inflater, { navigator.showSessionDetails(it) }))
+        .addDelegate(SearchSessionAdapterDelegate(inflater, {
+          searchBox.hideKeyboard()
+          navigator.showSessionDetails(it)
+        }))
         .addDelegate(
-            SearchSpeakerAdapterDelegate(inflater, picasso, { navigator.showSpeakerDetails(it) }))
+            SearchSpeakerAdapterDelegate(inflater, picasso, {
+              searchBox.hideKeyboard()
+              navigator.showSpeakerDetails(it)
+            }))
     )
     recyclerView.adapter = adapter
     recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
 
-    root.setOnClickListener { navigator.showHome() }
+    root.setOnClickListener {
+      searchBox.hideKeyboard()
+      navigator.showHome()
+    }
   }
 
   override fun searchIntent(): Observable<String> = Observable.merge(
