@@ -65,17 +65,16 @@ class SearchBox(context: Context, attributeSet: AttributeSet) : CardView(context
     return r
   }
 
-    fun animateSearchIconToCloseIcon() {
-      val drawable = searchIcon.drawable as AnimatedVectorDrawable
-      drawable.start()
-    }
+  fun animateSearchIconToCloseIcon() {
+    val drawable = searchIcon.drawable as AnimatedVectorDrawable
+    drawable.start()
+  }
 
-    fun hideKeyboard() {
-      searchField.hideKeyboard()
-    }
+  fun hideKeyboard() {
+    searchField.hideKeyboard()
+  }
 
-    fun showKeyboard(){
-      searchField.requestFocus()
-    }
+  fun showKeyboard() {
+    searchField.requestFocus()
   }
 }
