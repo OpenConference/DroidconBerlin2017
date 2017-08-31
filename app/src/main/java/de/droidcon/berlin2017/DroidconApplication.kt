@@ -2,12 +2,14 @@ package de.droidcon.berlin2017
 
 import android.content.Context
 import android.support.multidex.MultiDexApplication
+import com.crashlytics.android.Crashlytics
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.twitter.sdk.android.core.Twitter
 import de.droidcon.berlin2017.di.AnalyticsModule
 import de.droidcon.berlin2017.di.AppUpdateCheckerModule
 import de.droidcon.berlin2017.di.ApplicationComponent
 import de.droidcon.berlin2017.di.ApplicationModule
+import de.droidcon.berlin2017.di.CrashlyticsTimberTree
 import de.droidcon.berlin2017.di.DaggerApplicationComponent
 import de.droidcon.berlin2017.di.DaoModule
 import de.droidcon.berlin2017.di.NavigatorModule
@@ -16,6 +18,7 @@ import de.droidcon.berlin2017.di.PicassoModule
 import de.droidcon.berlin2017.di.RepositoriesModule
 import de.droidcon.berlin2017.di.ScheduleModule
 import de.droidcon.berlin2017.di.ViewBindingModule
+import io.fabric.sdk.android.Fabric
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
@@ -32,12 +35,17 @@ open class DroidconApplication : MultiDexApplication() {
     super.onCreate()
     AndroidThreeTen.init(this)
     Twitter.initialize(this)
+    Fabric.with(this, Crashlytics())
     plantTimber()
     applicationComponent = applicationComponentBuilder().build()
   }
 
   open fun plantTimber() {
-    Timber.plant(DebugTree())
+    if (BuildConfig.DEBUG) {
+      Timber.plant(DebugTree())
+    } else {
+      Timber.plant(CrashlyticsTimberTree())
+    }
   }
 
   open fun applicationComponentBuilder() =
