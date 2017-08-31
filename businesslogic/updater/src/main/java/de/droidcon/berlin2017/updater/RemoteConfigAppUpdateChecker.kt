@@ -5,9 +5,11 @@ import android.app.Application
 import android.app.Application.ActivityLifecycleCallbacks
 import android.os.Bundle
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
+
 
 /**
  * Uses Firebase Remote config
@@ -21,7 +23,7 @@ class RemoteConfigAppUpdateChecker(application: Application) : AppUpdateChecker 
   private val KEY_APP_PUBLISHED = "app_published"
   private val LOCAL_VERSION_NOT_AVAILABLE = -1L
 
-  private val remoteConfig: FirebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
+  private val remoteConfig: FirebaseRemoteConfig
 
   private val localAppVersion: Long = try {
     val pInfo = application.getPackageManager().getPackageInfo(application.getPackageName(), 0);
@@ -31,13 +33,19 @@ class RemoteConfigAppUpdateChecker(application: Application) : AppUpdateChecker 
     LOCAL_VERSION_NOT_AVAILABLE
   }
 
-
   private val appVersionSubject = BehaviorSubject.createDefault(AppVersion(
       newerAppVersionAvailable = false,
       appPublished = true
   ))
 
   init {
+
+
+    remoteConfig = FirebaseRemoteConfig.getInstance()
+    val configSettings = FirebaseRemoteConfigSettings.Builder()
+        .setDeveloperModeEnabled(BuildConfig.DEBUG)
+        .build()
+    remoteConfig.setConfigSettings(configSettings)
 
     // Default Settings
     remoteConfig.setDefaults(
