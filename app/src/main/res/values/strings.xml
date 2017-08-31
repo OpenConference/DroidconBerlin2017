@@ -44,5 +44,5 @@
   <string name="app_update_available_install">Install</string>
   <string name="app_update_available_close">Close</string>
 
-  <string name="goodbye">Droidcon Berlin 2017 is over.\n\nSee you next year!</string>
+  <string name="goodbye">Droidcon Berlin 2017 is over.\nSee you next year!</string>
 </resources>

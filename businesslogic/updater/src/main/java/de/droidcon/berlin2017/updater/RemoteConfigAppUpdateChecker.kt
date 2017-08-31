@@ -16,14 +16,14 @@ import timber.log.Timber
  *
  * @author Hannes Dorfmann
  */
-class RemoteConfigAppUpdateChecker(application: Application) : AppUpdateChecker {
+class RemoteConfigAppUpdateChecker(application: Application, debugBuild : Boolean) : AppUpdateChecker {
 
 
   private val KEY_APP_VERSION = "latest_app_version"
   private val KEY_APP_PUBLISHED = "app_published"
   private val LOCAL_VERSION_NOT_AVAILABLE = -1L
 
-  private val remoteConfig: FirebaseRemoteConfig
+  private val remoteConfig: FirebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
 
   private val localAppVersion: Long = try {
     val pInfo = application.getPackageManager().getPackageInfo(application.getPackageName(), 0);
@@ -40,10 +40,8 @@ class RemoteConfigAppUpdateChecker(application: Application) : AppUpdateChecker 
 
   init {
 
-
-    remoteConfig = FirebaseRemoteConfig.getInstance()
     val configSettings = FirebaseRemoteConfigSettings.Builder()
-        .setDeveloperModeEnabled(BuildConfig.DEBUG)
+        .setDeveloperModeEnabled(debugBuild)
         .build()
     remoteConfig.setConfigSettings(configSettings)
 
@@ -58,7 +56,8 @@ class RemoteConfigAppUpdateChecker(application: Application) : AppUpdateChecker 
     application.registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
       override fun onActivityResumed(p0: Activity?) {
 
-        remoteConfig.fetch(30 * 60) // half an hour
+        Timber.d("Checking FirebaseRemoteConfig")
+        remoteConfig.fetch(if (debugBuild) 0 else 30 * 60) // half an hour
             .addOnCompleteListener {
               if (it.isSuccessful) {
                 remoteConfig.activateFetched()
@@ -67,10 +66,14 @@ class RemoteConfigAppUpdateChecker(application: Application) : AppUpdateChecker 
                 val newerVersion = localAppVersion != LOCAL_VERSION_NOT_AVAILABLE && latestRemoteVersion > localAppVersion
                 val appPublished = remoteConfig.getBoolean(KEY_APP_PUBLISHED)
 
-                appVersionSubject.onNext(AppVersion(
+                val appVersion = AppVersion(
                     newerAppVersionAvailable = newerVersion,
                     appPublished = appPublished
-                ))
+                )
+
+
+                Timber.d("Checking FirebaseRemoteConfig was successful: $appVersion")
+                appVersionSubject.onNext(appVersion)
 
 
               } else if (it.exception != null) {

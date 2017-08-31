@@ -62,10 +62,13 @@ class MainActivity : AppCompatActivity() {
           if (!it.appPublished) {
             router.setRoot(RouterTransaction.with(GoodByeController()))
           } else if (it.newerAppVersionAvailable) {
-            router.pushController(RouterTransaction.with(UpdateController())
-                .pushChangeHandler(FadeChangeHandler())
-                .popChangeHandler(FadeChangeHandler())
-            )
+            if (router.getControllerWithTag("UpdateDialog") == null) {
+              router.pushController(RouterTransaction.with(UpdateController())
+                  .pushChangeHandler(FadeChangeHandler())
+                  .popChangeHandler(FadeChangeHandler())
+                  .tag("UpdateDialog")
+              )
+            }
           }
         }, { Timber.e(it) })
   }

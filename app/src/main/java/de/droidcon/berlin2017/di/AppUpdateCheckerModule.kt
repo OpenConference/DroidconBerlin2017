@@ -3,6 +3,7 @@ package de.droidcon.berlin2017.di
 import android.app.Application
 import dagger.Module
 import dagger.Provides
+import de.droidcon.berlin2017.BuildConfig
 import de.droidcon.berlin2017.updater.AppUpdateChecker
 import de.droidcon.berlin2017.updater.RemoteConfigAppUpdateChecker
 
@@ -13,7 +14,7 @@ import de.droidcon.berlin2017.updater.RemoteConfigAppUpdateChecker
  */
 @Module
 class AppUpdateCheckerModule(application : Application) {
-  private val updateChecker : AppUpdateChecker = RemoteConfigAppUpdateChecker(application)
+  private val updateChecker : AppUpdateChecker = RemoteConfigAppUpdateChecker(application, BuildConfig.DEBUG)
 
   @Provides
   fun provideUpdateChecker() = updateChecker

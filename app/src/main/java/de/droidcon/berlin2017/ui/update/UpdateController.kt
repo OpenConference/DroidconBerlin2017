@@ -39,6 +39,10 @@ class UpdateController : Controller() {
       startActivity(i)
     }
 
+    v.findViewById<View>(R.id.dialog_container).isClickable = true
+
+    v.setOnClickListener { router.popCurrentController() }
+
     return v
   }
 }

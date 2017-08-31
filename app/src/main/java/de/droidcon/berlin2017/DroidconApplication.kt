@@ -4,6 +4,7 @@ import android.content.Context
 import android.support.multidex.MultiDexApplication
 import com.jakewharton.threetenabp.AndroidThreeTen
 import de.droidcon.berlin2017.di.AnalyticsModule
+import de.droidcon.berlin2017.di.AppUpdateCheckerModule
 import de.droidcon.berlin2017.di.ApplicationComponent
 import de.droidcon.berlin2017.di.ApplicationModule
 import de.droidcon.berlin2017.di.DaggerApplicationComponent
@@ -48,6 +49,7 @@ open class DroidconApplication : MultiDexApplication() {
           .analyticsModule(AnalyticsModule(this))
           .navigatorModule(NavigatorModule())
           .viewBindingModule(ViewBindingModule())
+          .appUpdateCheckerModule(AppUpdateCheckerModule(this))
 
   companion object {
     fun getApplicationComponent(context: Context): ApplicationComponent {
