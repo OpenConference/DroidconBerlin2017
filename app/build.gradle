@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'io.fabric'
 
 android {
   compileSdkVersion compileSdk
@@ -64,6 +65,10 @@ dependencies {
   implementation deps.adapterDelegates
   implementation deps.recyclerViewFastscroll
   implementation deps.twitter
+
+  compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+    transitive = true;
+  }
 
   testImplementation deps.junit
   androidTestImplementation 'com.android.support.test:runner:1.0.0'

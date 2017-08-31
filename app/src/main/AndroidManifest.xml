@@ -26,6 +26,11 @@
     </activity>
 
     <receiver android:name=".notification.NotificationReceiver"></receiver>
+
+    <meta-data
+        android:name="io.fabric.ApiKey"
+        android:value="@string/crashlytics_key" />
+
   </application>
 
 </manifest>

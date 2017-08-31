@@ -99,11 +99,13 @@ buildscript {
   repositories {
     google()
     jcenter()
+    maven { url 'https://maven.fabric.io/public' }
   }
   dependencies {
     classpath 'com.android.tools.build:gradle:3.0.0-beta2'
     classpath deps.kotlinGradle
     classpath deps.playServicesGradle
+    classpath 'io.fabric.tools:gradle:1.+'
   }
 }
 
@@ -111,6 +113,7 @@ allprojects {
   repositories {
     google()
     jcenter()
+    maven { url 'https://maven.fabric.io/public' }
   }
 }
 
