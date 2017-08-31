@@ -1,5 +1,6 @@
 package de.droidcon.berlin2017.ui.sessions
 
+import android.support.v7.util.DiffUtil.DiffResult
 import de.droidcon.berlin2017.model.Session
 import de.droidcon.berlin2017.model.Speaker
 import org.threeten.bp.LocalDateTime
@@ -11,7 +12,8 @@ import org.threeten.bp.LocalDateTime
  */
 data class Sessions(
     val scrollTo: Int?,
-    val sessions: List<SchedulePresentationModel>
+    val sessions: List<SchedulePresentationModel>,
+    val diffResult: DiffResult?
 )
 
 /**

@@ -49,6 +49,7 @@ buildscript {
               firebaseDatabase       : "com.google.firebase:firebase-database:$ext.version.firebase",
               firebaseAnalytics      : "com.google.firebase:firebase-core:$ext.version.firebase",
               firebaseAuth           : "com.google.firebase:firebase-auth:$ext.version.firebase",
+              firebaseRemoteConfig   : "com.google.firebase:firebase-config:$ext.version.firebase",
               rxBinding              : "com.jakewharton.rxbinding2:rxbinding:$ext.version.rxBinding",
               dagger                 : "com.google.dagger:dagger:$ext.version.dagger",
               daggerCompiler         : "com.google.dagger:dagger-compiler:$ext.version.dagger",

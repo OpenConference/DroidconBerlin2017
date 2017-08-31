@@ -6,6 +6,7 @@ import com.bluelinelabs.conductor.changehandler.FadeChangeHandler
 import de.droidcon.berlin2017.R
 import de.droidcon.berlin2017.model.Session
 import de.droidcon.berlin2017.model.Speaker
+import de.droidcon.berlin2017.ui.myschedule.MyScheduleController
 import de.droidcon.berlin2017.ui.navigation.Navigator
 import de.droidcon.berlin2017.ui.search.SearchChangeHandler
 import de.droidcon.berlin2017.ui.search.SearchController
@@ -42,8 +43,12 @@ class HomeNavigator(private val controller : Controller) : Navigator {
   }
 
   override fun showMySchedule() {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
+    controller.getChildRouter(controller.view!!.findViewById(R.id.home_controller_containers))
+        .setRoot(
+            RouterTransaction.with(MyScheduleController())
+                .popChangeHandler(FadeChangeHandler())
+                .pushChangeHandler(FadeChangeHandler())
+        )
   }
 
   override fun showSpeakers() {

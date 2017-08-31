@@ -1,6 +1,8 @@
 package de.droidcon.berlin2017.interactor
 
+import android.support.v7.util.DiffUtil
 import de.droidcon.berlin2017.clock.Clock
+import de.droidcon.berlin2017.model.Session
 import de.droidcon.berlin2017.schedule.repository.SessionsRepository
 import de.droidcon.berlin2017.ui.lce.LceViewState
 import de.droidcon.berlin2017.ui.lce.LceViewState.Content
@@ -23,17 +25,31 @@ class SessionsInteractor @Inject constructor(
     private val sessionGrouper: SessionGrouper
 ) {
 
-  fun allSessions(scrolledToNowIntent: Observable<Boolean>): Observable<LceViewState<Sessions>> {
+
+  fun favoriteSessions(scrolledToNowIntent: Observable<Boolean>): Observable<LceViewState<Sessions>> =
+      transform(scrolledToNowIntent, { sessionsRepository.favoriteSessions() })
+
+  fun allSessions(scrolledToNowIntent: Observable<Boolean>): Observable<LceViewState<Sessions>> =
+      transform(scrolledToNowIntent) { sessionsRepository.allSessions() }
+
+  private inline fun transform(scrolledToNowIntent: Observable<Boolean>,
+      crossinline dataSourceFactory: () -> Observable<List<Session>>): Observable<LceViewState<Sessions>> {
 
     val zoneConferenceTakesPlace = clock.getZoneConferenceTakesPlace()
 
-    val dataObservable = sessionsRepository.allSessions().map { sessions ->
+    val dataObservable = dataSourceFactory().map { sessions ->
       sessionGrouper.groupSessions(sessions, zoneConferenceTakesPlace)
     }.map {
       Sessions(
           scrollTo = findScrollToIndex(it, clock.nowInConferenceTimeZone()),
-          sessions = it
+          sessions = it,
+          diffResult = null
       )
+    }.scan { old: Sessions, new: Sessions ->
+
+      new.copy(diffResult = DiffUtil.calculateDiff(ScheduleDiffCallback(old.sessions, new.sessions),
+          true))
+
     }
 
     val observables = arrayOf(lceObservable(dataObservable), scrolledToNowIntent)
@@ -110,4 +126,18 @@ class SessionsInteractor @Inject constructor(
     }
   }
 
+}
+
+private class ScheduleDiffCallback(val old: List<SchedulePresentationModel>,
+    val new: List<SchedulePresentationModel>) : DiffUtil.Callback() {
+
+  override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+      old[oldItemPosition] == new[newItemPosition]
+
+  override fun getOldListSize(): Int = old.size
+
+  override fun getNewListSize(): Int = new.size
+
+  override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+      old[oldItemPosition] == new[newItemPosition]
 }

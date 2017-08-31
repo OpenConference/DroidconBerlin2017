@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit.MILLISECONDS
  *
  * @author Hannes Dorfmann
  */
-class SessionsViewBinding : ViewBinding(), SessionsView {
+open class SessionsViewBinding : ViewBinding(), SessionsView {
 
   private var recyclerView by LifecycleAwareRef<RecyclerView>(this)
   private val scrolledToNowSubject = PublishSubject.create<Boolean>()
@@ -61,8 +61,15 @@ class SessionsViewBinding : ViewBinding(), SessionsView {
     errorView = rootView.findViewById(R.id.error)
     emptyView = rootView.findViewById(R.id.empty)
 
-
+    emptyView.setOnClickListener { onEmptyViewClicked() }
     errorView.setOnClickListener { retrySubject.onNext(Unit) }
+  }
+
+  /**
+   * Click listener on empty view
+   */
+  protected open fun onEmptyViewClicked(){
+
   }
 
   override fun loadDataIntent(): Observable<Unit> = Observable.merge(Observable.just(Unit),
@@ -96,8 +103,14 @@ class SessionsViewBinding : ViewBinding(), SessionsView {
           emptyView.visible()
           recyclerView.gone()
         } else {
-          adapter.items = state.data.sessions
-          adapter.notifyDataSetChanged()
+          if (state.data.diffResult == null || adapter.items == null) {
+            adapter.items = state.data.sessions
+            adapter.notifyDataSetChanged()
+          } else {
+            adapter.items = state.data.sessions
+            state.data.diffResult.dispatchUpdatesTo(adapter)
+          }
+
           emptyView.gone()
           recyclerView.visible()
           if (state.data.scrollTo != null) {

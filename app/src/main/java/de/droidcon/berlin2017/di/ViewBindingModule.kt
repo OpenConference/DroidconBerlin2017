@@ -4,6 +4,8 @@ import dagger.Module
 import dagger.Provides
 import de.droidcon.berlin2017.ui.home.HomeController
 import de.droidcon.berlin2017.ui.home.HomeViewBinding
+import de.droidcon.berlin2017.ui.myschedule.MyScheduleController
+import de.droidcon.berlin2017.ui.myschedule.MyScheduleViewBinding
 import de.droidcon.berlin2017.ui.search.SearchController
 import de.droidcon.berlin2017.ui.search.SearchViewBinding
 import de.droidcon.berlin2017.ui.sessiondetails.SessionDetailsController
@@ -34,7 +36,8 @@ class ViewBindingModule {
           SessionsController::class.java to ::SessionsViewBinding,
           SearchController::class.java to ::SearchViewBinding,
           SpeakerDetailsController::class.java to ::SpeakerDetailsViewBinding,
-          SessionDetailsController::class.java to ::SessionDetailsViewBinding
+          SessionDetailsController::class.java to ::SessionDetailsViewBinding,
+          MyScheduleController::class.java to ::MyScheduleViewBinding
       )
   )
 }
