@@ -12,6 +12,7 @@ import de.droidcon.berlin2017.ui.search.SearchChangeHandler
 import de.droidcon.berlin2017.ui.search.SearchController
 import de.droidcon.berlin2017.ui.sessions.SessionsController
 import de.droidcon.berlin2017.ui.speakers.SpeakersController
+import de.droidcon.berlin2017.ui.twitter.TwitterController
 
 /**
  * The navigator for the home
@@ -71,8 +72,12 @@ class HomeNavigator(private val controller : Controller) : Navigator {
   }
 
   override fun showTweets() {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
+    controller.getChildRouter(controller.view!!.findViewById(R.id.home_controller_containers))
+        .setRoot(
+            RouterTransaction.with(TwitterController())
+                .popChangeHandler(FadeChangeHandler())
+                .pushChangeHandler(FadeChangeHandler())
+        )
   }
 
   override fun popSelfFromBackstack() {

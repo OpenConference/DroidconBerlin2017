@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.view.animation.Interpolator;
+import android.view.animation.OvershootInterpolator;
 
 /**
  * CoordinatorLayout Behavior for a quick return footer
@@ -110,7 +111,7 @@ import android.view.animation.Interpolator;
   private void show(final View view) {
     mIsShowing = true;
     ViewPropertyAnimator animator =
-        view.animate().translationY(0).setInterpolator(INTERPOLATOR).setDuration(300);
+        view.animate().translationY(0).setInterpolator(new OvershootInterpolator()).setDuration(300);
 
     animator.setListener(new Animator.AnimatorListener() {
       @Override public void onAnimationStart(Animator animator) {

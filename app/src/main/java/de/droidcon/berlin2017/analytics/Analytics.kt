@@ -18,4 +18,5 @@ interface Analytics {
   fun trackSessionRemovedFromFavorite(sessionId : String)
   fun trackInstallUpdateDismissed()
   fun trackInstallUpdateClicked()
+  fun trackTwitterRefresh()
 }

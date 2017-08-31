@@ -56,4 +56,9 @@ class FirebaseAnalytics(context: Context) : Analytics {
     val bundle = Bundle()
     firebase.logEvent("InstallUpdate", bundle)
   }
+
+  override fun trackTwitterRefresh() {
+    val bundle = Bundle()
+    firebase.logEvent("TwitterPullToRefresh", bundle)
+  }
 }

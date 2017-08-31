@@ -23,4 +23,5 @@
   <color name="background_light">#F5F5F5</color>
 
   <color name="profilepic_darken">#1E222222</color>
+  <color name="searchbox_header_background">#a7a7a7</color>
 </resources>

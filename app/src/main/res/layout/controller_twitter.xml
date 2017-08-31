@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+  <View
+      android:id="@+id/headerPlaceHolder"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/subheader_height_plus_searchbox"
+      android:background="@color/searchbox_header_background"
+      />
+
+
+  <include layout="@layout/view_loading"/>
+
+  <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:id="@+id/swipeRefresh"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      >
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/subheader_height_plus_searchbox"
+        />
+
+  </android.support.v4.widget.SwipeRefreshLayout>
+
+</FrameLayout>
