@@ -3,6 +3,7 @@ package de.droidcon.berlin2017
 import android.content.Context
 import android.support.multidex.MultiDexApplication
 import com.jakewharton.threetenabp.AndroidThreeTen
+import com.twitter.sdk.android.core.Twitter
 import de.droidcon.berlin2017.di.AnalyticsModule
 import de.droidcon.berlin2017.di.AppUpdateCheckerModule
 import de.droidcon.berlin2017.di.ApplicationComponent
@@ -30,6 +31,7 @@ open class DroidconApplication : MultiDexApplication() {
   override fun onCreate() {
     super.onCreate()
     AndroidThreeTen.init(this)
+    Twitter.initialize(this)
     plantTimber()
     applicationComponent = applicationComponentBuilder().build()
   }

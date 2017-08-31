@@ -63,6 +63,7 @@ dependencies {
   implementation deps.lottie
   implementation deps.adapterDelegates
   implementation deps.recyclerViewFastscroll
+  implementation deps.twitter
 
   testImplementation deps.junit
   androidTestImplementation 'com.android.support.test:runner:1.0.0'
