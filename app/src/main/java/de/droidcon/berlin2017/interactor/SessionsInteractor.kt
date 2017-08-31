@@ -26,7 +26,8 @@ class SessionsInteractor @Inject constructor(
 ) {
 
 
-  fun favoriteSessions(scrolledToNowIntent: Observable<Boolean>): Observable<LceViewState<Sessions>> =
+  fun favoriteSessions(
+      scrolledToNowIntent: Observable<Boolean>): Observable<LceViewState<Sessions>> =
       transform(scrolledToNowIntent, { sessionsRepository.favoriteSessions() })
 
   fun allSessions(scrolledToNowIntent: Observable<Boolean>): Observable<LceViewState<Sessions>> =
@@ -75,55 +76,23 @@ class SessionsInteractor @Inject constructor(
 
   private fun findScrollToIndex(sessions: List<SchedulePresentationModel>,
       now: LocalDateTime): Int? {
-    // binary search
-    // Assumption: List is sorted by date
-    if (sessions.isEmpty())
-      return null
+    val position = sessions.binarySearch {
+      when {
+        it.date.isBefore(now) -> -1
+        it.date.isAfter(now) -> 1
+        else -> 0
+      }
+    }
 
-    return binarySearchStartTime(low = 0, high = sessions.size - 1, sessions = sessions, now = now)
-  }
-
-  private fun binarySearchStartTime(low: Int, high: Int, sessions: List<SchedulePresentationModel>,
-      now: LocalDateTime): Int? {
-
-    val diff = (high - low) / 2
-
-    if (low == 0 && diff == 0)
-      return null // Don't scroll is the same as scroll to 0 position
-
-    if (high == sessions.size && diff == 0)
-      return sessions.size - 1
-
-
-    val middle = low + diff
-    val middleStartTime = sessions[middle].date
-
-    if (now == middleStartTime) {
-      return middle
+    val toScroll = if (position >= 0)
+      position
+    else {
+      val positionWhereItShouldBe = (-position - 1)
+      Math.min(positionWhereItShouldBe, sessions.size - 1)
     }
 
 
-    if (now.isBefore(middleStartTime)) {
-      val beforeMiddle = middle - 1
-      if (beforeMiddle >= 0) {
-        val beforeMiddleStartTime = sessions[beforeMiddle].date
-        if (now.isAfter(beforeMiddleStartTime)) {
-          // now is between session[middle-1] and session[middle]
-          return middle
-        }
-      }
-      return binarySearchStartTime(low = low, high = middle, sessions = sessions, now = now)
-    } else {
-      val afterMiddle = middle + 1
-      if (afterMiddle < sessions.size) {
-        val afterMiddleStartTime = sessions[afterMiddle].date
-        if (now.isBefore(afterMiddleStartTime)) {
-          // now is between session[middle] and session[middle + 1]
-          return afterMiddle
-        }
-      }
-      return binarySearchStartTime(low = middle, high = high, sessions = sessions, now = now)
-    }
+    return Math.max(0, toScroll - 1) // -1 so that the real position is in the middle of the screen (not on top)
   }
 
 }
