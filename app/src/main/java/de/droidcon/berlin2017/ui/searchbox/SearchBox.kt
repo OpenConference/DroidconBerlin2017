@@ -12,7 +12,6 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import de.droidcon.berlin2017.R
 import de.droidcon.berlin2017.ui.gone
 import de.droidcon.berlin2017.ui.hideKeyboard
-import de.droidcon.berlin2017.ui.showKeyboard
 import de.droidcon.berlin2017.ui.visible
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.view_searchbox.view.searchInput
@@ -59,10 +58,14 @@ class SearchBox(context: Context, attributeSet: AttributeSet) : CardView(context
 
   fun currentSearchText(): String = searchInput.text.toString()
 
-  fun requestFocusForSearchInput(): Boolean {
-    val r = searchField.requestFocus()
-    searchField.showKeyboard()
-    return r
+  fun requestFocusForSearchInput() {
+    /*
+    Handler(Looper.getMainLooper()).post {
+      // searchField.showKeyboard()
+    }
+    */
+    searchField.setFocusableInTouchMode(true)
+    searchField.requestFocus()
   }
 
   fun animateSearchIconToCloseIcon() {

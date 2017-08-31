@@ -17,7 +17,7 @@ import timber.log.Timber
  * @author Hannes Dorfmann
  */
 class DefaultNotificationScheduler(private val context: Context,
-    private val intentToOpenActivity: (Context, Session) -> Intent) : NotificationScheduler {
+    private val intentToBroadcastReceiver: (Context, Session) -> Intent) : NotificationScheduler {
 
   companion object {
     // TODO add settings
@@ -29,14 +29,9 @@ class DefaultNotificationScheduler(private val context: Context,
       context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
   private fun buildPendingIntent(s: Session): PendingIntent {
-
-
-    /*
-    val intent = Intent(context, NotificationBroadcastReceiver::class.java)
-    intent.putExtra(NotificationBroadcastReceiver.SESSION_ID, s.id())
-    */
-    return PendingIntent.getBroadcast(context, 0, intentToOpenActivity(context, s), 0)
+    return PendingIntent.getBroadcast(context, 0, intentToBroadcastReceiver(context, s), 0)
   }
+
 
   override fun removeNotification(session: Session) {
     alarmService().cancel(buildPendingIntent(session))
@@ -48,14 +43,18 @@ class DefaultNotificationScheduler(private val context: Context,
 
     val startTime = session.startTime() ?: return
 
+
+    if (startTime.isBefore(Instant.now())) // not schedule notification because it was in the past
+      return
+
+
     val intent = buildPendingIntent(session)
-    val notificationTime = if (Instant.now().plusMillis(NOTIFICTAION_BEFORE_SESSION_START).isAfter(
-        startTime)) Instant.now().plusSeconds(2)
-    else startTime.minusMillis(
-        NOTIFICTAION_BEFORE_SESSION_START)
+
+    val notificationTime = startTime.minusMillis(NOTIFICTAION_BEFORE_SESSION_START)
 
     val localTime = LocalDateTime.ofInstant(notificationTime, ZoneId.systemDefault())
-    Timber.d("Schedule notification at $localTime  " + LocalDateTime.now(ZoneId.systemDefault()))
+    Timber.d("Schedule notification at $localTime  " + LocalDateTime.now(
+        ZoneId.systemDefault()) + " scheduled at UnixTimestamp: " + notificationTime.toEpochMilli())
 
     if (Build.VERSION.SDK_INT < 23) {
       alarmService().setExact(AlarmManager.RTC_WAKEUP,

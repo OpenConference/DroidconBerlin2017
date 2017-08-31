@@ -44,8 +44,9 @@
         app:layout_constraintEnd_toStartOf="@+id/overflowMenu"
         app:layout_constraintStart_toEndOf="@+id/searchIcon"
         app:layout_constraintTop_toTopOf="parent"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:visibility="gone"
+        android:focusableInTouchMode="true"
         />
 
     <TextView
@@ -64,7 +65,7 @@
         app:layout_constraintEnd_toStartOf="@+id/overflowMenu"
         app:layout_constraintStart_toEndOf="@+id/searchIcon"
         app:layout_constraintTop_toTopOf="parent"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textColor="@color/textColorSecondary"
         />
     <ImageButton

@@ -4,10 +4,10 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import de.droidcon.berlin2017.notification.DefaultNotificationScheduler
+import de.droidcon.berlin2017.notification.NotificationReceiver
 import de.droidcon.berlin2017.notification.NotificationScheduler
 import de.droidcon.berlin2017.schedule.backend.ScheduleDataStateDeterminer
 import de.droidcon.berlin2017.schedule.backend.TimebaseScheduleDataStateDeterminer
-import de.droidcon.berlin2017.ui.MainActivity
 
 /**
  *
@@ -33,5 +33,9 @@ open class ScheduleModule(c: Context) {
   }
 
   @Provides
-  fun provideNotificationScheduler(): NotificationScheduler = DefaultNotificationScheduler(context, { context, session -> MainActivity.buildSessionDetailsIntent(context, session)})
+  fun provideNotificationScheduler(): NotificationScheduler = DefaultNotificationScheduler(context,
+      { context, session ->
+        NotificationReceiver.showNotificationIntent(context, session.id())
+      })
+
 }

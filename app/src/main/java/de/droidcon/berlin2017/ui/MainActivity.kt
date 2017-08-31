@@ -9,12 +9,14 @@ import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
 import com.bluelinelabs.conductor.changehandler.FadeChangeHandler
+import com.bluelinelabs.conductor.changehandler.HorizontalChangeHandler
 import de.droidcon.berlin2017.DroidconApplication
 import de.droidcon.berlin2017.R
 import de.droidcon.berlin2017.model.Session
 import de.droidcon.berlin2017.schedule.backend.ScheduleDataStateDeterminer.ScheduleDataState.NO_DATA
 import de.droidcon.berlin2017.ui.goodbye.GoodByeController
 import de.droidcon.berlin2017.ui.home.HomeController
+import de.droidcon.berlin2017.ui.sessiondetails.SessionDetailsController
 import de.droidcon.berlin2017.ui.splash.SplashController
 import de.droidcon.berlin2017.ui.update.UpdateController
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -51,8 +53,19 @@ class MainActivity : AppCompatActivity() {
 
       if (showSplash == NO_DATA)
         router.setRoot(RouterTransaction.with(SplashController()))
-      else
+      else {
         router.setRoot(RouterTransaction.with(HomeController()))
+
+        if (intent != null) {
+          val sessionId = intent.getStringExtra(KEY_SESSION_ID)
+          if (sessionId != null) {
+            // Activity has been started from a notification
+            Timber.d("Application started from a Notification. Showing session id = $sessionId")
+            router.pushController(RouterTransaction.with(SessionDetailsController(sessionId))
+                .popChangeHandler(HorizontalChangeHandler()))
+          }
+        }
+      }
     }
 
     updateCheckerDisposable = applicationComponent.appUpdaterChecker()
@@ -81,6 +94,19 @@ class MainActivity : AppCompatActivity() {
 
   override fun onNewIntent(intent: Intent?) {
     super.onNewIntent(intent)
-    // TODO implement notification handling
+    Timber.d("Received new intent")
+    if (intent != null) {
+      val sessionId = intent.getStringExtra(KEY_SESSION_ID)
+      if (sessionId == null) {
+        Timber.e(IllegalStateException("Got new intent without a session id"))
+      } else {
+        Timber.d("Gonna show session with id = $sessionId")
+        router.pushController(
+            RouterTransaction.with(SessionDetailsController(sessionId))
+                .pushChangeHandler(HorizontalChangeHandler())
+                .popChangeHandler(HorizontalChangeHandler())
+        )
+      }
+    }
   }
 }
