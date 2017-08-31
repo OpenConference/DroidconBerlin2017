@@ -61,4 +61,16 @@ class FirebaseAnalytics(context: Context) : Analytics {
     val bundle = Bundle()
     firebase.logEvent("TwitterPullToRefresh", bundle)
   }
+
+  override fun trackSessionNotificationOpened(sessionId: String) {
+      val bundle = Bundle()
+      bundle.putString("SessionId", sessionId)
+      firebase.logEvent("SessionNotificationOpened", bundle)
+  }
+
+  override fun trackSessionNotificationGenerated(sessionId: String) {
+    val bundle = Bundle()
+    bundle.putString("SessionId", sessionId)
+    firebase.logEvent("SessionNotificationGenerated", bundle)
+  }
 }

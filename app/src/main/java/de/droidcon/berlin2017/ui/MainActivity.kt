@@ -101,6 +101,8 @@ class MainActivity : AppCompatActivity() {
         Timber.e(IllegalStateException("Got new intent without a session id"))
       } else {
         Timber.d("Gonna show session with id = $sessionId")
+        val applicationComponent = DroidconApplication.getApplicationComponent(this)
+        applicationComponent.analytics().trackSessionNotificationOpened(sessionId)
         router.pushController(
             RouterTransaction.with(SessionDetailsController(sessionId))
                 .pushChangeHandler(HorizontalChangeHandler())

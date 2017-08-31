@@ -30,7 +30,12 @@ class DefaultNotificationScheduler(private val context: Context,
       context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
   private fun buildPendingIntent(s: Session): PendingIntent {
-    return PendingIntent.getBroadcast(context, 0, intentToBroadcastReceiver(context, s), 0)
+    val id = try {
+      s.id().toInt()
+    } catch (t: Throwable) {
+      s.id().hashCode()
+    }
+    return PendingIntent.getBroadcast(context, id, intentToBroadcastReceiver(context, s), 0)
   }
 
 

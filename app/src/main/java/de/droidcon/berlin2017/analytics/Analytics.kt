@@ -19,4 +19,6 @@ interface Analytics {
   fun trackInstallUpdateDismissed()
   fun trackInstallUpdateClicked()
   fun trackTwitterRefresh()
+  fun trackSessionNotificationOpened(sessionId: String)
+  fun trackSessionNotificationGenerated(sessionId: String)
 }

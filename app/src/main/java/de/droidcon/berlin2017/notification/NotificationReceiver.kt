@@ -91,6 +91,7 @@ class NotificationReceiver : WakefulBroadcastReceiver() {
       val notificationManager = context.getSystemService(
           IntentService.NOTIFICATION_SERVICE) as NotificationManager
       notificationManager.notify(session.id().hashCode(), notification)
+      component.analytics().trackSessionNotificationGenerated(sessionId)
     }
   }
 
