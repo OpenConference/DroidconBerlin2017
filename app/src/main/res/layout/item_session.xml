@@ -112,14 +112,13 @@
           android:id="@+id/favorite"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="8dp"
           android:layout_marginEnd="8dp"
           android:visibility="gone"
-          app:layout_constraintBottom_toBottomOf="@+id/authorPic3"
           app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintTop_toTopOf="@+id/authorPic3"
           app:srcCompat="@drawable/ic_done"
           tools:visibility="visible"
+          app:layout_constraintTop_toTopOf="parent"
+          android:layout_marginTop="8dp"
           />
 
     </android.support.constraint.ConstraintLayout>

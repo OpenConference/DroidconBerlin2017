@@ -120,7 +120,7 @@ class SessionAdapterDelegate(
       }
 
       if (session.favorite)
-        favorite.visibility
+        favorite.visible()
       else
         favorite.gone()
     }

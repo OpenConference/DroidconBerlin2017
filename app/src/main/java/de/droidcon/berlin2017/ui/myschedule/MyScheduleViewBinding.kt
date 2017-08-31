@@ -9,6 +9,8 @@ import de.droidcon.berlin2017.ui.sessions.SessionsViewBinding
  */
 class MyScheduleViewBinding : SessionsViewBinding() {
 
+  override val loggingTag: String = MyScheduleViewBinding::class.java.simpleName
+
   override fun onEmptyViewClicked() {
     navigator.showSessions()
   }

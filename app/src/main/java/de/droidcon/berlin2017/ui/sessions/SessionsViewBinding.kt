@@ -27,6 +27,8 @@ import java.util.concurrent.TimeUnit.MILLISECONDS
  */
 open class SessionsViewBinding : ViewBinding(), SessionsView {
 
+  open val loggingTag : String = SessionsViewBinding::class.java.simpleName
+
   private var recyclerView by LifecycleAwareRef<RecyclerView>(this)
   private val scrolledToNowSubject = PublishSubject.create<Boolean>()
   private val retrySubject = PublishSubject.create<Unit>()
@@ -79,7 +81,7 @@ open class SessionsViewBinding : ViewBinding(), SessionsView {
       scrolledToNowSubject).delay(200, MILLISECONDS)
 
   override fun render(state: LceViewState<Sessions>) {
-    Timber.d("render $restoringViewState $state")
+    Timber.tag(loggingTag).d("render $restoringViewState $state")
     if (!restoringViewState)
       TransitionManager.beginDelayedTransition(rootView)
 
