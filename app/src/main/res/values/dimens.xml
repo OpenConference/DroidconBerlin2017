@@ -24,6 +24,6 @@
   <dimen name="keyline_content_width">40dp</dimen>
   <dimen name="keyline_content_with_plus_start_padding">56dp</dimen>
 
-  <dimen name="overflow_popup_width">120dp</dimen>
+  <dimen name="overflow_popup_width">220dp</dimen>
 
 </resources>
