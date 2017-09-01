@@ -87,7 +87,9 @@ class SessionDetailsViewBinding : ViewBinding(), SessionDetailsView {
 
   override fun loadIntent(): Observable<String> = loadSubject.startWith(sessionId)
 
-  override fun clickOnFabIntent(): Observable<Session> = RxView.clicks(fab).doOnNext{ Timber.d("Click on fab")}.map { session }
+  override fun clickOnFabIntent(): Observable<Session> = RxView.clicks(fab).doOnNext {
+    Timber.d("Click on fab")
+  }.map { session }
 
 
   override fun render(state: LceViewState<SessionState>) {
@@ -183,19 +185,19 @@ class SessionDetailsViewBinding : ViewBinding(), SessionDetailsView {
 
   private fun setFabDrawable(favorite: Boolean) {
 
-    Timber.d("Set drawable $favorite")
     val drawable = fab.drawable as AnimatedVectorDrawable
     drawable.stop()
 
     if (favorite) {
-      Timber.d("R.drawable.avd_remove_from_schedule")
       fab.setImageDrawable(
           fab.context.resources.getDrawable(
-              R.drawable.avd_remove_from_schedule, fab.context.theme)!!.mutate().constantState.newDrawable())
+              R.drawable.avd_remove_from_schedule,
+              fab.context.theme)!!.mutate().constantState.newDrawable())
     } else {
-      Timber.d("R.drawable.avd_add_to_schedule")
-      fab.context.resources.getDrawable(
-          R.drawable.avd_add_to_schedule, fab.context.theme)!!.mutate().constantState.newDrawable()
+      fab.setImageDrawable(
+          fab.context.resources.getDrawable(
+              R.drawable.avd_add_to_schedule,
+              fab.context.theme)!!.mutate().constantState.newDrawable())
     }
   }
 
