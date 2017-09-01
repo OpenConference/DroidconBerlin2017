@@ -27,5 +27,5 @@ class SpeakerDetailsController(args : Bundle?) : MviController<SpeakerDetailsVie
 
   override val layoutRes: Int = R.layout.controller_speaker_details
 
-  override fun createPresenter(): SpeakerDetailsPresenter = SpeakerDetailsPresenter(applicationComponent().speakerDetailsInteractor())
+  override fun createPresenter(): SpeakerDetailsPresenter = SpeakerDetailsPresenter(applicationComponent().speakerDetailsInteractor(), applicationComponent().analytics())
 }

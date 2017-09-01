@@ -8,11 +8,9 @@ import com.bluelinelabs.conductor.Controller
  * @author Hannes Dorfmann
  */
 interface Analytics {
-
-
   fun trackScreen(controller : Controller)
-  fun trackSessionDetailsScreen(id: String)
-  fun trackSpeakersDetailsScreen(id: String)
+  fun trackLoadSessionDetails(id: String)
+  fun trackLoadSpeakerDetails(id: String)
   fun trackSearch(query : String)
   fun trackSessionMarkedAsFavorite(sessionId : String)
   fun trackSessionRemovedFromFavorite(sessionId : String)

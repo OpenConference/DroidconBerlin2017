@@ -54,10 +54,12 @@ abstract class MviController<V : MvpView, P : MviPresenter<V, *>>(
 
     if (!lifecycleListenersRegistered) {
       lifecycleListenersRegistered = true
-      addLifecycleListener(viewBinding)
-      addLifecycleListener(mosbyDelegate)
+
       if (trackingWithAnalytics)
         addLifecycleListener(AnalyticsLifecycleListener())
+
+      addLifecycleListener(viewBinding)
+      addLifecycleListener(mosbyDelegate)
     }
 
   }

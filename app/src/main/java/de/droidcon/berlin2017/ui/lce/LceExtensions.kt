@@ -3,6 +3,7 @@ package de.droidcon.berlin2017.ui.lce
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 
 
 /**
@@ -15,6 +16,9 @@ fun <T> lceObservable(dataSource: Observable<T>): Observable<LceViewState<T>> =
     dataSource
         .map { LceViewState.Content(it) as LceViewState<T> }
         .subscribeOn(Schedulers.io())
-        .onErrorReturn { LceViewState.Error<T>(it) }
+        .onErrorReturn {
+          Timber.e(it)
+          LceViewState.Error<T>(it)
+        }
         .startWith(LceViewState.Loading<T>())
         .observeOn(AndroidSchedulers.mainThread())

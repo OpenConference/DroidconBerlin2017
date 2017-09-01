@@ -9,6 +9,7 @@ import de.droidcon.berlin2017.schedule.database.dao.LocationDao
 import de.droidcon.berlin2017.schedule.database.dao.SessionDao
 import de.droidcon.berlin2017.schedule.database.dao.SpeakerDao
 import de.droidcon.berlin2017.schedule.sync.ScheduleSync
+import de.droidcon.berlin2017.ui.twitter.TwitterInitializer
 
 /**
  *
@@ -21,11 +22,12 @@ import de.droidcon.berlin2017.schedule.sync.ScheduleSync
         PicassoModule::class, NavigatorModule::class, ViewBindingModule::class,
         AnalyticsModule::class, ClockModule::class,
         SessionsModule::class, SearchModule::class, AppUpdateCheckerModule::class
-        )
+    )
 )
 class ApplicationModule(c: Context) {
 
   private val applicationContext = c.applicationContext
+  private val twitterInitializer = TwitterInitializer(applicationContext)
 
   @Provides
   fun provideScheduleSync(backend: BackendScheduleAdapter,
@@ -38,4 +40,7 @@ class ApplicationModule(c: Context) {
   @Provides
   @ApplicationContext
   fun provideApplicationContext() = applicationContext
+
+  @Provides
+  fun provideTwitterInitializer() = twitterInitializer
 }

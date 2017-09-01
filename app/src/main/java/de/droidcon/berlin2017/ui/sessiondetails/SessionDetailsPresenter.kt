@@ -47,6 +47,7 @@ class SessionDetailsPresenter(
 
     val sessionData = intent(SessionDetailsView::loadIntent)
         .doOnNext { Timber.d("load Session intent. Session Id = $it") }
+        .doOnNext { analytics.trackLoadSessionDetails(it) }
         .switchMap {
           // Will automatically update if Session is "favorite" / "not favorite anymore"
           lceObservable(sessionRepository.getSession(it)

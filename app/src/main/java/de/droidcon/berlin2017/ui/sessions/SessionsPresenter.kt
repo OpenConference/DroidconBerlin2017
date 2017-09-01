@@ -18,7 +18,6 @@ class SessionsPresenter(
 ) : MviBasePresenter<SessionsView, LceViewState<Sessions>>() {
 
   override fun bindIntents() {
-    Timber.d("Bind intents")
     val scrolledToNowIntent = intent(SessionsView::scrolledToNowIntent)
         .doOnNext { Timber.d("Scrolled to now intent: $it") }
         .distinctUntilChanged()

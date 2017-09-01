@@ -12,6 +12,7 @@ import de.droidcon.berlin2017.schedule.repository.SessionsRepository
 import de.droidcon.berlin2017.schedule.repository.SpeakerRepository
 import de.droidcon.berlin2017.search.SearchEngine
 import de.droidcon.berlin2017.ui.navigation.NavigatorFactory
+import de.droidcon.berlin2017.ui.twitter.TwitterInitializer
 import de.droidcon.berlin2017.ui.viewbinding.ViewBindingFactory
 import de.droidcon.berlin2017.updater.AppUpdateChecker
 
@@ -36,4 +37,5 @@ interface ApplicationComponent {
   fun clock() : Clock
   fun appUpdaterChecker() : AppUpdateChecker
   fun notificationScheduler() : NotificationScheduler
+  fun twitterInitilizer() : TwitterInitializer
 }

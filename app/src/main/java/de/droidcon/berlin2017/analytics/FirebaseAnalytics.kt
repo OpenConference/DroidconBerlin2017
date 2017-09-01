@@ -14,14 +14,16 @@ class FirebaseAnalytics(context: Context) : Analytics {
 
   private val firebase = FirebaseAnalytics.getInstance(context);
 
-  override fun trackSessionDetailsScreen(id: String) {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
+  override fun trackLoadSessionDetails(id: String) {
+    val bundle = Bundle()
+    bundle.putString("SessionId", id)
+    firebase.logEvent("LoadSessionDetails", bundle)
   }
 
-  override fun trackSpeakersDetailsScreen(id: String) {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
+  override fun trackLoadSpeakerDetails(id: String) {
+    val bundle = Bundle()
+    bundle.putString("SpeakerId", id)
+    firebase.logEvent("LoadSpeakerDetails", bundle)
   }
 
 

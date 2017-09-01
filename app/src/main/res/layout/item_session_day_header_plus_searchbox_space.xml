@@ -6,7 +6,7 @@
     android:layout_height="@dimen/subheader_height_plus_searchbox"
     android:background="@color/searchbox_header_background"
     android:orientation="horizontal"
-    android:paddingLeft="24dp"
+    android:paddingLeft="28dp"
     android:paddingRight="24dp"
     >
 
