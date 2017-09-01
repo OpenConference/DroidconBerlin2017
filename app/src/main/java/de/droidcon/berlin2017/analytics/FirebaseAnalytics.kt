@@ -63,9 +63,9 @@ class FirebaseAnalytics(context: Context) : Analytics {
   }
 
   override fun trackSessionNotificationOpened(sessionId: String) {
-      val bundle = Bundle()
-      bundle.putString("SessionId", sessionId)
-      firebase.logEvent("SessionNotificationOpened", bundle)
+    val bundle = Bundle()
+    bundle.putString("SessionId", sessionId)
+    firebase.logEvent("SessionNotificationOpened", bundle)
   }
 
   override fun trackSessionNotificationGenerated(sessionId: String) {
@@ -82,5 +82,11 @@ class FirebaseAnalytics(context: Context) : Analytics {
   override fun trackShowLicenses() {
     val bundle = Bundle()
     firebase.logEvent("ShowLicenseClicked", bundle)
+  }
+
+  override fun trackFastScrollStarted(controllerName: String) {
+    val bundle = Bundle()
+    bundle.putString("ControllerName", controllerName)
+    firebase.logEvent("FastScrollStarted", bundle)
   }
 }

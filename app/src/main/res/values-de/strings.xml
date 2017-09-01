@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="app_name">droidcon Berlin</string>
   <string name="screen_title_sessions">Sessions</string>
   <string name="screen_title_my_schedule">Mein Kalender</string>
   <string name="screen_title_speakers">Referenten</string>
@@ -22,6 +23,7 @@
 
   <string name="notification_title">Eine Session startet bald</string>
   <string name="notification_text">%1$s startet um %2$s</string>
+  <string name="empty">Nichts zum Anzeigen da.\nProbiers später nochmal.</string>
 
 
   <string name="menu_license">Lizenzen</string>

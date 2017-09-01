@@ -1,13 +1,15 @@
 package de.droidcon.berlin2017.ui.sessions
 
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager
 import com.hannesdorfmann.adapterdelegates3.ListDelegationAdapter
+import com.simplecityapps.recyclerview_fastscroll.interfaces.OnFastScrollStateChangeListener
+import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
+import de.droidcon.berlin2017.DroidconApplication
 import de.droidcon.berlin2017.R
 import de.droidcon.berlin2017.ui.PicassoScrollListener
 import de.droidcon.berlin2017.ui.gone
@@ -29,7 +31,7 @@ open class SessionsViewBinding : ViewBinding(), SessionsView {
 
   open val loggingTag : String = SessionsViewBinding::class.java.simpleName
 
-  private var recyclerView by LifecycleAwareRef<RecyclerView>(this)
+  private var recyclerView by LifecycleAwareRef<FastScrollRecyclerView>(this)
   private val scrolledToNowSubject = PublishSubject.create<Boolean>()
   private val retrySubject = PublishSubject.create<Unit>()
 
@@ -53,11 +55,19 @@ open class SessionsViewBinding : ViewBinding(), SessionsView {
     )
 
     val layoutManager = LinearLayoutManager(rootView.context)
+    val analytics = DroidconApplication.getApplicationComponent(rootView.context).analytics()
 
     recyclerView = rootView.findViewById(R.id.recyclerView)
     recyclerView.adapter = adapter
     recyclerView.layoutManager = layoutManager
     recyclerView.addOnScrollListener(PicassoScrollListener(picasso))
+    recyclerView.setStateChangeListener(object : OnFastScrollStateChangeListener {
+      override fun onFastScrollStop() {}
+
+      override fun onFastScrollStart() {
+        analytics.trackFastScrollStarted(loggingTag)
+      }
+    })
 
     loadingView = rootView.findViewById(R.id.loading)
     errorView = rootView.findViewById(R.id.error)

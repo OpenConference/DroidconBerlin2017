@@ -23,4 +23,5 @@ interface Analytics {
   fun trackSessionNotificationGenerated(sessionId: String)
   fun trackShowSourceCode()
   fun trackShowLicenses()
+  fun trackFastScrollStarted(controllerName : String)
 }
