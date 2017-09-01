@@ -3,6 +3,7 @@ package de.droidcon.berlin2017
 import android.content.Context
 import android.support.multidex.MultiDexApplication
 import com.crashlytics.android.Crashlytics
+import com.crashlytics.android.core.CrashlyticsCore
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.twitter.sdk.android.core.Twitter
 import de.droidcon.berlin2017.di.AnalyticsModule
@@ -22,6 +23,7 @@ import io.fabric.sdk.android.Fabric
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
+
 /**
  *
  *
@@ -35,7 +37,12 @@ open class DroidconApplication : MultiDexApplication() {
     super.onCreate()
     AndroidThreeTen.init(this)
     Twitter.initialize(this)
-    Fabric.with(this, Crashlytics())
+
+    val crashlytics = Crashlytics.Builder()
+        .core(CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
+        .build()
+
+    Fabric.with(this, crashlytics)
     plantTimber()
     applicationComponent = applicationComponentBuilder().build()
   }

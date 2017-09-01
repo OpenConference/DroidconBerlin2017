@@ -43,9 +43,9 @@ class SpeakerDetailsViewBinding : ViewBinding(), SpeakerDetailsView {
   private var rootView by LifecycleAwareRef<ViewGroup>(this)
   private var contentView by LifecycleAwareRef<ViewGroup>(this)
   private var adapter by LifecycleAwareRef<ListDelegationAdapter<List<SpeakerDetailsItem>>>(this)
-  private var collapsingToolbar by LifecycleAwareRef<CollapsingToolbarLayout>(this)
+  private var collapsingToolbar: CollapsingToolbarLayout? = null
   private var toolbar by LifecycleAwareRef<Toolbar>(this)
-  private var profilePic by LifecycleAwareRef<ImageView>(this)
+  private var profilePic: ImageView? = null
   private val loadSubject = PublishSubject.create<String>()
 
   override fun postContextAvailable(controller: Controller, context: Context) {
@@ -65,7 +65,7 @@ class SpeakerDetailsViewBinding : ViewBinding(), SpeakerDetailsView {
     errorView = rootView.findViewById(R.id.error)
     loadingView = rootView.findViewById(R.id.loading)
 
-    profilePic.setColorFilter(
+    profilePic?.setColorFilter(
         rootView.resources.getColor(R.color.profilepic_darken),
         PorterDuff.Mode.DARKEN)
 
@@ -106,16 +106,17 @@ class SpeakerDetailsViewBinding : ViewBinding(), SpeakerDetailsView {
       is Content -> {
         val name = state.data.speakerName
         toolbar.title = name
-        collapsingToolbar.title = name
+        collapsingToolbar?.title = name
         errorView.gone()
         loadingView.gone()
         contentView.visible()
 
-        picasso.load(state.data.profilePic)
-            .centerCrop()
-            .fit()
-            .placeholder(R.color.speakerslist_placeholder)
-            .into(profilePic)
+        if (profilePic != null)
+          picasso.load(state.data.profilePic)
+              .centerCrop()
+              .fit()
+              .placeholder(R.color.speakerslist_placeholder)
+              .into(profilePic)
 
         val info = state.data.detailsItems
         if (info.isEmpty()) {
@@ -130,6 +131,12 @@ class SpeakerDetailsViewBinding : ViewBinding(), SpeakerDetailsView {
       }
     }
 
+  }
+
+  override fun postDestroyView(controller: Controller) {
+    super.postDestroyView(controller)
+    collapsingToolbar = null
+    profilePic = null
   }
 
 }

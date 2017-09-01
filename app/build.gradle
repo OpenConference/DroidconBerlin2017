@@ -23,6 +23,12 @@ android {
     multiDexEnabled true
   }
   buildTypes {
+
+    debug {
+      // Only use this flag on builds you don't proguard or upload to beta-by-crashlytics
+      ext.alwaysUpdateBuildId = false
+      ext.enableCrashlytics = false
+    }
     release {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
