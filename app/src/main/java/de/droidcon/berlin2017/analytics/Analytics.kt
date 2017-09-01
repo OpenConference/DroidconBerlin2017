@@ -21,4 +21,6 @@ interface Analytics {
   fun trackTwitterRefresh()
   fun trackSessionNotificationOpened(sessionId: String)
   fun trackSessionNotificationGenerated(sessionId: String)
+  fun trackShowSourceCode()
+  fun trackShowLicenses()
 }

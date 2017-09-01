@@ -20,6 +20,7 @@ class HomeViewBinding : ViewBinding(), HomeView {
 
 
   private val navigationListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+    searchBox.slideInIfNeeded()
     when (item.itemId) {
       R.id.nav_sessions -> {
         navigator.showSessions()
@@ -46,8 +47,8 @@ class HomeViewBinding : ViewBinding(), HomeView {
     searchBox = rootView.findViewById(R.id.searchBox)
     searchBox.showInput = false
     searchBox.setOnClickListener { navigator.showSearch() }
-    searchBox.overflowMenuClickListener =  {
-      when(it){
+    searchBox.overflowMenuClickListener = {
+      when (it) {
         0 -> navigator.showSourceCode()
         1 -> navigator.showLicences()
       }

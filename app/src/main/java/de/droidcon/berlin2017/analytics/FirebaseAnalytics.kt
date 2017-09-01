@@ -73,4 +73,14 @@ class FirebaseAnalytics(context: Context) : Analytics {
     bundle.putString("SessionId", sessionId)
     firebase.logEvent("SessionNotificationGenerated", bundle)
   }
+
+  override fun trackShowSourceCode() {
+    val bundle = Bundle()
+    firebase.logEvent("ShowSourceCodeClicked", bundle)
+  }
+
+  override fun trackShowLicenses() {
+    val bundle = Bundle()
+    firebase.logEvent("ShowLicenseClicked", bundle)
+  }
 }

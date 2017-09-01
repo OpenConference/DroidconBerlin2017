@@ -8,6 +8,7 @@ import com.bluelinelabs.conductor.changehandler.HorizontalChangeHandler
 import de.droidcon.berlin2017.R
 import de.droidcon.berlin2017.model.Session
 import de.droidcon.berlin2017.model.Speaker
+import de.droidcon.berlin2017.ui.applicationComponent
 import de.droidcon.berlin2017.ui.navigation.Navigator
 import de.droidcon.berlin2017.ui.sessiondetails.SessionDetailsController
 import de.droidcon.berlin2017.ui.speakerdetail.SpeakerDetailsController
@@ -76,6 +77,7 @@ class SearchViewNavigator(private val controller: Controller) : Navigator {
 
 
   override fun showLicences() {
+    controller.applicationComponent().analytics().trackShowLicenses()
     LicensesDialog.Builder(controller.activity!!)
         .setNotices(R.raw.notices)
         .setIncludeOwnLicense(true)
@@ -84,6 +86,7 @@ class SearchViewNavigator(private val controller: Controller) : Navigator {
   }
 
   override fun showSourceCode() {
+    controller.applicationComponent().analytics().trackShowSourceCode()
     val intent = Intent(Intent.ACTION_VIEW)
     intent.data = Uri.parse("https://github.com/OpenConference/DroidconBerlin2017")
     controller.startActivity(intent)

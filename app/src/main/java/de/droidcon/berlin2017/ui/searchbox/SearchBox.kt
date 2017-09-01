@@ -1,5 +1,6 @@
 package de.droidcon.berlin2017.ui.searchbox
 
+import android.animation.Animator
 import android.content.Context
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.support.v7.widget.CardView
@@ -7,6 +8,7 @@ import android.support.v7.widget.ListPopupWindow
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.view.animation.OvershootInterpolator
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageView
@@ -96,5 +98,27 @@ class SearchBox(context: Context, attributeSet: AttributeSet) : CardView(context
 
   fun showKeyboard() {
     searchField.requestFocus()
+  }
+
+  fun slideInIfNeeded() {
+    if (translationY != 0f) {
+      val animator = animate().translationY(0f).setInterpolator(
+          OvershootInterpolator()).setDuration(
+          300).setStartDelay(200)
+
+      animator.setListener(object : Animator.AnimatorListener {
+        override fun onAnimationStart(animator: Animator) {
+          visible()
+        }
+
+        override fun onAnimationEnd(animator: Animator) {}
+        override fun onAnimationCancel(animator: Animator) {}
+
+        override fun onAnimationRepeat(animator: Animator) {}
+      })
+
+      animator.start()
+    }
+
   }
 }
