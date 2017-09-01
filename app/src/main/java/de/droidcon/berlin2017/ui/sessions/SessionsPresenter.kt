@@ -21,6 +21,7 @@ class SessionsPresenter(
     Timber.d("Bind intents")
     val scrolledToNowIntent = intent(SessionsView::scrolledToNowIntent)
         .doOnNext { Timber.d("Scrolled to now intent: $it") }
+        .distinctUntilChanged()
 
     val data = intent(SessionsView::loadDataIntent)
         .doOnNext { Timber.d("Load data intent") }

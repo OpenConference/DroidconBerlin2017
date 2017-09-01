@@ -58,9 +58,9 @@ class SessionsInteractor @Inject constructor(
     return Observable.combineLatest(observables) {
 
       val lceState = it[0] as LceViewState<Sessions>
-      val scrolledToNow = it[1] as Boolean
+      val alreadyScrolledToNow = it[1] as Boolean
       if (lceState is Content) {
-        if (scrolledToNow)
+        if (alreadyScrolledToNow)
           Content(
               // We already have scrolled, so don't scroll again
               lceState.data.copy(scrollTo = null, sessions = lceState.data.sessions)
@@ -71,7 +71,8 @@ class SessionsInteractor @Inject constructor(
         lceState
       }
 
-    }.distinctUntilChanged()
+    }
+        .distinctUntilChanged()
   }
 
   private fun findScrollToIndex(sessions: List<SchedulePresentationModel>,
@@ -92,7 +93,8 @@ class SessionsInteractor @Inject constructor(
     }
 
 
-    return Math.max(0, toScroll - 1) // -1 so that the real position is in the middle of the screen (not on top)
+    return Math.max(0,
+        toScroll - 1) // -1 so that the real position is in the middle of the screen (not on top)
   }
 
 }

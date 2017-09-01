@@ -118,7 +118,6 @@ open class SessionsViewBinding : ViewBinding(), SessionsView {
           if (state.data.scrollTo != null) {
             recyclerView.scrollToPosition(state.data.scrollTo)
             scrolledToNowSubject.onNext(true)
-            scrolledToNowSubject.onComplete()
           }
         }
       }
