@@ -1,5 +1,7 @@
 package de.droidcon.berlin2017.ui.home
 
+import android.content.Intent
+import android.net.Uri
 import com.bluelinelabs.conductor.Controller
 import com.bluelinelabs.conductor.RouterTransaction
 import com.bluelinelabs.conductor.changehandler.FadeChangeHandler
@@ -13,6 +15,8 @@ import de.droidcon.berlin2017.ui.search.SearchController
 import de.droidcon.berlin2017.ui.sessions.SessionsController
 import de.droidcon.berlin2017.ui.speakers.SpeakersController
 import de.droidcon.berlin2017.ui.twitter.TwitterController
+import de.psdev.licensesdialog.LicensesDialog
+
 
 /**
  * The navigator for the home
@@ -83,5 +87,19 @@ class HomeNavigator(private val controller : Controller) : Navigator {
   override fun popSelfFromBackstack() {
     TODO(
         "not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override fun showLicences() {
+    LicensesDialog.Builder(controller.activity!!)
+        .setNotices(R.raw.notices)
+        .setIncludeOwnLicense(true)
+        .build()
+        .show();
+  }
+
+  override fun showSourceCode() {
+    val intent = Intent(Intent.ACTION_VIEW)
+    intent.data = Uri.parse("https://github.com/OpenConference/DroidconBerlin2017")
+    controller.startActivity(intent)
   }
 }

@@ -54,6 +54,12 @@ class SearchViewBinding : ViewBinding(), SearchView {
     errorView = rootView.findViewById(R.id.error)
     errorView.setOnClickListener { retrySubject.onNext(searchBox.currentSearchText()) }
 
+    searchBox.overflowMenuClickListener =  {
+      when(it){
+        0 -> navigator.showSourceCode()
+        1 -> navigator.showLicences()
+      }
+    }
     searchBox.showInput = true
     searchBox.requestFocusForSearchInput()
     autoTransition = TransitionInflater.from(rootView.context).inflateTransition(R.transition.auto)

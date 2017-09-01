@@ -41,4 +41,9 @@
 
 
   <string name="goodbye">Droidcon Berlin 2017 ist vorbei.\nBis zum nächsten Mal!</string>
+
+  <string-array name="overflow_items">
+    <item>Source Code</item>
+    <item>Open Source Lizenzen</item>
+  </string-array>
 </resources>

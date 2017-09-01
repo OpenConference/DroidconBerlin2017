@@ -27,4 +27,7 @@ interface Navigator {
   fun showSearch()
 
   fun popSelfFromBackstack()
+
+  fun showLicences()
+  fun showSourceCode()
 }

@@ -3,9 +3,11 @@ package de.droidcon.berlin2017.ui.searchbox
 import android.content.Context
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.support.v7.widget.CardView
+import android.support.v7.widget.ListPopupWindow
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageView
 import com.jakewharton.rxbinding2.widget.RxTextView
@@ -29,12 +31,27 @@ class SearchBox(context: Context, attributeSet: AttributeSet) : CardView(context
   private val overflowMenu: View by lazy { findViewById<View>(R.id.overflowMenu) }
   private val searchPlaceHolder by lazy { findViewById<View>(R.id.searchPlaceholder) }
   val textInputChanges: Observable<String>
+  var overflowMenuClickListener: ((Int) -> Unit)? = null
 
   init {
     val inflater = LayoutInflater.from(context)
     inflater.inflate(R.layout.view_searchbox, this, true)
     useCompatPadding = true
     textInputChanges = RxTextView.textChanges(searchField).map { it.toString() }.share()
+    overflowMenu.setOnClickListener {
+      val adapter = ArrayAdapter<String>(context,
+          android.R.layout.simple_list_item_1,
+          context.resources.getStringArray(R.array.overflow_items))
+
+      val popup = ListPopupWindow(context)
+      popup.anchorView = overflowMenu
+      popup.setAdapter(adapter)
+      popup.width = context.resources.getDimensionPixelOffset(R.dimen.overflow_popup_width)
+      popup.setOnItemClickListener { adapterView, view, i, l ->
+        overflowMenuClickListener?.invoke(i)
+      }
+      popup.show()
+    }
 
     /*
     val padding= dpToPx(R.dimen.activity_horizontal_margin).toInt()

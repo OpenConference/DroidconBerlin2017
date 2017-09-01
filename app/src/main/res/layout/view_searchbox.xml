@@ -72,14 +72,13 @@
         android:id="@+id/overflowMenu"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:background="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_more"
         tools:visibility="visible"
-        style="@android:style/Widget.Material.Light.ImageButton"
-        android:visibility="gone"
+        style="@android:style/Widget.Material.Button.Borderless.Small"
+        android:visibility="visible"
         />
   </android.support.constraint.ConstraintLayout>
 </merge>

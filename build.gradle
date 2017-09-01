@@ -78,6 +78,7 @@ buildscript {
               recyclerViewFastscroll : "com.simplecityapps:recyclerview-fastscroll:1.0.16",
               moshiConverter         : "com.squareup.retrofit2:converter-moshi:$ext.version.retrofit",
               twitter                : "com.twitter.sdk.android:twitter:3.1.1",
+              licenseDialog          : "de.psdev.licensesdialog:licensesdialog:1.8.3",
 
               loganSquare            : "com.bluelinelabs:logansquare:$ext.version.loganSquare",
               loganSquareCompiler    : "com.bluelinelabs:logansquare-compiler:$ext.version.loganSquare",

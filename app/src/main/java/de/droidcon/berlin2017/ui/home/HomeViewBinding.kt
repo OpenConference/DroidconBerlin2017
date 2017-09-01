@@ -46,6 +46,12 @@ class HomeViewBinding : ViewBinding(), HomeView {
     searchBox = rootView.findViewById(R.id.searchBox)
     searchBox.showInput = false
     searchBox.setOnClickListener { navigator.showSearch() }
+    searchBox.overflowMenuClickListener =  {
+      when(it){
+        0 -> navigator.showSourceCode()
+        1 -> navigator.showLicences()
+      }
+    }
 
     bottomNavigationView = rootView.findViewById(R.id.navigation)
     bottomNavigationView.setOnNavigationItemSelectedListener(navigationListener)

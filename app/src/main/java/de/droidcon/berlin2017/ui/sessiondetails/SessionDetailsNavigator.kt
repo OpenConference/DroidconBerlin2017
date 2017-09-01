@@ -64,4 +64,15 @@ class SessionDetailsNavigator(private val controller: Controller) : Navigator {
   override fun popSelfFromBackstack() {
     controller.router.popCurrentController()
   }
+
+
+  override fun showLicences() {
+    TODO(
+        "not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override fun showSourceCode() {
+    TODO(
+        "not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
 }

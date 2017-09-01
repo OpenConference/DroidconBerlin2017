@@ -69,4 +69,14 @@ class MyScheduleNavigator(private val controller: Controller) : Navigator {
     TODO(
         "not implemented") //To change body of created functions use File | Settings | File Templates.
   }
+
+  override fun showLicences() {
+    TODO(
+        "not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override fun showSourceCode() {
+    TODO(
+        "not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
 }
