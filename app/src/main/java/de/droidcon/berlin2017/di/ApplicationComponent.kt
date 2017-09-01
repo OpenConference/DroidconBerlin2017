@@ -6,6 +6,7 @@ import de.droidcon.berlin2017.analytics.Analytics
 import de.droidcon.berlin2017.clock.Clock
 import de.droidcon.berlin2017.interactor.SessionsInteractor
 import de.droidcon.berlin2017.interactor.SpeakerDetailsInteractor
+import de.droidcon.berlin2017.notification.NotificationScheduler
 import de.droidcon.berlin2017.schedule.backend.ScheduleDataStateDeterminer
 import de.droidcon.berlin2017.schedule.repository.SessionsRepository
 import de.droidcon.berlin2017.schedule.repository.SpeakerRepository
@@ -34,4 +35,5 @@ interface ApplicationComponent {
   fun speakerDetailsInteractor() : SpeakerDetailsInteractor
   fun clock() : Clock
   fun appUpdaterChecker() : AppUpdateChecker
+  fun notificationScheduler() : NotificationScheduler
 }

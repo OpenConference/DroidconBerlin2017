@@ -5,6 +5,8 @@
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
   <uses-permission android:name="android.permission.WAKE_LOCK"/>
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
 
   <application
       android:name=".DroidconApplication"
@@ -25,11 +27,22 @@
       </intent-filter>
     </activity>
 
-    <receiver android:name=".notification.NotificationReceiver"></receiver>
+    <receiver android:name=".notification.NotificationReceiver">
+    <intent-filter>
+      <action android:name="de.droidcon.berlin2017.notification.NotificationForMySchedule"></action>
+    </intent-filter>
+    </receiver>
+    <receiver
+        android:name=".notification.BootCompletedNotificationSchedulerReceiver"
+        android:enabled="true">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+      </intent-filter>
+    </receiver>
 
     <meta-data
         android:name="io.fabric.ApiKey"
-        android:value="9c9192e12701b0830ed9c97bf0df6d5dde11def5" />
+        android:value="9c9192e12701b0830ed9c97bf0df6d5dde11def5"/>
 
   </application>
 
