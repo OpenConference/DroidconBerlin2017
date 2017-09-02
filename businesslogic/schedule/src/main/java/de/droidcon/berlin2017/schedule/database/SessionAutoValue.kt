@@ -70,6 +70,10 @@ abstract class SessionAutoValue : Session {
 
   override abstract fun favorite(): Boolean
 
+  override fun toString(): String {
+    return "id=${id()} title=${title()} favorite=${favorite()}"
+  }
+
   companion object {
 
     fun create(id: String, title: String?, description: String?, tags: String?, start: Instant?,

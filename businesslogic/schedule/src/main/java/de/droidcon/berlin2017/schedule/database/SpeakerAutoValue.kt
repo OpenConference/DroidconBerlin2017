@@ -77,6 +77,9 @@ abstract class SpeakerAutoValue : Speaker {
   @ColumnName(SpeakerDaoSqlite.COL_PICTURE)
   override abstract fun profilePic(): String?
 
+  override fun toString(): String =
+      "id=${id()} name=${name()}"
+
   abstract fun toContentValues(): ContentValues
 
   companion object {
