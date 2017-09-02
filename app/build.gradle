@@ -49,6 +49,7 @@ dependencies {
   implementation deps.mosbyMviConductor
   implementation deps.rxJava
   implementation deps.rxBinding
+  implementation deps.rxBindingV4
   implementation deps.rxAndroid
   implementation deps.firebaseAnalytics
   implementation deps.retrofit

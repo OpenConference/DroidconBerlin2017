@@ -8,7 +8,6 @@ import de.droidcon.berlin2017.model.Session
 import de.droidcon.berlin2017.schedule.database.SessionAutoValue
 import de.droidcon.berlin2017.ui.lce.LceViewState
 import de.droidcon.berlin2017.ui.sessions.Sessions
-import de.droidcon.berlin2017.ui.sessions.SessionsView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -33,17 +32,20 @@ class BarCampPresenter(
 
 
   override fun bindIntents() {
-    val scrolledToNowIntent = intent(SessionsView::scrolledToNowIntent)
+    val scrolledToNowIntent = intent(BarCampView::scrolledToNowIntent)
         .doOnNext { Timber.d("Scrolled to now intent: $it") }
         .distinctUntilChanged()
 
-    val loadDataIntent = intent(SessionsView::loadDataIntent)
+    val loadDataIntent = intent(BarCampView::loadDataIntent)
         .doOnNext { Timber.d("Load data intent") }
 
-    val retryLoadDataIntent = intent(SessionsView::retryLoadDataIntent)
+    val pullToRefreshIntent = intent(BarCampView::swipeRefreshIntent)
+        .doOnNext { Timber.d("PullToRefresh data intent") }
+
+    val retryLoadDataIntent = intent(BarCampView::retryLoadDataIntent)
         .doOnNext { Timber.d("Retry load data intent") }
 
-    val data = Observable.merge(loadDataIntent, retryLoadDataIntent).switchMap {
+    val data = Observable.merge(loadDataIntent, retryLoadDataIntent, pullToRefreshIntent).switchMap {
 
       val scheduleObservable = Observable.fromCallable {
         val response = okHttp.newCall(Request.Builder().url(url).get().build()).execute()

@@ -115,7 +115,8 @@ class SessionAdapterDelegate(
       if (session.time == null) {
         time.gone()
       } else {
-        time.text = session.time
+        val location = if(session.locationName != null) "   @ "+session.locationName else ""
+        time.text = session.time + location
         time.visible()
       }
 

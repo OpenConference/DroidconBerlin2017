@@ -120,17 +120,6 @@
           app:srcCompat="@drawable/ic_done"
           tools:visibility="visible"
           />
-      <TextView
-          android:id="@+id/location"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="0dp"
-          android:layout_marginStart="8dp"
-          android:gravity="right"
-          android:text="TextView"
-          app:layout_constraintBottom_toBottomOf="@+id/time"
-          app:layout_constraintStart_toEndOf="@+id/time"
-          />
 
     </android.support.constraint.ConstraintLayout>
 

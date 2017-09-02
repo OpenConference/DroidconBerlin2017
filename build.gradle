@@ -51,6 +51,7 @@ buildscript {
               firebaseAuth           : "com.google.firebase:firebase-auth:$ext.version.firebase",
               firebaseRemoteConfig   : "com.google.firebase:firebase-config:$ext.version.firebase",
               rxBinding              : "com.jakewharton.rxbinding2:rxbinding:$ext.version.rxBinding",
+              rxBindingV4              : "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:$ext.version.rxBinding",
               dagger                 : "com.google.dagger:dagger:$ext.version.dagger",
               daggerCompiler         : "com.google.dagger:dagger-compiler:$ext.version.dagger",
               room                   : "android.arch.persistence.room:runtime:$ext.version.room",

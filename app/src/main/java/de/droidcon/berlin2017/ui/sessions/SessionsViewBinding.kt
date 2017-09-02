@@ -12,6 +12,7 @@ import com.simplecityapps.recyclerview_fastscroll.interfaces.OnFastScrollStateCh
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import de.droidcon.berlin2017.DroidconApplication
 import de.droidcon.berlin2017.R
+import de.droidcon.berlin2017.model.Session
 import de.droidcon.berlin2017.ui.PicassoScrollListener
 import de.droidcon.berlin2017.ui.gone
 import de.droidcon.berlin2017.ui.lce.LceViewState
@@ -56,7 +57,7 @@ open class SessionsViewBinding : ViewBinding(), SessionsView {
     adapter = SessionsAdapter(
         AdapterDelegatesManager<List<SchedulePresentationModel>>()
             .addDelegate(0, SessionAdapterDelegate(inflater, picasso,
-                { navigator.showSessionDetails(it) }))
+                { onSessionClicked(it) }))
             .addDelegate(1, SessionDayHeaderAdapterDelegate(inflater))
             .addDelegate(2, SessionDayHeaderPlusSearchBoxSpaceAdapterDelegate(inflater))
     )
@@ -88,6 +89,10 @@ open class SessionsViewBinding : ViewBinding(), SessionsView {
    */
   protected open fun onEmptyViewClicked() {
 
+  }
+
+  protected open fun onSessionClicked(session : Session){
+    navigator.showSessionDetails(session)
   }
 
   override fun loadDataIntent(): Observable<Unit> = loadDataIntent

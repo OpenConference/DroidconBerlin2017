@@ -13,7 +13,7 @@ import de.droidcon.berlin2017.ui.applicationComponent
 class BarCampController : MviController<BarCampView, BarCampPresenter>() {
 
 
-  override val layoutRes: Int = R.layout.controller_sessions
+  override val layoutRes: Int = R.layout.controller_barcamp
 
 
   override fun createPresenter(): BarCampPresenter = BarCampPresenter(
