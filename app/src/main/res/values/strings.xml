@@ -5,6 +5,7 @@
   <string name="screen_title_sessions">Sessions</string>
   <string name="screen_title_my_schedule">My Schedule</string>
   <string name="screen_title_speakers">Speakers</string>
+  <string name="screen_title_barcamp">Barcamp</string>
   <string name="screen_title_twitter">Twitter</string>
   <string name="search_hint">Sessions, Speakers …</string>
 

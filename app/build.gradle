@@ -71,6 +71,7 @@ dependencies {
   implementation deps.adapterDelegates
   implementation deps.recyclerViewFastscroll
   implementation deps.twitter
+  api deps.bypass
   api deps.licenseDialog
 
   compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {

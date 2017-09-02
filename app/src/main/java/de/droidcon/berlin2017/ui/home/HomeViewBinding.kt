@@ -38,6 +38,10 @@ class HomeViewBinding : ViewBinding(), HomeView {
         navigator.showTweets()
         true
       }
+      R.id.nav_barcamp -> {
+        navigator.showBarcamp()
+        true
+      }
       else -> false
     }
   }

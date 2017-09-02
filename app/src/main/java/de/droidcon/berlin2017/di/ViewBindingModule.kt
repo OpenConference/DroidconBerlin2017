@@ -2,6 +2,8 @@ package de.droidcon.berlin2017.di
 
 import dagger.Module
 import dagger.Provides
+import de.droidcon.berlin2017.ui.barcamp.BarCampController
+import de.droidcon.berlin2017.ui.barcamp.BarCampViewBinding
 import de.droidcon.berlin2017.ui.home.HomeController
 import de.droidcon.berlin2017.ui.home.HomeViewBinding
 import de.droidcon.berlin2017.ui.myschedule.MyScheduleController
@@ -37,7 +39,8 @@ class ViewBindingModule {
           SearchController::class.java to ::SearchViewBinding,
           SpeakerDetailsController::class.java to ::SpeakerDetailsViewBinding,
           SessionDetailsController::class.java to ::SessionDetailsViewBinding,
-          MyScheduleController::class.java to ::MyScheduleViewBinding
+          MyScheduleController::class.java to ::MyScheduleViewBinding,
+          BarCampController::class.java to ::BarCampViewBinding
       )
   )
 }

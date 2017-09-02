@@ -80,6 +80,7 @@ buildscript {
               twitter                : "com.twitter.sdk.android:twitter:3.1.1",
               licenseDialog          : "de.psdev.licensesdialog:licensesdialog:1.8.3",
               rxSharedPrefs          : "com.f2prateek.rx.preferences2:rx-preferences:2.0.0-RC3",
+              bypass                 : "com.github.Commit451:bypasses:1.1.0",
 
               loganSquare            : "com.bluelinelabs:logansquare:$ext.version.loganSquare",
               loganSquareCompiler    : "com.bluelinelabs:logansquare-compiler:$ext.version.loganSquare",
@@ -116,6 +117,7 @@ allprojects {
     google()
     jcenter()
     maven { url 'https://maven.fabric.io/public' }
+    maven { url "https://jitpack.io" } // bypass
   }
 }
 

@@ -33,8 +33,8 @@ class SessionsInteractor @Inject constructor(
   fun allSessions(scrolledToNowIntent: Observable<Boolean>): Observable<LceViewState<Sessions>> =
       transform(scrolledToNowIntent) { sessionsRepository.allSessions() }
 
-  private inline fun transform(scrolledToNowIntent: Observable<Boolean>,
-      crossinline dataSourceFactory: () -> Observable<List<Session>>): Observable<LceViewState<Sessions>> {
+  fun transform(scrolledToNowIntent: Observable<Boolean>,
+      dataSourceFactory: () -> Observable<List<Session>>): Observable<LceViewState<Sessions>> {
 
     val zoneConferenceTakesPlace = clock.getZoneConferenceTakesPlace()
 
