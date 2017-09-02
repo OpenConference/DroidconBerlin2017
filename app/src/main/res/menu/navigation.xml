@@ -17,6 +17,11 @@
       android:title="@string/screen_title_speakers"/>
 
   <item
+      android:id="@+id/nav_barcamp"
+      android:icon="@drawable/ic_barcamp"
+      android:title="@string/screen_title_barcamp"/>
+
+  <item
       android:id="@+id/nav_twitter"
       android:icon="@drawable/ic_twitter"
       android:title="@string/screen_title_twitter"/>

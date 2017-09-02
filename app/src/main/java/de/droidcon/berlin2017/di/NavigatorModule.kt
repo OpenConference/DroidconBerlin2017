@@ -2,6 +2,8 @@ package de.droidcon.berlin2017.di
 
 import dagger.Module
 import dagger.Provides
+import de.droidcon.berlin2017.ui.barcamp.BarCampController
+import de.droidcon.berlin2017.ui.barcamp.BarCampNavigator
 import de.droidcon.berlin2017.ui.home.HomeController
 import de.droidcon.berlin2017.ui.home.HomeNavigator
 import de.droidcon.berlin2017.ui.myschedule.MyScheduleController
@@ -39,7 +41,8 @@ class NavigatorModule {
               SearchController::class.java to ::SearchViewNavigator,
               SpeakerDetailsController::class.java to ::SpeakerDetailsNavigator,
               SessionDetailsController::class.java to ::SessionDetailsNavigator,
-              MyScheduleController::class.java to ::MyScheduleNavigator
+              MyScheduleController::class.java to ::MyScheduleNavigator,
+              BarCampController::class.java to ::BarCampNavigator
           )
       )
 

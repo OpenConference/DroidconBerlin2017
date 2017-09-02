@@ -51,6 +51,7 @@ buildscript {
               firebaseAuth           : "com.google.firebase:firebase-auth:$ext.version.firebase",
               firebaseRemoteConfig   : "com.google.firebase:firebase-config:$ext.version.firebase",
               rxBinding              : "com.jakewharton.rxbinding2:rxbinding:$ext.version.rxBinding",
+              rxBindingV4              : "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:$ext.version.rxBinding",
               dagger                 : "com.google.dagger:dagger:$ext.version.dagger",
               daggerCompiler         : "com.google.dagger:dagger-compiler:$ext.version.dagger",
               room                   : "android.arch.persistence.room:runtime:$ext.version.room",
@@ -80,6 +81,7 @@ buildscript {
               twitter                : "com.twitter.sdk.android:twitter:3.1.1",
               licenseDialog          : "de.psdev.licensesdialog:licensesdialog:1.8.3",
               rxSharedPrefs          : "com.f2prateek.rx.preferences2:rx-preferences:2.0.0-RC3",
+              bypass                 : "com.github.Commit451:bypasses:1.1.0",
 
               loganSquare            : "com.bluelinelabs:logansquare:$ext.version.loganSquare",
               loganSquareCompiler    : "com.bluelinelabs:logansquare-compiler:$ext.version.loganSquare",
@@ -116,6 +118,7 @@ allprojects {
     google()
     jcenter()
     maven { url 'https://maven.fabric.io/public' }
+    maven { url "https://jitpack.io" } // bypass
   }
 }
 

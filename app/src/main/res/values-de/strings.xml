@@ -5,6 +5,7 @@
   <string name="screen_title_my_schedule">Mein Kalender</string>
   <string name="screen_title_speakers">Referenten</string>
   <string name="screen_title_twitter">Twitter</string>
+  <string name="screen_title_barcamp">Barcamp</string>
   <string name="search_hint">Session, Referenten …</string>
 
   <string name="error_unknown">Ein unerwarteter Fehler ist aufgetreten.</string>

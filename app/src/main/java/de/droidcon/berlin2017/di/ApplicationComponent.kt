@@ -15,6 +15,7 @@ import de.droidcon.berlin2017.ui.navigation.NavigatorFactory
 import de.droidcon.berlin2017.ui.twitter.TwitterInitializer
 import de.droidcon.berlin2017.ui.viewbinding.ViewBindingFactory
 import de.droidcon.berlin2017.updater.AppUpdateChecker
+import okhttp3.OkHttpClient
 
 /**
  *
@@ -27,6 +28,7 @@ interface ApplicationComponent {
   fun analytics() : Analytics
   fun scheduleStateDeterminer(): ScheduleDataStateDeterminer
   fun picasso(): Picasso
+  fun okHttp() : OkHttpClient
   fun sessionRepository(): SessionsRepository
   fun speakersRepository(): SpeakerRepository
   fun navigatorFactory(): NavigatorFactory

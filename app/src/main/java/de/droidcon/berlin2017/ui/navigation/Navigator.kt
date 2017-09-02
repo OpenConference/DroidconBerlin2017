@@ -28,6 +28,8 @@ interface Navigator {
 
   fun popSelfFromBackstack()
 
+  fun showBarcamp() {}
+
   fun showLicences()
   fun showSourceCode()
 }
