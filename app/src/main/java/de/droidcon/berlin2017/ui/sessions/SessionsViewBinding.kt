@@ -97,8 +97,7 @@ open class SessionsViewBinding : ViewBinding(), SessionsView {
   override fun retryLoadDataIntent(): Observable<Unit>  = RxView.clicks(errorView).map { Unit }
 
   override fun render(state: LceViewState<Sessions>) {
-    Timber.d("render $restoringViewState")
-    //Timber.tag(loggingTag).d("render $restoringViewState $state")
+    Timber.tag(loggingTag).d("render $restoringViewState $state")
     if (!restoringViewState)
       TransitionManager.beginDelayedTransition(rootView)
 
@@ -116,7 +115,7 @@ open class SessionsViewBinding : ViewBinding(), SessionsView {
         errorView.visible()
       }
       is LceViewState.Content -> {
-        Timber.d("Scroll To ${state.data.scrollTo}")
+        Timber.tag(loggingTag).d("Scroll To ${state.data.scrollTo}")
         loadingView.gone()
         errorView.gone()
         if (state.data.sessions.isEmpty()) {
