@@ -17,6 +17,11 @@ interface SessionsView : MvpView {
   fun loadDataIntent(): Observable<Unit>
 
   /**
+   * Retry to load data
+   */
+  fun retryLoadDataIntent() : Observable<Unit>
+
+  /**
    * Indicates that the UI has automatically scrolled to now
    */
   fun scrolledToNowIntent(): Observable<Boolean>

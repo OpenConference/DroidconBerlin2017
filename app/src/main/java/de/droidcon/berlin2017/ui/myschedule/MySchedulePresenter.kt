@@ -5,6 +5,7 @@ import de.droidcon.berlin2017.interactor.SessionsInteractor
 import de.droidcon.berlin2017.ui.lce.LceViewState
 import de.droidcon.berlin2017.ui.sessions.Sessions
 import de.droidcon.berlin2017.ui.sessions.SessionsView
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -22,9 +23,17 @@ class MySchedulePresenter(
     val scrolledToNowIntent = intent(SessionsView::scrolledToNowIntent)
         .doOnNext { Timber.d("Scrolled to now intent: $it") }
 
-    val data = intent(SessionsView::loadDataIntent)
+
+    val loadDataIntent = intent(SessionsView::loadDataIntent)
         .doOnNext { Timber.d("Load data intent") }
-        .switchMap { sessionsInteractor.favoriteSessions(scrolledToNowIntent).subscribeOn(Schedulers.io()) }
+
+    val retryLoadDataIntent = intent(SessionsView::retryLoadDataIntent)
+        .doOnNext { Timber.d("Retry load data intent") }
+
+    val data = Observable.merge(loadDataIntent, retryLoadDataIntent)
+        .switchMap {
+          sessionsInteractor.favoriteSessions(scrolledToNowIntent).subscribeOn(Schedulers.io())
+        }
         .observeOn(AndroidSchedulers.mainThread())
 
     subscribeViewState(data, SessionsView::render)

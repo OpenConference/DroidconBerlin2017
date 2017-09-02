@@ -53,7 +53,7 @@ class SessionsInteractor @Inject constructor(
 
     }
 
-    val observables = arrayOf(lceObservable(dataObservable), scrolledToNowIntent)
+    val observables = arrayOf(lceObservable(dataObservable), scrolledToNowIntent.startWith(false))
 
     return Observable.combineLatest(observables) {
 

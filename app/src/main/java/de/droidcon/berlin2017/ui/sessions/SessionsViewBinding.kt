@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager
 import com.hannesdorfmann.adapterdelegates3.ListDelegationAdapter
+import com.jakewharton.rxbinding2.view.RxView
 import com.simplecityapps.recyclerview_fastscroll.interfaces.OnFastScrollStateChangeListener
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import de.droidcon.berlin2017.DroidconApplication
@@ -20,7 +21,6 @@ import de.droidcon.berlin2017.ui.visible
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
-import java.util.concurrent.TimeUnit.MILLISECONDS
 
 /**
  * Responsible to display a list of all Sessions on screen
@@ -28,19 +28,26 @@ import java.util.concurrent.TimeUnit.MILLISECONDS
  * @author Hannes Dorfmann
  */
 open class SessionsViewBinding : ViewBinding(), SessionsView {
+  companion object {
+    private val KEY_LAST_SCROLL_POSITION = "LastScrollPosition"
+  }
 
-  open val loggingTag : String = SessionsViewBinding::class.java.simpleName
+  open val loggingTag: String = SessionsViewBinding::class.java.simpleName
 
   private var recyclerView by LifecycleAwareRef<FastScrollRecyclerView>(this)
   private val scrolledToNowSubject = PublishSubject.create<Boolean>()
   private val retrySubject = PublishSubject.create<Unit>()
 
   private var loadingView by LifecycleAwareRef<View>(this)
+  private var layoutManager by LifecycleAwareRef<LinearLayoutManager>(this)
   private var errorView by LifecycleAwareRef<View>(this)
   private var emptyView by LifecycleAwareRef<View>(this)
   private var rootView by LifecycleAwareRef<ViewGroup>(this)
   private var adapter by LifecycleAwareRef<ListDelegationAdapter<List<SchedulePresentationModel>>>(
       this)
+
+  // It's a one time shot
+  private val loadDataIntent = Observable.just(Unit)
 
   override fun bindView(rootView: ViewGroup) {
     this.rootView = rootView
@@ -54,7 +61,7 @@ open class SessionsViewBinding : ViewBinding(), SessionsView {
             .addDelegate(2, SessionDayHeaderPlusSearchBoxSpaceAdapterDelegate(inflater))
     )
 
-    val layoutManager = LinearLayoutManager(rootView.context)
+    layoutManager = LinearLayoutManager(rootView.context)
     val analytics = DroidconApplication.getApplicationComponent(rootView.context).analytics()
 
     recyclerView = rootView.findViewById(R.id.recyclerView)
@@ -74,24 +81,24 @@ open class SessionsViewBinding : ViewBinding(), SessionsView {
     emptyView = rootView.findViewById(R.id.empty)
 
     emptyView.setOnClickListener { onEmptyViewClicked() }
-    errorView.setOnClickListener { retrySubject.onNext(Unit) }
   }
 
   /**
    * Click listener on empty view
    */
-  protected open fun onEmptyViewClicked(){
+  protected open fun onEmptyViewClicked() {
 
   }
 
-  override fun loadDataIntent(): Observable<Unit> = Observable.merge(Observable.just(Unit),
-      retrySubject)
+  override fun loadDataIntent(): Observable<Unit> = loadDataIntent
 
-  override fun scrolledToNowIntent(): Observable<Boolean> = Observable.merge(Observable.just(false),
-      scrolledToNowSubject).delay(200, MILLISECONDS)
+  override fun scrolledToNowIntent(): Observable<Boolean> = scrolledToNowSubject
+
+  override fun retryLoadDataIntent(): Observable<Unit>  = RxView.clicks(errorView).map { Unit }
 
   override fun render(state: LceViewState<Sessions>) {
-    Timber.tag(loggingTag).d("render $restoringViewState $state")
+    Timber.d("render $restoringViewState")
+    //Timber.tag(loggingTag).d("render $restoringViewState $state")
     if (!restoringViewState)
       TransitionManager.beginDelayedTransition(rootView)
 
@@ -109,6 +116,7 @@ open class SessionsViewBinding : ViewBinding(), SessionsView {
         errorView.visible()
       }
       is LceViewState.Content -> {
+        Timber.d("Scroll To ${state.data.scrollTo}")
         loadingView.gone()
         errorView.gone()
         if (state.data.sessions.isEmpty()) {
