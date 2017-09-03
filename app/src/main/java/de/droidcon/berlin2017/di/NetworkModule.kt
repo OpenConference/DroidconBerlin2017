@@ -35,13 +35,12 @@ open class NetworkModule(context: Context) {
 
     if (BuildConfig.DEBUG) {
       val logging = HttpLoggingInterceptor()
-      logging.level = Level.NONE
+      logging.level = Level.HEADERS
       builder.addInterceptor(logging)
     }
     okHttp = builder.build()
 
     val moshi = Moshi.Builder()
-       // .add(HtmlStringConverter())
         .add(HtmlStringTypeAdapter.newFactory())
         .add(InstantIsoTypeConverter())
         .build()

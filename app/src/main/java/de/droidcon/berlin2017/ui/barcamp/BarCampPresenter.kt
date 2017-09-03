@@ -11,6 +11,7 @@ import de.droidcon.berlin2017.ui.sessions.Sessions
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import okhttp3.CacheControl
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.threeten.bp.ZonedDateTime
@@ -48,7 +49,8 @@ class BarCampPresenter(
     val data = Observable.merge(loadDataIntent, retryLoadDataIntent, pullToRefreshIntent).switchMap {
 
       val scheduleObservable = Observable.fromCallable {
-        val response = okHttp.newCall(Request.Builder().url(url).get().build()).execute()
+        val response = okHttp.newCall(Request.Builder().url(url).get()
+            .cacheControl(CacheControl.FORCE_NETWORK).build()).execute()
         if (!response.isSuccessful) {
           throw IOException("Could not load BarCamp")
         }
@@ -102,8 +104,8 @@ class BarCampPresenter(
                     favorite = false,
                     title = bypass.markdownToSpannable(title).toString(),
                     description = "",
-                    locationName = "Stage ${(i + 1)}",
-                    locationId = "Stage ${(i + 1)}",
+                    locationName = "Stage ${getStage(i)}",
+                    locationId = "Stage ${getStage(i)}",
                     start = startTime.toInstant(),
                     end = endTime.toInstant(),
                     tags = null
@@ -115,5 +117,13 @@ class BarCampPresenter(
         sessionsInLine
       }
     }
+  }
+
+  private fun getStage(index : Int) = when (index){
+    0 -> "Stage Lamarr"
+    1 -> "Stage Lovelace"
+    2 -> "Stage Turing"
+    3 -> "Stage Zuse"
+    else -> "Stage Unknown"
   }
 }
