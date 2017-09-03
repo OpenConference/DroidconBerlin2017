@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/subheader_height"
-    android:paddingLeft="64dp"
-    android:paddingRight="64dp"
+    android:layout_height="@dimen/subheader_timeslot_title"
+    android:paddingLeft="28dp"
+    android:paddingRight="24dp"
+    android:paddingBottom="8dp"
+    xmlns:tools="http://schemas.android.com/tools"
     >
 
-  <View
+  <TextView
+      android:id="@+id/timeSlot"
       android:layout_width="match_parent"
-      android:layout_height="1dp"
-      android:background="@color/separator_line"
-      android:layout_gravity="center"
+      android:layout_height="wrap_content"
+      android:layout_gravity="bottom|left"
+      android:maxLines="1"
+      android:textSize="@dimen/subheader_text_size"
+      android:textStyle="bold"
+      tools:text="12:00 PM"
       />
 
 </FrameLayout>

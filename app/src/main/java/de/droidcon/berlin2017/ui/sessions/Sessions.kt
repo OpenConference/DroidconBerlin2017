@@ -61,6 +61,7 @@ sealed class SchedulePresentationModel {
    * A visual divider for timeslots (like 10 AM)
    */
   data class TimeSlotDividerPresentationModel(
+      val timeStr : String,
       override val date: LocalDateTime,
       override val fastScrollInfo: String
   ) : SchedulePresentationModel()

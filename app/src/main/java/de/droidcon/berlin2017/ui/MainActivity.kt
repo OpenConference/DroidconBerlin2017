@@ -77,8 +77,8 @@ class MainActivity : AppCompatActivity() {
           } else if (it.newerAppVersionAvailable) {
             if (router.getControllerWithTag("UpdateDialog") == null) {
               router.pushController(RouterTransaction.with(UpdateController())
-                  .pushChangeHandler(FadeChangeHandler())
-                  .popChangeHandler(FadeChangeHandler())
+                  .pushChangeHandler(FadeChangeHandler(false))
+                  .popChangeHandler(FadeChangeHandler(false))
                   .tag("UpdateDialog")
               )
             }

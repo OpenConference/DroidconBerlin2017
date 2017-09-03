@@ -5,6 +5,7 @@
   <dimen name="item_horizontal_margin">8dp</dimen>
   <dimen name="errorview_width_height">128dp</dimen>
   <dimen name="subheader_height">88dp</dimen>
+  <dimen name="subheader_timeslot_title">68dp</dimen>
   <dimen name="subheader_height_plus_searchbox">128dp</dimen>
   <dimen name="subheader_text_size">16sp</dimen>
   <dimen name="subheader_text_size_smaller">12sp</dimen>

@@ -4,6 +4,7 @@ import de.droidcon.berlin2017.model.Session
 import de.droidcon.berlin2017.model.Speaker
 import de.droidcon.berlin2017.ui.sessions.SchedulePresentationModel.DayPresentationModel
 import de.droidcon.berlin2017.ui.sessions.SchedulePresentationModel.SessionPresentationModel
+import de.droidcon.berlin2017.ui.sessions.SchedulePresentationModel.TimeSlotDividerPresentationModel
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneId
 import org.threeten.bp.format.DateTimeFormatter
@@ -72,16 +73,17 @@ class PhoneSessionGrouper() : SessionGrouper {
         // Precondition: Session has a start time holds because start time already checked for grouping by day
         val timeSlots = sessions.groupBy { it.startTime() }.toList().sortedBy { (startDateTime, _) -> startDateTime }
         timeSlots.forEachIndexed { i, (startDateTime, sessionInTimeSlot) ->
-          /*
-          if (i > 0) {
-            val startZoned = LocalDateTime.ofInstant(startDateTime, zoneConferenceTakesPlace)
-            result.add(TimeSlotDividerPresentationModel(
-                date = startZoned,
-                fastScrollInfo = dayInWeekShort.format(startZoned) + " " + timeFormatter.format(
-                    startZoned)
-            ))
-          }
-          */
+
+
+          val startZoned = LocalDateTime.ofInstant(startDateTime, zoneConferenceTakesPlace)
+          result.add(TimeSlotDividerPresentationModel(
+              timeStr = timeFormatter.format(startZoned),
+              date = startZoned,
+              fastScrollInfo = dayInWeekShort.format(startZoned) + " " + timeFormatter.format(
+                  startZoned)
+          ))
+
+
           result += sessionInTimeSlot.toSchedulePresentationModel(zoneConferenceTakesPlace,
               fallbackStartDateIfDateNotSet)
         }

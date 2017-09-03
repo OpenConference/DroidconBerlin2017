@@ -60,6 +60,7 @@ open class SessionsViewBinding : ViewBinding(), SessionsView {
                 { onSessionClicked(it) }))
             .addDelegate(1, SessionDayHeaderAdapterDelegate(inflater))
             .addDelegate(2, SessionDayHeaderPlusSearchBoxSpaceAdapterDelegate(inflater))
+            .addDelegate(3, SessionTimeSlotDividerAdapterDelegate(inflater))
     )
 
     layoutManager = LinearLayoutManager(rootView.context)
