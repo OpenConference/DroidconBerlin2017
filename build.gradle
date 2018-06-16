@@ -3,7 +3,7 @@
 buildscript {
 
   ext.version = [kotlin              : '1.2.50',
-                 playServicesGradle  : "3.1.0",
+                 playServicesGradle  : "4.0.1",
                  supportLib          : "27.1.1",
                  constraintLayout    : "1.1.2",
                  conductor           : "2.1.4",
