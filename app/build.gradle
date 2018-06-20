@@ -13,7 +13,7 @@ android {
   }
 
   defaultConfig {
-    applicationId "de.droidcon.berlin2017"
+    applicationId "de.droidcon.berlin2018"
     minSdkVersion minSdk
     targetSdkVersion targetSdk
     targetSdkVersion targetSdk

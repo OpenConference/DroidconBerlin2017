@@ -12,7 +12,7 @@
     >
 
 
-  <de.droidcon.berlin2017.ui.searchbox.SearchBox
+  <de.droidcon.berlin2018.ui.searchbox.SearchBox
       android:id="@+id/searchBox"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"

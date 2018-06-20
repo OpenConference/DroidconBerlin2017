@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="de.droidcon.berlin2017.ui.MainActivity"
+    tools:context="de.droidcon.berlin2018.ui.MainActivity"
     >
 
   <android.support.design.widget.CoordinatorLayout
@@ -23,7 +23,7 @@
         android:layout_height="match_parent"
         />
 
-    <de.droidcon.berlin2017.ui.searchbox.SearchBox
+    <de.droidcon.berlin2018.ui.searchbox.SearchBox
         android:id="@+id/searchBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

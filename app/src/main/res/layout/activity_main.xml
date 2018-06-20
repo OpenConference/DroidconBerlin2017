@@ -6,5 +6,5 @@
     android:id="@+id/controller_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.droidcon.berlin2017.ui.MainActivity"
+    tools:context="de.droidcon.berlin2018.ui.MainActivity"
     />
