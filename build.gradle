@@ -7,7 +7,7 @@ buildscript {
                    supportLib          : "27.1.1",
                    constraintLayout    : "1.1.2",
                    conductor           : "2.1.4",
-                   mosbyMvi            : "3.1.0",
+                   mosbyMvi            : "3.0.4",
                    rxJava              : "2.1.3",
                    rxAndroid           : "2.0.1",
                    firebase            : "16.0.0",

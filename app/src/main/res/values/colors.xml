@@ -4,9 +4,9 @@
   <color name="colorPrimaryDark">@color/green_dark</color>
   <color name="colorAccent">@color/green</color>
 
-  <color name="green">#8ED300</color>
+  <color name="green">#6CDDA4</color>
   <color name="green_light">#caf968</color>
-  <color name="green_dark">#78B300</color>
+  <color name="green_dark">#3DC778</color>
   <color name="red">#FD5620</color>
   <color name="turkis">#64D79E</color>
 
