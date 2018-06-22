@@ -33,7 +33,7 @@
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:transitionName="@string/transition_searchbox"
         app:cardElevation="8dp"
-        app:layout_behavior="de.droidcon.berlin2017.ui.QuickReturnBehavior"
+        app:layout_behavior="de.droidcon.berlin2018.ui.QuickReturnBehavior"
         />
 
   </android.support.design.widget.CoordinatorLayout>

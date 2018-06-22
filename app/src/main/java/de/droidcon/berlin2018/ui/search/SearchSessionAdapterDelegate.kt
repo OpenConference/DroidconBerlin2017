@@ -63,7 +63,7 @@ class SearchSessionAdapterDelegate(
           clickListener)
 
   /**
-   * ViewHolder for a Session Item
+   * ViewHolder for a Session SessionItem
    */
   class SessionItemViewHolder(v: View, clickListener: (Session) -> Unit) : RecyclerView.ViewHolder(
       v) {

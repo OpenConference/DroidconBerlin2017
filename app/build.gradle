@@ -26,8 +26,8 @@ android {
 
     debug {
       // Only use this flag on builds you don't proguard or upload to beta-by-crashlytics
-      ext.alwaysUpdateBuildId = false
-      ext.enableCrashlytics = false
+      ext.alwaysUpdateBuildId = true
+      ext.enableCrashlytics = true
     }
     release {
       minifyEnabled false
@@ -52,6 +52,7 @@ dependencies {
   implementation deps.rxBindingV4
   implementation deps.rxAndroid
   implementation deps.firebaseAnalytics
+  implementation deps.firebaseCore
   implementation deps.retrofit
   implementation deps.retrofitRxJava
   implementation deps.okhttp
@@ -75,7 +76,7 @@ dependencies {
   api deps.bypass
   api deps.licenseDialog
 
-  implementation 'com.crashlytics.sdk.android:crashlytics:2.9.3'
+  implementation 'com.crashlytics.sdk.android:crashlytics:2.9.4'
 
   testImplementation deps.junit
   androidTestImplementation 'com.android.support.test:runner:1.0.0'

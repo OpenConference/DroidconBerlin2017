@@ -31,47 +31,52 @@ import timber.log.Timber.DebugTree
  */
 open class DroidconApplication : MultiDexApplication() {
 
-  private lateinit var applicationComponent: ApplicationComponent
+    private lateinit var applicationComponent: ApplicationComponent
 
-  override fun onCreate() {
-    super.onCreate()
-    AndroidThreeTen.init(this)
-    Twitter.initialize(this)
+    override fun onCreate() {
+        super.onCreate()
+        AndroidThreeTen.init(this)
+        Twitter.initialize(this)
 
-    val crashlytics = Crashlytics.Builder()
-        .core(CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
-        .build()
+        val crashlytics = Crashlytics.Builder()
+            .core(CrashlyticsCore.Builder().disabled(false).build())
+            .build()
 
-    Fabric.with(this, crashlytics)
-    plantTimber()
-    applicationComponent = applicationComponentBuilder().build()
-  }
-
-  open fun plantTimber() {
-    if (BuildConfig.DEBUG) {
-      Timber.plant(DebugTree())
-    } else {
-      Timber.plant(CrashlyticsTimberTree())
+        val fabric = Fabric.Builder(this)
+            .kits(crashlytics)
+            .debuggable(BuildConfig.DEBUG)           // Enables Crashlytics debugger
+            .build()
+        Fabric.with(fabric)
+        plantTimber()
+        applicationComponent = applicationComponentBuilder().build()
+//        Crashlytics.getInstance().crash()
     }
-  }
 
-  open fun applicationComponentBuilder() =
-      DaggerApplicationComponent.builder()
-          .applicationModule(ApplicationModule(this))
-          .daoModule(DaoModule(this))
-          .networkModule(NetworkModule(this))
-          .repositoriesModule(RepositoriesModule())
-          .scheduleModule(ScheduleModule(this))
-          .picassoModule(PicassoModule(this))
-          .analyticsModule(AnalyticsModule(this))
-          .navigatorModule(NavigatorModule())
-          .viewBindingModule(ViewBindingModule())
-          .appUpdateCheckerModule(AppUpdateCheckerModule(this))
-
-  companion object {
-    fun getApplicationComponent(context: Context): ApplicationComponent {
-      val app = context.applicationContext as DroidconApplication
-      return app.applicationComponent
+    open fun plantTimber() {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(DebugTree())
+        } else {
+            Timber.plant(CrashlyticsTimberTree())
+        }
     }
-  }
+
+    open fun applicationComponentBuilder() =
+        DaggerApplicationComponent.builder()
+            .applicationModule(ApplicationModule(this))
+            .daoModule(DaoModule(this))
+            .networkModule(NetworkModule(this))
+            .repositoriesModule(RepositoriesModule())
+            .scheduleModule(ScheduleModule(this))
+            .picassoModule(PicassoModule(this))
+            .analyticsModule(AnalyticsModule(this))
+            .navigatorModule(NavigatorModule())
+            .viewBindingModule(ViewBindingModule())
+            .appUpdateCheckerModule(AppUpdateCheckerModule(this))
+
+    companion object {
+        fun getApplicationComponent(context: Context): ApplicationComponent {
+            val app = context.applicationContext as DroidconApplication
+            return app.applicationComponent
+        }
+    }
 }
