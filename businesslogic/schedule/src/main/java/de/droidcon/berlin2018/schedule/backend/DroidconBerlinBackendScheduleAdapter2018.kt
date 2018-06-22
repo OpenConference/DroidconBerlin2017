@@ -35,7 +35,7 @@ public class DroidconBerlinBackendScheduleAdapter2018(
                 BackendScheduleResponse.dataChanged(emptyList())
             else {
                 val locations: List<Location> =
-                    result.items.map { SimpleLocation.create(it.id, it.roomName) }
+                    result.items.map { SimpleLocation.create(it.roomName, it.roomName) } // TODO roomId is fucked up on backend
                         .distinct()
                         .toList()
                 BackendScheduleResponse.dataChanged(locations)
@@ -79,10 +79,10 @@ public class DroidconBerlinBackendScheduleAdapter2018(
             title = title,
             description = description,
             favorite = false,
-            locationId = roomId,
+            locationId = roomName, // TODO roomId is fucked up on backend site.
             locationName = roomName,
             speakers = listOf(speakers[speakerIds]!!),
-            tags = null,
+            tags = category,
             startTime = startDate,
             endTime = endDate
         )

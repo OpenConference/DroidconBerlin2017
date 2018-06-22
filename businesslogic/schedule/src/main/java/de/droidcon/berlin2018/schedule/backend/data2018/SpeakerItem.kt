@@ -1,6 +1,7 @@
 package de.droidcon.berlin2018.schedule.backend.data2018
 
 import com.tickaroo.tikxml.annotation.Element
+import com.tickaroo.tikxml.annotation.Path
 import com.tickaroo.tikxml.annotation.PropertyElement
 import com.tickaroo.tikxml.annotation.Xml
 
@@ -14,5 +15,5 @@ data class SpeakerItem(
     @PropertyElement(name = "position") val position: String?,
     @PropertyElement(name = "image") val imageUrl: String,
     @PropertyElement(name = "description_short") val description: String,
-    @Element(name = "links") val links: List<LinkItem>?
+    @Path("links") @Element(name = "item") val links: List<LinkItem>?
 )

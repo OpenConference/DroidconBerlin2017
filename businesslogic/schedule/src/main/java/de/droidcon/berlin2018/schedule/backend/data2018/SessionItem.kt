@@ -14,5 +14,6 @@ data class SessionItem(
     @Path("room") @PropertyElement(name = "item") val roomName: String,
     @Path("speaker_uids") @PropertyElement(name = "item") val speakerIds: String,
     @PropertyElement(name = "abstract") val description: String,
-    @PropertyElement(name = "nid") val id: String
+    @PropertyElement(name = "nid") val id: String,
+    @PropertyElement(name ="category") val category: String
 )
