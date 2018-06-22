@@ -91,7 +91,8 @@ buildscript {
                 loganSquareConverter   : "com.github.aurae.retrofit2:converter-logansquare:$ext.version.loganSquareConverter",
                 tikXmlAnnotation       : "com.tickaroo.tikxml:annotation:$ext.version.tikXml",
                 tikXmlConverter        : "com.tickaroo.tikxml:retrofit-converter:$ext.version.tikXml",
-                tikXmlCompiler         : "com.tickaroo.tikxml:processor:0.8.13",
+                tikXmlHtmlEscape       : "com.tickaroo.tikxml:converter-htmlescape:$ext.version.tikXml",
+                tikXmlCompiler         : "com.tickaroo.tikxml:processor:$ext.version.tikXml",
 
 
 

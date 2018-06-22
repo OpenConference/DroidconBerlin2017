@@ -21,6 +21,13 @@ android {
     }
 }
 
+kapt {
+    arguments {
+        arg("primitiveTypeConverters", "java.lang.String")
+    }
+}
+
+
 dependencies {
     implementation deps.supportAnnotations
     implementation deps.rxJava
@@ -41,5 +48,6 @@ dependencies {
     api deps.moshi
     api deps.tikXmlConverter
     implementation deps.tikXmlAnnotation
+    api deps.tikXmlHtmlEscape
     kapt deps.tikXmlCompiler
 }

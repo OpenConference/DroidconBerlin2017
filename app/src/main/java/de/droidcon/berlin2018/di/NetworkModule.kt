@@ -2,6 +2,7 @@ package de.droidcon.berlin2018.di
 
 import android.content.Context
 import com.tickaroo.tikxml.TikXml
+import com.tickaroo.tikxml.converter.htmlescape.HtmlEscapeStringConverter
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -10,6 +11,7 @@ import de.droidcon.berlin2018.schedule.backend.BackendScheduleAdapter
 import de.droidcon.berlin2018.schedule.backend.DroidconBerlinBackend2018
 import de.droidcon.berlin2018.schedule.backend.DroidconBerlinBackendScheduleAdapter2018
 import de.droidcon.berlin2018.schedule.backend.data2018.InstantTimeTypeConverter
+import de.droidcon.berlin2018.schedule.backend.data2018.MyHtmlEscapeConverter
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
@@ -55,6 +57,7 @@ open class NetworkModule(context: Context) {
                     TikXml.Builder()
                         .exceptionOnUnreadXml(false)
                         .addTypeConverter(Instant::class.java, InstantTimeTypeConverter())
+                        .addTypeConverter(String::class.java, MyHtmlEscapeConverter()) // HtmlEscapeStringConverter encode / decode html characters. This class ships as optional dependency
                         .build()
                 )
             )

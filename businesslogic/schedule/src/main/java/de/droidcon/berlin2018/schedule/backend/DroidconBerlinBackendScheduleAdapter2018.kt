@@ -81,7 +81,7 @@ public class DroidconBerlinBackendScheduleAdapter2018(
             favorite = false,
             locationId = roomId,
             locationName = roomName,
-            speakers = speakerIds?.map { speakers[it.id]!! },
+            speakers = listOf(speakers[speakerIds]!!),
             tags = null,
             startTime = startDate,
             endTime = endDate
