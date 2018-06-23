@@ -39,7 +39,7 @@ open class DroidconApplication : MultiDexApplication() {
         Twitter.initialize(this)
 
         val crashlytics = Crashlytics.Builder()
-            .core(CrashlyticsCore.Builder().disabled(false).build())
+            .core(CrashlyticsCore.Builder().build())
             .build()
 
         val fabric = Fabric.Builder(this)
