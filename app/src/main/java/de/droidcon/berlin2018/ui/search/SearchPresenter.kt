@@ -23,7 +23,6 @@ class SearchPresenter(
 
   override fun bindIntents() {
     val search = intent(SearchView::searchIntent)
-        .filter { it.isEmpty() || it.length > 2 }
         .debounce(200, MILLISECONDS)
         .doOnNext { Timber.d("Search intent: $it") }
         .doOnNext { if (it.isNotEmpty()) analytics.trackSearch(it) }
