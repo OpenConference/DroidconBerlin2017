@@ -26,7 +26,7 @@
       app:srcCompat="@drawable/ic_graphic_tv_tower_sq"
       />
 
-  <com.airbnb.lottie.LottieAnimationView
+  <ProgressBar
       android:id="@+id/loading"
       android:layout_width="0dp"
       android:layout_height="0dp"
@@ -35,9 +35,6 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="@+id/guideline2"
-      app:lottie_autoPlay="true"
-      app:lottie_fileName="splash_loading.json"
-      app:lottie_loop="true"
       />
 
   <android.support.constraint.Guideline

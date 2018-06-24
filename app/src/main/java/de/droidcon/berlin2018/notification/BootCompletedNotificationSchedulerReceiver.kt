@@ -22,7 +22,6 @@ class BootCompletedNotificationSchedulerReceiver : BroadcastReceiver() {
       favoriteSessions.forEach {
         notificationScheduler.addOrRescheduleNotification(it)
       }
-
     }
   }
 }
