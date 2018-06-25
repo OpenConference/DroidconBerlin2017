@@ -108,7 +108,7 @@ class TwitterController : Controller() {
   private fun initSearchTimeLineAndAdapter(context: Context) {
 
     searchTimeline = SearchTimeline.Builder()
-        .query("#droidconDE")
+        .query("#DCBERLIN18")
         .resultType(RECENT)
         .build()
 
