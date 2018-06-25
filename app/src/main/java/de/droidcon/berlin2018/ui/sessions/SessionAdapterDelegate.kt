@@ -65,6 +65,7 @@ class SessionAdapterDelegate(
     private val authorPic1 = v.findViewById<ImageView>(R.id.authorPic1)
     private val authorPic2 = v.findViewById<ImageView>(R.id.authorPic2)
     private val authorPic3 = v.findViewById<ImageView>(R.id.authorPic3)
+    private val authorPic4 = v.findViewById<ImageView>(R.id.authorPic4)
     private val speakerNames = v.findViewById<TextView>(R.id.speakers)
     private val title = v.findViewById<TextView>(R.id.title)
     private val time = v.findViewById<TextView>(R.id.time)
@@ -76,6 +77,7 @@ class SessionAdapterDelegate(
       authorPic1.gone()
       authorPic2.gone()
       authorPic3.gone()
+      authorPic4.gone()
 
       if (session.speakers.isNotEmpty()) {
         val speaker = session.speakers[0]
@@ -107,6 +109,16 @@ class SessionAdapterDelegate(
             .into(authorPic3)
         authorPic3.visible()
       }
+
+        if (session.speakers.size >= 4) {
+            val speaker = session.speakers[3]
+            picasso.load(speaker.profilePic())
+                .placeholder(R.drawable.speaker_circle_placeholder)
+                .transform(CropCircleTransformation())
+                .tag(PicassoScrollListener.TAG)
+                .into(authorPic4)
+            authorPic4.visible()
+        }
 
 
       speakerNames.text = session.speakerNames

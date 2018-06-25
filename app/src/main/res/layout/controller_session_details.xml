@@ -65,6 +65,17 @@
             tools:background="@color/red"
             />
 
+        <ImageView
+            android:id="@+id/speakerPic4"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="0dp"
+            app:layout_constraintLeft_toRightOf="@id/speakerPic3"
+            app:layout_constraintTop_toTopOf="@+id/speakerPic3"
+            tools:background="@color/red"
+            />
+
 
         <TextView
             android:id="@+id/speakers"

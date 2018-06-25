@@ -11,7 +11,6 @@ import de.droidcon.berlin2018.schedule.backend.data2018.mapping.SimpleSession
 import de.droidcon.berlin2018.schedule.backend.data2018.mapping.SimpleSpeaker
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
-import timber.log.Timber
 
 
 /**
@@ -35,7 +34,12 @@ public class DroidconBerlinBackendScheduleAdapter2018(
                 BackendScheduleResponse.dataChanged(emptyList())
             else {
                 val locations: List<Location> =
-                    result.items.map { SimpleLocation.create(it.roomName, it.roomName) } // TODO roomId is fucked up on backend
+                    result.items.map {
+                        SimpleLocation.create(
+                            it.roomName,
+                            it.roomName
+                        )
+                    } // TODO roomId is fucked up on backend
                         .distinct()
                         .toList()
                 BackendScheduleResponse.dataChanged(locations)
@@ -72,8 +76,6 @@ public class DroidconBerlinBackendScheduleAdapter2018(
     )
 
     private fun SessionItem.toSession(speakers: Map<String, Speaker>): Session {
-        Timber.d(toString())
-        Timber.d("Session before crash $id")
         return SimpleSession.create(
             id = id,
             title = title,
@@ -81,7 +83,33 @@ public class DroidconBerlinBackendScheduleAdapter2018(
             favorite = false,
             locationId = roomName, // TODO roomId is fucked up on backend site.
             locationName = roomName,
-            speakers = listOf(speakers[speakerIds]!!),
+            speakers = when (id) {
+                "3858" -> listOf(speakers["237"]!!, speakers["1135"]!!)// MVI
+                "3785" -> listOf(speakers["1144"]!!, speakers["347"]!!)// Code sharing is caring
+                "3949" -> listOf(
+                    speakers["1217"]!!,
+                    speakers["276"]!!
+                )// Everything is better with(out) Bluetooth
+                "3859" -> listOf(speakers["127"]!!, speakers["304"]!!)// The build side of an app
+                "5302" -> listOf(
+                    speakers["1345"]!!,
+                    speakers["1347"]!!,
+                    speakers["1348"]!!,
+                    speakers["1349"]!!
+                ) // Manage android without an app
+                "5309" -> listOf(
+                    speakers["1345"]!!,
+                    speakers["1347"]!!,
+                    speakers["1348"]!!,
+                    speakers["1349"]!!
+                ) // Manage android api hands on
+                "5307" -> listOf(
+                    speakers["1354"]!!,
+                    speakers["1355"]!!
+                ) // Sharing a success story
+
+                else -> listOf(speakers[speakerIds]!!)
+            },
             tags = category,
             startTime = startDate,
             endTime = endDate

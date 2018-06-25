@@ -51,6 +51,7 @@ class SessionDetailsViewBinding : ViewBinding(), SessionDetailsView {
   private var speakerPic1 by LifecycleAwareRef<ImageView>(this)
   private var speakerPic2 by LifecycleAwareRef<ImageView>(this)
   private var speakerPic3 by LifecycleAwareRef<ImageView>(this)
+  private var speakerPic4 by LifecycleAwareRef<ImageView>(this)
   private var spekersName by LifecycleAwareRef<TextView>(this)
   private var title by LifecycleAwareRef<TextView>(this)
   private var toolbar by LifecycleAwareRef<Toolbar>(this)
@@ -72,6 +73,7 @@ class SessionDetailsViewBinding : ViewBinding(), SessionDetailsView {
     speakerPic1 = rootView.findViewById(R.id.speakerPic1)
     speakerPic2 = rootView.findViewById(R.id.speakerPic2)
     speakerPic3 = rootView.findViewById(R.id.speakerPic3)
+    speakerPic4 = rootView.findViewById(R.id.speakerPic4)
     spekersName = rootView.findViewById(R.id.speakers)
     toolbar = rootView.findViewById(R.id.toolbar)
     title = rootView.findViewById(R.id.title)
@@ -176,6 +178,15 @@ class SessionDetailsViewBinding : ViewBinding(), SessionDetailsView {
               .into(speakerPic3)
 
           speakerPic3.setOnClickListener { navigator.showSpeakerDetails(speakers[2]) }
+        }
+
+        if (speakers.size >= 4) {
+          picasso.load(speakers[3].profilePic())
+            .transform(CropCircleTransformation())
+            .placeholder(R.drawable.speaker_circle_placeholder)
+            .into(speakerPic4)
+
+          speakerPic4.setOnClickListener { navigator.showSpeakerDetails(speakers[3]) }
         }
 
       }

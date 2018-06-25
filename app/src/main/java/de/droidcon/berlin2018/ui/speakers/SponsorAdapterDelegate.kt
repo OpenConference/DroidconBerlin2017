@@ -58,7 +58,6 @@ class SponsorAdapterDelegate(
             picasso.load(sponsor.drawable)
                 .fit()
                 .centerInside()
-                .placeholder(R.color.speakerslist_placeholder)
                 .into(image)
         }
 

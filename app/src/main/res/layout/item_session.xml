@@ -56,6 +56,17 @@
           tools:srcCompat="@color/colorAccent"
           />
 
+      <ImageView
+          android:id="@+id/authorPic4"
+          android:layout_width="@dimen/session_author_image_width_height"
+          android:layout_height="@dimen/session_author_image_width_height"
+          android:layout_marginStart="8dp"
+          android:layout_marginTop="8dp"
+          app:layout_constraintStart_toEndOf="@+id/authorPic3"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:srcCompat="@color/colorAccent"
+          />
+
       <TextView
           android:id="@+id/speakers"
           android:layout_width="match_parent"
