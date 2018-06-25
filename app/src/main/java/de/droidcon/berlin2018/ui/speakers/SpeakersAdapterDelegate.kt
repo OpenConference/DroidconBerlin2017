@@ -20,7 +20,7 @@ class SpeakersAdapterDelegate(
     private val inflater: LayoutInflater,
     private val picasso: Picasso,
     private val clicklistener: (Speaker) -> Unit
-) : AbsListItemAdapterDelegate<Speaker, Speaker, SpeakersAdapterDelegate.SpeakerViewHolder>() {
+) : AbsListItemAdapterDelegate<Speaker, Any, SpeakersAdapterDelegate.SpeakerViewHolder>() {
 
 
   override fun onCreateViewHolder(parent: ViewGroup): SpeakerViewHolder {
@@ -34,8 +34,8 @@ class SpeakersAdapterDelegate(
   }
 
 
-  override fun isForViewType(item: Speaker, items: MutableList<Speaker>,
-      position: Int): Boolean = true
+  override fun isForViewType(item: Any, items: MutableList<Any>,
+      position: Int): Boolean = item is Speaker
 
 
   inner class SpeakerViewHolder(v: View) : ViewHolder(v) {

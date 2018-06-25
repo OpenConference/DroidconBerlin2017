@@ -27,75 +27,93 @@ import timber.log.Timber
  */
 class SpeakersViewBinding : ViewBinding(), SpeakersView {
 
-  private var loadingView by LifecycleAwareRef<View>(this)
-  private var errorView by LifecycleAwareRef<View>(this)
-  private var emptyView by LifecycleAwareRef<View>(this)
-  private var recyclerView by LifecycleAwareRef<RecyclerView>(this)
-  private var rootView by LifecycleAwareRef<ViewGroup>(this)
-  private var adapter by LifecycleAwareRef<ListDelegationAdapter<List<Speaker>>>(this)
+    private var loadingView by LifecycleAwareRef<View>(this)
+    private var errorView by LifecycleAwareRef<View>(this)
+    private var emptyView by LifecycleAwareRef<View>(this)
+    private var recyclerView by LifecycleAwareRef<RecyclerView>(this)
+    private var rootView by LifecycleAwareRef<ViewGroup>(this)
+    private var adapter by LifecycleAwareRef<ListDelegationAdapter<List<Any>>>(this)
 
-  private val retrySubject = PublishSubject.create<Unit>()
+    private val retrySubject = PublishSubject.create<Unit>()
 
-  override fun bindView(rootView: ViewGroup) {
-    this.rootView = rootView
-    adapter = ListDelegationAdapter(
-        AdapterDelegatesManager<List<Speaker>>()
-            .addDelegate(SpeakersAdapterDelegate(LayoutInflater.from(rootView.context), picasso,
-                { navigator.showSpeakerDetails(it) }))
-    )
+    override fun bindView(rootView: ViewGroup) {
+        this.rootView = rootView
+        val inflater = LayoutInflater.from(rootView.context)
+        adapter = ListDelegationAdapter(
+            AdapterDelegatesManager<List<Any>>()
+                .addDelegate(
+                    SpeakersAdapterDelegate(inflater, picasso,
+                        { navigator.showSpeakerDetails(it) })
+                )
+                .addDelegate(
+                    SponsorAdapterDelegate(
+                        inflater,
+                        picasso,
+                        controller.activity!!
+                    )
+                ).addDelegate(SponsorSectionTitleAdapterDelegate(inflater)
+        )
+        )
 
-    val layoutManager = GridLayoutManager(rootView.context,
-        rootView.resources.getInteger(R.integer.speakers_list_columns))
-    layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-      override fun getSpanSize(position: Int): Int = 1
-    }
+        val columns = rootView.resources.getInteger(R.integer.speakers_list_columns)
 
-    recyclerView = rootView.findViewById(R.id.recyclerView)
-    recyclerView.adapter = adapter
-    recyclerView.layoutManager = layoutManager
-    recyclerView.addOnScrollListener(PicassoScrollListener(picasso))
+        val layoutManager = GridLayoutManager(
+            rootView.context,
+            columns
+        )
+        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int =
+                if (adapter.items[position] == SponsorSectionTitle) columns else 1
 
-    loadingView = rootView.findViewById(R.id.loading)
-    errorView = rootView.findViewById(R.id.error)
-    emptyView = rootView.findViewById(R.id.empty)
-
-
-    errorView.setOnClickListener { retrySubject.onNext(Unit) }
-
-  }
-
-  override fun loadIntent(): Observable<Unit> = retrySubject.startWith(Unit) // trigger on subscribe
-
-  override fun render(state: LceViewState<List<Speaker>>) {
-    Timber.d("render $state")
-    if (!restoringViewState)
-      TransitionManager.beginDelayedTransition(rootView)
-    when (state) {
-      is LceViewState.Loading -> {
-        errorView.gone()
-        emptyView.gone()
-        recyclerView.gone()
-        loadingView.visible()
-      }
-      is LceViewState.Error -> {
-        loadingView.gone()
-        emptyView.gone()
-        recyclerView.gone()
-        errorView.visible()
-      }
-      is LceViewState.Content -> {
-        loadingView.gone()
-        errorView.gone()
-        if (state.data.isEmpty()) {
-          emptyView.visible()
-          recyclerView.gone()
-        } else {
-          adapter.items = state.data
-          adapter.notifyDataSetChanged()
-          emptyView.gone()
-          recyclerView.visible()
         }
-      }
+
+        recyclerView = rootView.findViewById(R.id.recyclerView)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = layoutManager
+        recyclerView.addOnScrollListener(PicassoScrollListener(picasso))
+
+        loadingView = rootView.findViewById(R.id.loading)
+        errorView = rootView.findViewById(R.id.error)
+        emptyView = rootView.findViewById(R.id.empty)
+
+
+        errorView.setOnClickListener { retrySubject.onNext(Unit) }
+
     }
-  }
+
+    override fun loadIntent(): Observable<Unit> =
+        retrySubject.startWith(Unit) // trigger on subscribe
+
+    override fun render(state: LceViewState<List<Speaker>>) {
+        Timber.d("render $state")
+        if (!restoringViewState)
+            TransitionManager.beginDelayedTransition(rootView)
+        when (state) {
+            is LceViewState.Loading -> {
+                errorView.gone()
+                emptyView.gone()
+                recyclerView.gone()
+                loadingView.visible()
+            }
+            is LceViewState.Error -> {
+                loadingView.gone()
+                emptyView.gone()
+                recyclerView.gone()
+                errorView.visible()
+            }
+            is LceViewState.Content -> {
+                loadingView.gone()
+                errorView.gone()
+                if (state.data.isEmpty()) {
+                    emptyView.visible()
+                    recyclerView.gone()
+                } else {
+                    adapter.items = state.data + sponsors
+                    adapter.notifyDataSetChanged()
+                    emptyView.gone()
+                    recyclerView.visible()
+                }
+            }
+        }
+    }
 }

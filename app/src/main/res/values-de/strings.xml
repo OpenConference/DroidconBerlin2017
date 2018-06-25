@@ -43,7 +43,9 @@
   <string name="app_update_available_close">Schließen</string>
 
 
-  <string name="goodbye">Droidcon Berlin 2017 ist vorbei.\nBis zum nächsten Mal!</string>
+  <string name="goodbye">Droidcon Berlin 2018 ist vorbei.\nBis zum nächsten Mal!</string>
+  <string name="sponsor_section_header">Unsere Sponsoren</string>
+
 
   <string-array name="overflow_items">
     <item>Source Code</item>

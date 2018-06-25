@@ -23,10 +23,12 @@ abstract class ViewBinding : LifecycleListener(), LifecycleOwner {
 
   lateinit protected var picasso: Picasso
   lateinit protected var navigator: Navigator
+  lateinit protected var controller: Controller
   var restoringViewState = false
   private val clearCallbacks = ArrayList<() -> Unit>()
 
   override fun postCreateView(controller: Controller, view: View) {
+    this.controller = controller
     picasso = controller.applicationComponent().picasso()
     navigator = (controller as MviController<*, *>).navigator
     bindView(view as ViewGroup)

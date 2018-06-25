@@ -20,16 +20,17 @@ import timber.log.Timber
  */
 class SplashViewBinding() : ViewBinding(), SplashView {
 
-  private var progressView: LottieAnimationView by LifecycleAwareRef(this)
+  // private var progressView: LottieAnimationView by LifecycleAwareRef(this)
 
   override fun bindView(rootView: ViewGroup) {
+    /*
     progressView = rootView.findViewById(R.id.loading)
 
     progressView.addColorFilterToLayer("loader Silhouettes",
         SimpleColorFilter(progressView.resources.getColor(color.green)))
     progressView.addColorFilterToLayer("fond carte",
         SimpleColorFilter(progressView.resources.getColor(color.green)))
-    /*
+
     progressView.addColorFilterToLayer("green ring 1",
         SimpleColorFilter(progressView.resources.getColor(R.color.green)))
     progressView.addColorFilterToLayer("flamingo ring 3",
