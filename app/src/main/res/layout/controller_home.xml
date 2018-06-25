@@ -46,6 +46,7 @@
       android:layout_marginStart="0dp"
       android:background="?android:attr/windowBackground"
       app:menu="@menu/navigation"
+      app:elevation="4dp"
       />
 
 </LinearLayout>

@@ -33,7 +33,7 @@ class UpdateController : Controller() {
     }
     v.findViewById<View>(R.id.install).setOnClickListener {
       analytics.trackInstallUpdateClicked()
-      val packageName = applicationContext?.packageName ?: "de.droidcon.berlin2017"
+      val packageName = applicationContext?.packageName ?: "de.droidcon.berlin2018"
       val uri = Uri.parse("http://play.google.com/store/apps/details?id=$packageName")// sending to Deal Website
       val i = Intent(Intent.ACTION_VIEW, uri)
       startActivity(i)
